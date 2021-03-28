@@ -16,6 +16,11 @@ namespace CSharpNationV2._0.Visualizer
                 return null;
             }
 
+            if(influence <= 0)
+            {
+                return spectrum;
+            }
+
             float[] promediatedSpectrum = new float[spectrum.Count];
 
             float actualValue = 0;

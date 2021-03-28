@@ -10,9 +10,9 @@ using System.Windows;
 [assembly: AssemblyTitle("CSharpNationV2.0")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("HP Inc.")]
+[assembly: AssemblyCompany("JustSharingSomeCode")]
 [assembly: AssemblyProduct("CSharpNationV2.0")]
-[assembly: AssemblyCopyright("Copyright © HP Inc. 2021")]
+[assembly: AssemblyCopyright("Copyright © JustSharingSomeCode 2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

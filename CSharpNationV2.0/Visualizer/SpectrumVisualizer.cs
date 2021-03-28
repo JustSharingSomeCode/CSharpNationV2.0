@@ -78,6 +78,10 @@ namespace CSharpNationV2._0.Visualizer
                 WaveColor = Color.FromArgb(0, 255, 0)
             };
            
+            for(int i = 0; i < Waves.Length; i++)
+            {
+                Waves[i].DegreesIncrement = 180f / (Analyzer._lines - 1);
+            }
         }
 
         private SpectrumAnalyzer Analyzer;
@@ -116,7 +120,8 @@ namespace CSharpNationV2._0.Visualizer
 
             for (int i = 0; i < Waves.Length; i++)
             {
-                Waves[i].SpectrumData = WaveTools.PromSpectrum(Replay.GetSpectrumReplay(i), i);
+                Waves[i].SpectrumData = WaveTools.PromSpectrum(Replay.GetSpectrumReplay(i), i + 1);
+                Waves[i].UpdatePoints(Width / 2, Height / 2, Height / 4 + power);
             }
 
             Replay.PushSpectrum(spectrumData);            
@@ -128,15 +133,15 @@ namespace CSharpNationV2._0.Visualizer
 
         protected override void OnRenderFrame(FrameEventArgs e)
         {
-            GL.Clear(ClearBufferMask.ColorBufferBit);
-
-            DrawCircle(Width / 2, Height / 2, (Height / 4) + power, Color.White);
-            DrawCircle(Width / 2, Height / 2, (Height / 4.2) + power, Color.Black);
+            GL.Clear(ClearBufferMask.ColorBufferBit);           
                         
             for (int i = Waves.Length - 1; i >= 0; i--)
             {
-                Waves[i].DrawWave(Width / 2, 0);
-            }                       
+                Waves[i].DrawWave(Width / 2, Height / 2, Height / 4 + power);
+            }
+
+            DrawCircle(Width / 2, Height / 2, (Height / 4) + power, Color.White);
+            DrawCircle(Width / 2, Height / 2, (Height / 4.2) + power, Color.Black);
 
             Context.SwapBuffers();
 
