@@ -63,7 +63,7 @@ namespace CSharpNationV2._0.WpfGUI
 
         private void VisualizerProcess()
         {            
-            using (Visualizer = new SpectrumVisualizer(800, 450, "CSharpNation_V2.0", Analyzer))
+            using (Visualizer = new SpectrumVisualizer(1024, 576, "CSharpNation_V2.0", Analyzer))
             {
                 Visualizer.Run();
             }            

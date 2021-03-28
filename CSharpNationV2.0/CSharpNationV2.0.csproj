@@ -70,6 +70,7 @@
     <Compile Include="Visualizer\SpectrumReplay.cs" />
     <Compile Include="Visualizer\SpectrumVisualizer.cs" />
     <Compile Include="Visualizer\SpectrumWave.cs" />
+    <Compile Include="Visualizer\WaveTools.cs" />
     <Compile Include="WpfGUI\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>

@@ -23,16 +23,15 @@ namespace CSharpNationV2._0.Visualizer
 
             Title = title;
 
-            _analyzer.multiplier = height / 4;
-            powerMultiplier = height / 100;
+            _analyzer.multiplier = height / 4;            
 
             Analyzer = _analyzer;
 
 
             //DegreesIncrement = 180.0f / _analyzer._lines;
 
-            Replay = new SpectrumReplay(5);
-            Waves = new SpectrumWave[5];
+            Replay = new SpectrumReplay(9);
+            Waves = new SpectrumWave[9];
 
             Waves[0] = new SpectrumWave
             {
@@ -46,7 +45,7 @@ namespace CSharpNationV2._0.Visualizer
 
             Waves[2] = new SpectrumWave
             {
-                WaveColor = Color.Orange
+                WaveColor = Color.FromArgb(255, 150, 0)
             };
 
             Waves[3] = new SpectrumWave
@@ -56,9 +55,29 @@ namespace CSharpNationV2._0.Visualizer
 
             Waves[4] = new SpectrumWave
             {
-                WaveColor = Color.Pink
+                WaveColor = Color.FromArgb(255, 100, 255)
             };
 
+            Waves[5] = new SpectrumWave
+            {
+                WaveColor = Color.FromArgb(50, 50, 155)
+            };
+
+            Waves[6] = new SpectrumWave
+            {
+                WaveColor = Color.Blue
+            };
+
+            Waves[7] = new SpectrumWave
+            {
+                WaveColor = Color.FromArgb(50, 205, 255)
+            };
+
+            Waves[8] = new SpectrumWave
+            {
+                WaveColor = Color.FromArgb(0, 255, 0)
+            };
+           
         }
 
         private SpectrumAnalyzer Analyzer;
@@ -69,8 +88,7 @@ namespace CSharpNationV2._0.Visualizer
         private SpectrumWave[] Waves;
 
         //private float DegreesIncrement = 0;
-        private float power = 0;
-        private float powerMultiplier = 1;
+        private float power = 0;        
 
         protected override void OnLoad(EventArgs e)
         {
@@ -87,19 +105,18 @@ namespace CSharpNationV2._0.Visualizer
             GL.LoadIdentity();
             GL.Ortho(0.0f, Width, 0.0f, Height, 0.0f, 1.0f);
 
-            Analyzer.multiplier = Height / 4;
-            powerMultiplier = Height / 100;
+            Analyzer.multiplier = Height / 4;            
 
             base.OnResize(e);
         }
 
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
-            spectrumData = Analyzer.GetSpectrum();
+            spectrumData = FixDiscontinuities(Analyzer.GetSpectrum());
 
             for (int i = 0; i < Waves.Length; i++)
             {
-                Waves[i].SpectrumData = Replay.GetSpectrumReplay(i);
+                Waves[i].SpectrumData = WaveTools.PromSpectrum(Replay.GetSpectrumReplay(i), i);
             }
 
             Replay.PushSpectrum(spectrumData);            
@@ -113,8 +130,8 @@ namespace CSharpNationV2._0.Visualizer
         {
             GL.Clear(ClearBufferMask.ColorBufferBit);
 
-            DrawCircle(Width / 2, Height / 2, (Height / 4) + (power * powerMultiplier), Color.White);
-            DrawCircle(Width / 2, Height / 2, (Height / 4.2) + (power * powerMultiplier), Color.Black);
+            DrawCircle(Width / 2, Height / 2, (Height / 4) + power, Color.White);
+            DrawCircle(Width / 2, Height / 2, (Height / 4.2) + power, Color.Black);
                         
             for (int i = Waves.Length - 1; i >= 0; i--)
             {
@@ -153,6 +170,29 @@ namespace CSharpNationV2._0.Visualizer
             }
 
             power /= spectrumData.Count;
-        }               
+        }     
+        
+        private List<float> FixDiscontinuities(List<float> spectrum)
+        {
+            float[] fixedSpectrum = new float[spectrum.Count];
+
+            fixedSpectrum[0] = spectrum[0];
+
+            for(int i = 1; i < spectrum.Count - 1; i++)
+            {
+                if (spectrum[i] < fixedSpectrum[i - 1] && spectrum[i] < spectrum[i + 1])
+                {
+                    fixedSpectrum[i] = (fixedSpectrum[i - 1] + spectrum[i + 1]) / 2;
+                }
+                else
+                {
+                    fixedSpectrum[i] = spectrum[i];
+                }
+            }
+
+            fixedSpectrum[fixedSpectrum.Length - 1] = spectrum[spectrum.Count - 1];
+
+            return fixedSpectrum.ToList();
+        }
     }
 }
