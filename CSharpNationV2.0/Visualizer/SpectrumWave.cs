@@ -19,7 +19,8 @@ namespace CSharpNationV2._0.Visualizer
 
         public float DegreesIncrement { get; set; }
 
-        //private float barWidth = 10;
+        private float barWidth = 10;
+
         private float qualityIncrement = 0.2f;
 
         private Vector2 p1, p2, p3, p4;
@@ -53,21 +54,6 @@ namespace CSharpNationV2._0.Visualizer
 
                 GL.End();
             }            
-            
-            /*  Draws the data in lines
-            for (int i = 0; i < SpectrumData.Count; i++)
-            {
-                GL.Color3(WaveColor);
-                GL.Begin(PrimitiveType.Quads);
-
-                GL.Vertex2(i * barWidth, y);
-                GL.Vertex2(i * barWidth, SpectrumData[i] + y);
-                GL.Vertex2((i + 1) * barWidth, SpectrumData[i] + y);                
-                GL.Vertex2((i + 1) * barWidth, y);
-
-                GL.End();
-            }      
-            */
         }
 
         private Vector2 GetPosition(float x, float y, int i, float circleRadius)
@@ -107,6 +93,27 @@ namespace CSharpNationV2._0.Visualizer
                 {
                     CatmullRomPoints.Add(WaveTools.CatmullRom(j, p1, p2, p3, p4));
                 }
+            }
+        }
+
+        public void DrawLines(float y)
+        {
+            if(SpectrumData == null)
+            {
+                return;
+            }
+
+            for (int i = 0; i < SpectrumData.Count; i++)
+            {
+                GL.Color3(WaveColor);
+                GL.Begin(PrimitiveType.LineLoop);
+
+                GL.Vertex2(i * barWidth, y);
+                GL.Vertex2(i * barWidth, SpectrumData[i] + y);
+                GL.Vertex2((i + 1) * barWidth, SpectrumData[i] + y);
+                GL.Vertex2((i + 1) * barWidth, y);
+
+                GL.End();
             }
         }
     }

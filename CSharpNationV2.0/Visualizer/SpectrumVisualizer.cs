@@ -25,10 +25,7 @@ namespace CSharpNationV2._0.Visualizer
 
             _analyzer.multiplier = height / 4;            
 
-            Analyzer = _analyzer;
-
-
-            //DegreesIncrement = 180.0f / _analyzer._lines;
+            Analyzer = _analyzer;            
 
             Replay = new SpectrumReplay(9);
             Waves = new SpectrumWave[9];
@@ -90,8 +87,7 @@ namespace CSharpNationV2._0.Visualizer
         private List<float> spectrumData = new List<float>();
 
         private SpectrumWave[] Waves;
-
-        //private float DegreesIncrement = 0;
+        
         private float power = 0;        
 
         protected override void OnLoad(EventArgs e)
@@ -120,7 +116,8 @@ namespace CSharpNationV2._0.Visualizer
 
             for (int i = 0; i < Waves.Length; i++)
             {
-                Waves[i].SpectrumData = WaveTools.PromSpectrum(Replay.GetSpectrumReplay(i), i + 1);
+                //Waves[i].SpectrumData = Replay.GetSpectrumReplay(i);
+                Waves[i].SpectrumData = WaveTools.PromSpectrum(Replay.GetSpectrumReplay(i), i + 1);                
                 Waves[i].UpdatePoints(Width / 2, Height / 2, Height / 4 + power);
             }
 
@@ -138,6 +135,7 @@ namespace CSharpNationV2._0.Visualizer
             for (int i = Waves.Length - 1; i >= 0; i--)
             {
                 Waves[i].DrawWave(Width / 2, Height / 2, Height / 4 + power);
+                //Waves[i].DrawLines(i * 20);
             }
 
             DrawCircle(Width / 2, Height / 2, (Height / 4) + power, Color.White);

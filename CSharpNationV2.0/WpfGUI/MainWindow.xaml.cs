@@ -31,9 +31,9 @@ namespace CSharpNationV2._0.WpfGUI
             Analyzer = new SpectrumAnalyzer();
         }
 
-        SpectrumAnalyzer Analyzer;
-        Thread VisualizerThread;
-        SpectrumVisualizer Visualizer;
+        private SpectrumAnalyzer Analyzer;
+        private Thread VisualizerThread;
+        private SpectrumVisualizer Visualizer;
 
         private void StartBtn_Click(object sender, RoutedEventArgs e)
         {            
@@ -72,6 +72,16 @@ namespace CSharpNationV2._0.WpfGUI
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {                
+            if(VisualizerThread.IsAlive)
+            {
+                Visualizer.Close();
+            }
+
+            Analyzer.Free();
         }
     }
 }

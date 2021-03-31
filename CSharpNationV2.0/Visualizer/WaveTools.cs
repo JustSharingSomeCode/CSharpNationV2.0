@@ -45,7 +45,7 @@ namespace CSharpNationV2._0.Visualizer
             }            
 
             return promediatedSpectrum.ToList();
-        }
+        }        
 
         public static int Clamp(int min, int max, int value)
         {
