@@ -8,6 +8,11 @@
         Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded" Closing="Window_Closing">
     <Grid x:Name="MainGrid">
         <Button x:Name="StartBtn" Content="Launch visualizer" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="125" Click="StartBtn_Click"/>
-
+        <Button x:Name="PauseBtn" Content="Pause capture" HorizontalAlignment="Right" Margin="0,10,140,0" VerticalAlignment="Top" Width="125" Click="PauseBtn_Click"/>
+        <Button x:Name="ResumeBtn" Content="Resume capture" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="125" Click="ResumeBtn_Click"/>
+        <Grid x:Name="BottomGrid" Height="30" VerticalAlignment="Bottom">
+            <Label x:Name="DeviceLbl" Content="Device :" HorizontalAlignment="Left" Width="55" VerticalContentAlignment="Center"/>
+            <ComboBox x:Name="DevicesCb" HorizontalAlignment="Left" Margin="60,4,0,4" Width="320" SelectionChanged="DevicesCb_SelectionChanged" IsReadOnly="True"/>
+        </Grid>
     </Grid>
 </Window>

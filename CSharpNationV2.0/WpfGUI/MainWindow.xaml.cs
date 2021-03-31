@@ -71,7 +71,12 @@ namespace CSharpNationV2._0.WpfGUI
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            
+            DevicesCb.ItemsSource = Analyzer.GetDevices();
+
+            if(DevicesCb.HasItems)
+            {
+                DevicesCb.SelectedIndex = 0;
+            }
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -83,5 +88,20 @@ namespace CSharpNationV2._0.WpfGUI
 
             Analyzer.Free();
         }
+
+        private void PauseBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Analyzer.PauseCapture();
+        }
+
+        private void ResumeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Analyzer.ResumeCapture();
+        }
+
+        private void DevicesCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {            
+            Analyzer.ChangeDevice(DevicesCb.SelectedIndex);                      
+        }               
     }
 }
