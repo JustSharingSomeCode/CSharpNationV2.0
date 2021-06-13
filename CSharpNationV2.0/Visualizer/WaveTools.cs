@@ -45,7 +45,17 @@ namespace CSharpNationV2._0.Visualizer
             }            
 
             return promediatedSpectrum.ToList();
-        }      
+        }  
+        
+        public static List<float> LoopProm(List<float> spectrum, int influence, int loops)
+        {
+            for(int i = 0; i < loops; i++)
+            {
+                spectrum = PromSpectrum(spectrum, influence);
+            }
+
+            return spectrum;
+        }
         
         public static List<float> Normalize(List<float> spectrum)
         {

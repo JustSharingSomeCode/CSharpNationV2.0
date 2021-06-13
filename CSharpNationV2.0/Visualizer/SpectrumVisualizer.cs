@@ -130,8 +130,7 @@ namespace CSharpNationV2._0.Visualizer
 
             for (int i = 1; i < Waves.Length; i++)
             {                
-                Waves[i].SpectrumData = WaveTools.CombineWaves(WaveTools.PromSpectrum(Replay.GetSpectrumReplay(i), i + 1), Waves[i - 1].SpectrumData, Replay.GetSpectrumReplay(i), Waves[i].Increment);
-                
+                Waves[i].SpectrumData = WaveTools.CombineWaves(WaveTools.LoopProm(Replay.GetSpectrumReplay(i), 1, i), Waves[i - 1].SpectrumData, Replay.GetSpectrumReplay(i), Waves[i].Increment);
                 Waves[i].UpdatePoints(Width / 2, Height / 2, Height / 4 + power);
             }
 
