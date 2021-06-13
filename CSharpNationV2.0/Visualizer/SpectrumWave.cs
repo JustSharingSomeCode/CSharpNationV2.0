@@ -17,6 +17,8 @@ namespace CSharpNationV2._0.Visualizer
 
         public Color WaveColor { get; set; }
 
+        public float Increment { get; set; }
+
         public float DegreesIncrement { get; set; }
 
         private float barWidth = 10;

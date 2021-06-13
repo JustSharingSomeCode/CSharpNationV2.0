@@ -102,6 +102,6 @@ namespace CSharpNationV2._0.WpfGUI
         private void DevicesCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {            
             Analyzer.ChangeDevice(DevicesCb.SelectedIndex);                      
-        }               
+        }        
     }
 }

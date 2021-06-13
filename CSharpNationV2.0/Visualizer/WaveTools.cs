@@ -45,7 +45,60 @@ namespace CSharpNationV2._0.Visualizer
             }            
 
             return promediatedSpectrum.ToList();
-        }        
+        }      
+        
+        public static List<float> Normalize(List<float> spectrum)
+        {
+            if(spectrum == null)
+            {
+                return null;
+            }
+
+            float max = spectrum.Max();            
+
+            float[] normalizedList = new float[spectrum.Count];
+
+            for(int i = 0; i < spectrum.Count; i++)
+            {
+                normalizedList[i] = spectrum[i] / max;
+            }
+
+            return normalizedList.ToList();
+        }
+
+        public static List<float> SumAverages(List<float> spectrum, List<float> spectrum2, float increase)
+        {
+            if (spectrum == null || spectrum2 == null)
+            {
+                return null;
+            }
+
+            for (int i = 0; i < spectrum.Count; i++)
+            {                
+                spectrum[i] = (spectrum[i] * increase + spectrum2[i] * (1.0f - increase));
+            }
+
+            return spectrum;
+        }      
+        
+        public static List<float> CombineWaves(List<float> spectrum, List<float> spectrum2, List<float> raw, float increase)
+        {
+            if (spectrum == null || spectrum2 == null)
+            {
+                return null;
+            }
+
+            List<float> normalizedList = Normalize(SumAverages(spectrum, spectrum2, increase));
+
+            float max = raw.Max();
+
+            for(int i = 0; i < spectrum.Count; i++)
+            {
+                normalizedList[i] = normalizedList[i] * max;
+            }
+
+            return normalizedList;
+        }                      
 
         public static int Clamp(int min, int max, int value)
         {
@@ -62,6 +115,6 @@ namespace CSharpNationV2._0.Visualizer
             Vector2 pos = 0.5f * (a + (b * t) + (c * t * t) + (d * t * t * t));
 
             return pos;
-        }
+        }                     
     }
 }
