@@ -14,7 +14,7 @@ namespace CSharpNationV2._0.Visualizer
 {
     public class SpectrumVisualizer : GameWindow
     {
-        public SpectrumVisualizer(int width, int height, string title, SpectrumAnalyzer _analyzer) : base(width, height, new GraphicsMode(new ColorFormat(8, 8, 8, 0), 24, 8, 4), title)
+        public SpectrumVisualizer(int width, int height, string title, SpectrumAnalyzer _analyzer, SpectrumWave[] waves) : base(width, height, new GraphicsMode(new ColorFormat(8, 8, 8, 0), 24, 8, 4), title)
         {
             VSync = VSyncMode.On;
 
@@ -28,61 +28,8 @@ namespace CSharpNationV2._0.Visualizer
             Analyzer = _analyzer;            
 
             Replay = new SpectrumReplay(9);
-            Waves = new SpectrumWave[9];
 
-            Waves[0] = new SpectrumWave
-            {
-                WaveColor = Color.White,
-                Increment = 0
-            };
-
-            Waves[1] = new SpectrumWave
-            {
-                WaveColor = Color.Yellow,
-                Increment = 0.5f
-            };
-
-            Waves[2] = new SpectrumWave
-            {
-                WaveColor = Color.FromArgb(255, 150, 0),
-                Increment = 0.5f
-            };
-
-            Waves[3] = new SpectrumWave
-            {
-                WaveColor = Color.Red,
-                Increment = 0.5f
-            };
-
-            Waves[4] = new SpectrumWave
-            {
-                WaveColor = Color.FromArgb(255, 100, 255),
-                Increment = 0.5f
-            };
-
-            Waves[5] = new SpectrumWave
-            {
-                WaveColor = Color.FromArgb(50, 50, 155),
-                Increment = 0.5f
-            };
-
-            Waves[6] = new SpectrumWave
-            {
-                WaveColor = Color.Blue,
-                Increment = 0.5f
-            };
-
-            Waves[7] = new SpectrumWave
-            {
-                WaveColor = Color.FromArgb(50, 205, 255),
-                Increment = 0.5f
-            };
-
-            Waves[8] = new SpectrumWave
-            {
-                WaveColor = Color.FromArgb(0, 255, 0),
-                Increment = 0.5f
-            };
+            Waves = waves;            
            
             for(int i = 0; i < Waves.Length; i++)
             {
@@ -123,14 +70,16 @@ namespace CSharpNationV2._0.Visualizer
         {
             spectrumData = FixDiscontinuities(Analyzer.GetSpectrum());
 
-            spectrumData = WaveTools.PromSpectrum(spectrumData, 1);
-            
-            Waves[0].SpectrumData = Replay.GetSpectrumReplay(0);
-            Waves[0].UpdatePoints(Width / 2, Height / 2, Height / 4 + power);
+            spectrumData = WaveTools.LoopProm(spectrumData, 1,2);                        
 
-            for (int i = 1; i < Waves.Length; i++)
+            for (int i = 0; i < Waves.Length; i++)
             {                
-                Waves[i].SpectrumData = WaveTools.CombineWaves(WaveTools.LoopProm(Replay.GetSpectrumReplay(i), 1, i), Waves[i - 1].SpectrumData, Replay.GetSpectrumReplay(i), Waves[i].Increment);
+                if(Replay.IsNullSpectrum(i))
+                {
+                    continue;
+                }
+
+                Waves[i].SpectrumData = WaveTools.CombineWaves(WaveTools.LoopProm(Replay.GetSpectrumReplay(i), Waves[i].BarsInfluence, Waves[i].PromLoops), Replay.GetSpectrumReplay(i), Waves[i].Increment);
                 Waves[i].UpdatePoints(Width / 2, Height / 2, Height / 4 + power);
             }
 
@@ -148,7 +97,7 @@ namespace CSharpNationV2._0.Visualizer
             for (int i = Waves.Length - 1; i >= 0; i--)
             {
                 Waves[i].DrawWave(Width / 2, Height / 2, Height / 4 + power);
-                Waves[i].DrawLines(0);
+                //Waves[i].DrawLines(0);
             }
 
             DrawCircle(Width / 2, Height / 2, (Height / 4) + power, Color.White);

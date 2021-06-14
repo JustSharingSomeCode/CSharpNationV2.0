@@ -1,0 +1,27 @@
+﻿<UserControl x:Name="Editor" x:Class="CSharpNationV2._0.WpfGUI.WaveEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CSharpNationV2._0.WpfGUI"
+             mc:Ignorable="d" 
+             d:DesignHeight="115" d:DesignWidth="500" Loaded="Editor_Loaded">
+    <Grid Background="#FFCBCBCB">
+        <Ellipse x:Name="SelectedColor" Fill="#FFF4F4F5" HorizontalAlignment="Left" Margin="15,36,0,29" Stroke="Black" Width="50"/>
+        <Slider x:Name="RedSlider" HorizontalAlignment="Left" Margin="92,20,0,0" VerticalAlignment="Top" Width="120" Maximum="255" Height="20" SmallChange="1" ValueChanged="RedSlider_ValueChanged"/>
+        <Label Content="R" HorizontalAlignment="Left" Margin="80,20,0,0" VerticalAlignment="Top" Height="20" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="RedTxt" HorizontalAlignment="Left" Height="20" Margin="212,20,0,0" TextWrapping="Wrap" Text="{Binding ElementName=RedSlider, Path=Value}" VerticalAlignment="Top" Width="26" HorizontalContentAlignment="Center"/>
+        <Slider x:Name="GreenSlider" HorizontalAlignment="Left" Margin="92,51,0,0" VerticalAlignment="Top" Width="120" Maximum="255" Height="20" SmallChange="1" ValueChanged="RedSlider_ValueChanged"/>
+        <Label Content="G" HorizontalAlignment="Left" Margin="80,51,0,0" VerticalAlignment="Top" Height="20" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="GreenTxt" HorizontalAlignment="Left" Height="20" Margin="212,51,0,0" TextWrapping="Wrap" Text="{Binding Value, ElementName=GreenSlider}" VerticalAlignment="Top" Width="26" HorizontalContentAlignment="Center"/>
+        <Slider x:Name="BlueSlider" HorizontalAlignment="Left" Margin="92,82,0,0" VerticalAlignment="Top" Width="120" Maximum="255" Height="20" SmallChange="1"  ValueChanged="RedSlider_ValueChanged"/>
+        <Label Content="B" HorizontalAlignment="Left" Margin="80,82,0,0" VerticalAlignment="Top" Height="20" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="BlueTxt" HorizontalAlignment="Left" Height="20" Margin="212,82,0,0" TextWrapping="Wrap" Text="{Binding Value, ElementName=BlueSlider}" VerticalAlignment="Top" Width="26" HorizontalContentAlignment="Center"/>
+        <Label Content="Increment:" HorizontalAlignment="Left" Margin="265,14,0,0" VerticalAlignment="Top"/>
+        <Label Content="BarsInfluence:" HorizontalAlignment="Left" Margin="265,45,0,0" VerticalAlignment="Top"/>
+        <Label Content="PromLoops:" HorizontalAlignment="Left" Margin="265,76,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="IncrementTxt" HorizontalAlignment="Left" Height="26" Margin="370,14,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" KeyUp="IncrementTxt_KeyUp"/>
+        <TextBox x:Name="BarsInfluenceTxt" HorizontalAlignment="Left" Height="26" Margin="370,45,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" KeyUp="BarsInfluenceTxt_KeyUp"/>
+        <TextBox x:Name="PromLoopsTxt" HorizontalAlignment="Left" Height="26" Margin="370,76,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" KeyUp="PromLoopsTxt_KeyUp"/>
+    </Grid>
+</UserControl>

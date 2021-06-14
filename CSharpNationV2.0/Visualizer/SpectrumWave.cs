@@ -19,6 +19,10 @@ namespace CSharpNationV2._0.Visualizer
 
         public float Increment { get; set; }
 
+        public int BarsInfluence { get; set; }
+
+        public int PromLoops { get; set; }
+
         public float DegreesIncrement { get; set; }
 
         private float barWidth = 10;

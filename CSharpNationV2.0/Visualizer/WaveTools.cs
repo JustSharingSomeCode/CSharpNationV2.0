@@ -11,10 +11,12 @@ namespace CSharpNationV2._0.Visualizer
     {
         public static List<float> PromSpectrum(List<float> spectrum, int influence)
         {
+            /*
             if(spectrum == null)
             {
                 return null;
             }
+            */
 
             if(influence <= 0)
             {
@@ -59,10 +61,12 @@ namespace CSharpNationV2._0.Visualizer
         
         public static List<float> Normalize(List<float> spectrum)
         {
+            /*
             if(spectrum == null)
             {
                 return null;
             }
+            */
 
             float max = spectrum.Max();            
 
@@ -78,10 +82,12 @@ namespace CSharpNationV2._0.Visualizer
 
         public static List<float> SumAverages(List<float> spectrum, List<float> spectrum2, float increase)
         {
+            /*
             if (spectrum == null || spectrum2 == null)
             {
                 return null;
             }
+            */
 
             for (int i = 0; i < spectrum.Count; i++)
             {                
@@ -91,14 +97,16 @@ namespace CSharpNationV2._0.Visualizer
             return spectrum;
         }      
         
-        public static List<float> CombineWaves(List<float> spectrum, List<float> spectrum2, List<float> raw, float increase)
+        public static List<float> CombineWaves(List<float> spectrum, List<float> raw, float increase)
         {
+            /*
             if (spectrum == null || spectrum2 == null)
             {
                 return null;
             }
+            */
 
-            List<float> normalizedList = Normalize(SumAverages(spectrum, spectrum2, increase));
+            List<float> normalizedList = Normalize(SumAverages(spectrum, raw, increase));
 
             float max = raw.Max();
 

@@ -25,6 +25,11 @@ namespace CSharpNationV2._0.Visualizer
             spectrumData[0] = spectrum;                      
         }
 
+        public bool IsNullSpectrum(int index)
+        {
+            return spectrumData[index] == null;            
+        }
+
         public List<float> GetSpectrumReplay(int index)
         {
             return spectrumData[index];
