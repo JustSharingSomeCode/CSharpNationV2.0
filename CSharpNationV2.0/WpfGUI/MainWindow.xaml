@@ -18,5 +18,9 @@
             <ListBox x:Name="EditorList" Margin="0,26,0,60" BorderBrush="{x:Null}" Background="{x:Null}"/>
             <Label Content="Wave editor" HorizontalAlignment="Left" VerticalAlignment="Top" Width="535" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         </Grid>
+        <Grid Margin="550,47,10,35">
+            <Label Content="Backgrounds location: " HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0"/>
+            <TextBox x:Name="BackgroundsTxt" Height="23" Margin="0,21,0,0" TextWrapping="Wrap" Text="Default" VerticalAlignment="Top"/>
+        </Grid>
     </Grid>
 </Window>

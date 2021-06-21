@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Drawing;
 using CSharpNationV2._0.Analyzer;
 using CSharpNationV2._0.Visualizer;
+using CSharpNationV2._0.Configuration;
 using System.Threading;
 
 namespace CSharpNationV2._0.WpfGUI
@@ -31,81 +32,13 @@ namespace CSharpNationV2._0.WpfGUI
             VisualizerThread = new Thread(VisualizerProcess);
             Analyzer = new SpectrumAnalyzer();
 
-            Waves = new SpectrumWave[9];
+            ConfigManager.LoadConfigFile();
 
-            Waves[0] = new SpectrumWave
-            {
-                WaveColor = Color.White,
-                Increment = 0,
-                BarsInfluence = 0,
-                PromLoops = 0
-            };
+            BackgroundsTxt.Text = ConfigManager.GetBackgroundsFolder();
 
-            Waves[1] = new SpectrumWave
-            {
-                WaveColor = Color.Yellow,
-                Increment = 0.5f,
-                BarsInfluence = 2,
-                PromLoops = 1
-            };
+            Waves = ConfigManager.GetWaveConfig();            
 
-            Waves[2] = new SpectrumWave
-            {
-                WaveColor = Color.FromArgb(255, 150, 0),
-                Increment = 0.5f,
-                BarsInfluence = 2,
-                PromLoops = 2
-            };
-
-            Waves[3] = new SpectrumWave
-            {
-                WaveColor = Color.Red,
-                Increment = 0.5f,
-                BarsInfluence = 2,
-                PromLoops = 3
-            };
-
-            Waves[4] = new SpectrumWave
-            {
-                WaveColor = Color.FromArgb(255, 100, 255),
-                Increment = 0.5f,
-                BarsInfluence = 2,
-                PromLoops = 4
-            };
-
-            Waves[5] = new SpectrumWave
-            {
-                WaveColor = Color.FromArgb(50, 50, 155),
-                Increment = 0.5f,
-                BarsInfluence = 2,
-                PromLoops = 5
-            };
-
-            Waves[6] = new SpectrumWave
-            {
-                WaveColor = Color.Blue,
-                Increment = 0.5f,
-                BarsInfluence = 2,
-                PromLoops = 6
-            };
-
-            Waves[7] = new SpectrumWave
-            {
-                WaveColor = Color.FromArgb(50, 205, 255),
-                Increment = 0.5f,
-                BarsInfluence = 2,
-                PromLoops = 7
-            };
-
-            Waves[8] = new SpectrumWave
-            {
-                WaveColor = Color.FromArgb(0, 255, 0),
-                Increment = 0.5f,
-                BarsInfluence = 2,
-                PromLoops = 8
-            };
-
-            UpdateWaveEditor();
+            UpdateWaveEditor();            
         }
 
         private SpectrumAnalyzer Analyzer;
@@ -166,6 +99,8 @@ namespace CSharpNationV2._0.WpfGUI
             }
 
             Analyzer.Free();
+
+            ConfigManager.SaveConfig(BackgroundsTxt.Text, Waves);
         }
 
         private void PauseBtn_Click(object sender, RoutedEventArgs e)
@@ -196,16 +131,10 @@ namespace CSharpNationV2._0.WpfGUI
 
                     R = Waves[i].WaveColor.R,
                     G = Waves[i].WaveColor.G,
-                    B = Waves[i].WaveColor.B,
-
-                    //Increment = Waves[i].Increment,
-                    //BarsInfluence = Waves[i].BarsInfluence,
-                    //PromLoops = Waves[i].PromLoops,
+                    B = Waves[i].WaveColor.B,                    
 
                     Wave = Waves[i]
-                };
-
-                //editor.UpdateColorPicker();
+                };                
 
                 EditorList.Items.Add(editor);
             }

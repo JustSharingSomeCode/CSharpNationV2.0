@@ -67,6 +67,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Configuration\ConfigManager.cs" />
+    <Compile Include="Textures\TextureManager.cs" />
     <Compile Include="Visualizer\SpectrumReplay.cs" />
     <Compile Include="Visualizer\SpectrumVisualizer.cs" />
     <Compile Include="Visualizer\SpectrumWave.cs" />
@@ -106,7 +108,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Page Include="WpfGUI\MainWindow.xaml">
       <SubType>Designer</SubType>
