@@ -16,7 +16,7 @@ namespace CSharpNationV2._0.Configuration
     {        
         private static string[] configData;
 
-        private static readonly string configDirectoryPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\CSharpNationV2.0";
+        public static readonly string configDirectoryPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\CSharpNationV2.0";
         private static readonly string configFilePath = configDirectoryPath + @"\Config.txt";
 
         public static void LoadConfigFile()
@@ -37,11 +37,18 @@ namespace CSharpNationV2._0.Configuration
             {                
                 MessageBox.Show(ex.Message);
             }            
-        }
+        }        
 
-        public static string GetBackgroundsFolder()
-        {            
-            return configData[0];
+        public static string BackgroundsFolder
+        {
+            get
+            {
+                return configData[0];
+            }
+            set
+            {
+                configData[0] = value;
+            }
         }
 
         public static SpectrumWave[] GetWaveConfig()
@@ -166,6 +173,10 @@ namespace CSharpNationV2._0.Configuration
         private static void CreateParticlesDirectory()
         {
             Directory.CreateDirectory(configDirectoryPath + @"\Particles");
+
+            Bitmap logo = new Bitmap(Properties.Resources.Logo);
+            logo.Save(configDirectoryPath + @"\Particles\Logo.png");
+            logo.Dispose();
         }
 
         private static void CreateConfigFile()

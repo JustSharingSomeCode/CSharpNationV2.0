@@ -34,11 +34,11 @@ namespace CSharpNationV2._0.WpfGUI
 
             ConfigManager.LoadConfigFile();
 
-            BackgroundsTxt.Text = ConfigManager.GetBackgroundsFolder();
+            BackgroundsTxt.Text = ConfigManager.BackgroundsFolder;
 
-            Waves = ConfigManager.GetWaveConfig();            
+            Waves = ConfigManager.GetWaveConfig();
 
-            UpdateWaveEditor();            
+            UpdateWaveEditor();
         }
 
         private SpectrumAnalyzer Analyzer;
@@ -47,13 +47,15 @@ namespace CSharpNationV2._0.WpfGUI
 
         private SpectrumWave[] Waves;
 
+        private float[] LogoOffset = new float[4];
+
         private void StartBtn_Click(object sender, RoutedEventArgs e)
-        {            
+        {
             if (VisualizerThread.IsAlive)
             {
                 MessageBoxResult result = MessageBox.Show("The visualizer is actually running, ¿Do you want to start a new one?", "Visualizer actually running", MessageBoxButton.YesNo);
 
-                if(result == MessageBoxResult.Yes)
+                if (result == MessageBoxResult.Yes)
                 {
                     Visualizer.Close();
 
@@ -63,7 +65,7 @@ namespace CSharpNationV2._0.WpfGUI
             else
             {
                 StartVisualizerThread();
-            }            
+            }
         }
 
         private void StartVisualizerThread()
@@ -74,26 +76,26 @@ namespace CSharpNationV2._0.WpfGUI
         }
 
         private void VisualizerProcess()
-        {            
-            using (Visualizer = new SpectrumVisualizer(1280, 720, "CSharpNation_V2.0", Analyzer, Waves))
+        {
+            using (Visualizer = new SpectrumVisualizer(1280, 720, "CSharpNation_V2.0", Analyzer, Waves, LogoOffset))
             {
                 Visualizer.Run();
-            }            
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             DevicesCb.ItemsSource = Analyzer.GetDevices();
 
-            if(DevicesCb.HasItems)
+            if (DevicesCb.HasItems)
             {
                 DevicesCb.SelectedIndex = 0;
             }
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {                
-            if(VisualizerThread.IsAlive)
+        {
+            if (VisualizerThread.IsAlive)
             {
                 Visualizer.Close();
             }
@@ -114,15 +116,15 @@ namespace CSharpNationV2._0.WpfGUI
         }
 
         private void DevicesCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {            
+        {
             Analyzer.ChangeDevice(DevicesCb.SelectedIndex);
-        }   
-        
+        }
+
         private void UpdateWaveEditor()
         {
             EditorList.Items.Clear();
 
-            for(int i = 0; i < Waves.Length; i++)
+            for (int i = 0; i < Waves.Length; i++)
             {
                 WaveEditor editor = new WaveEditor()
                 {
@@ -131,10 +133,10 @@ namespace CSharpNationV2._0.WpfGUI
 
                     R = Waves[i].WaveColor.R,
                     G = Waves[i].WaveColor.G,
-                    B = Waves[i].WaveColor.B,                    
+                    B = Waves[i].WaveColor.B,
 
                     Wave = Waves[i]
-                };                
+                };
 
                 EditorList.Items.Add(editor);
             }
@@ -142,7 +144,7 @@ namespace CSharpNationV2._0.WpfGUI
 
         private void PreviousBackgroundBtn_Click(object sender, RoutedEventArgs e)
         {
-            if(Visualizer != null)
+            if (Visualizer != null)
             {
                 Visualizer.Textures.PreviousBackground();
             }
@@ -153,6 +155,74 @@ namespace CSharpNationV2._0.WpfGUI
             if (Visualizer != null)
             {
                 Visualizer.Textures.NextBackground();
+            }
+        }
+
+        private void BackgroundsTxt_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                ConfigManager.BackgroundsFolder = BackgroundsTxt.Text;
+            }
+        }
+
+        private void TopOffsetTxt_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                try
+                {
+                    LogoOffset[1] = float.Parse(TopOffsetTxt.Text);
+                }
+                catch
+                {
+                    TopOffsetTxt.Text = LogoOffset[1].ToString();
+                }
+            }
+        }
+
+        private void BottomOffsetTxt_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                try
+                {
+                    LogoOffset[3] = float.Parse(BottomOffsetTxt.Text);
+                }
+                catch
+                {
+                    BottomOffsetTxt.Text = LogoOffset[3].ToString();
+                }
+            }
+        }
+
+        private void LeftOffsetTxt_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                try
+                {
+                    LogoOffset[0] = float.Parse(LeftOffsetTxt.Text);
+                }
+                catch
+                {
+                    LeftOffsetTxt.Text = LogoOffset[0].ToString();
+                }
+            }
+        }
+
+        private void RightOffsetTxt_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                try
+                {
+                    LogoOffset[2] = float.Parse(RightOffsetTxt.Text);
+                }
+                catch
+                {
+                    RightOffsetTxt.Text = LogoOffset[2].ToString();
+                }
             }
         }
     }

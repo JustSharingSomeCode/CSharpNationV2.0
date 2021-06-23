@@ -17,7 +17,7 @@ namespace CSharpNationV2._0.Visualizer
 {
     public class SpectrumVisualizer : GameWindow
     {
-        public SpectrumVisualizer(int width, int height, string title, SpectrumAnalyzer _analyzer, SpectrumWave[] waves) : base(width, height, new GraphicsMode(new ColorFormat(8, 8, 8, 0), 24, 8, 4), title)
+        public SpectrumVisualizer(int width, int height, string title, SpectrumAnalyzer _analyzer, SpectrumWave[] waves, float[] offset) : base(width, height, new GraphicsMode(new ColorFormat(8, 8, 8, 0), 24, 8, 4), title)
         {
             VSync = VSyncMode.On;
 
@@ -41,8 +41,12 @@ namespace CSharpNationV2._0.Visualizer
 
             Textures = new TextureManager();
 
-            Textures.LoadBackgrounds(ConfigManager.GetBackgroundsFolder(), "*.jpg");
-            Textures.LoadBackgrounds(ConfigManager.GetBackgroundsFolder(), "*.png");       
+            Textures.LoadBackgrounds(ConfigManager.BackgroundsFolder, "*.jpg");
+            Textures.LoadBackgrounds(ConfigManager.BackgroundsFolder, "*.png");
+
+            LogoTexture = Textures.LoadTexture(ConfigManager.configDirectoryPath + @"\Particles\Logo.png");
+
+            LogoOffset = offset;
         }
 
         public TextureManager Textures;
@@ -53,7 +57,12 @@ namespace CSharpNationV2._0.Visualizer
 
         public SpectrumWave[] Waves;
         
-        private float power = 0;        
+        private float power = 0;
+
+        private int LogoTexture = -1;
+        private float Radius = 0;
+
+        private float[] LogoOffset;
 
         protected override void OnLoad(EventArgs e)
         {
@@ -96,12 +105,14 @@ namespace CSharpNationV2._0.Visualizer
 
             CalculateWavePower();
 
+            Radius = Height / 4 + power;
+
             base.OnUpdateFrame(e);
         }
 
         protected override void OnRenderFrame(FrameEventArgs e)
         {
-            GL.Clear(ClearBufferMask.ColorBufferBit);     
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);     
             
             if(Textures.LoadedBackgrounds != 0)
             {
@@ -116,6 +127,11 @@ namespace CSharpNationV2._0.Visualizer
 
             DrawCircle(Width / 2, Height / 2, (Height / 4) + power, Color.White);
             DrawCircle(Width / 2, Height / 2, (Height / 4.2) + power, Color.Black);
+
+            if(LogoTexture != -1)
+            {
+                Textures.DrawTexture(LogoTexture, (Width / 2) - (Radius + LogoOffset[0]), (Height / 2) - (Radius + LogoOffset[1]), (Width / 2) + (Radius + LogoOffset[2]), (Height / 2) + (Radius + LogoOffset[3]), 255, 255, 255, 255);                
+            }
 
             Context.SwapBuffers();
 
