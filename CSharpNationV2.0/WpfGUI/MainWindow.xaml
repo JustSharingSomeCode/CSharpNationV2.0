@@ -20,7 +20,9 @@
         </Grid>
         <Grid Margin="550,47,10,35">
             <Label Content="Backgrounds location: " HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0"/>
-            <TextBox x:Name="BackgroundsTxt" Height="23" Margin="0,21,0,0" TextWrapping="Wrap" Text="Default" VerticalAlignment="Top"/>
+            <TextBox x:Name="BackgroundsTxt" Height="50" Margin="0,21,0,0" TextWrapping="Wrap" Text="Default" VerticalAlignment="Top"/>
+            <Button x:Name="PreviousBackgroundBtn" Content="Previous background" HorizontalAlignment="Left" Margin="0,76,0,0" VerticalAlignment="Top" Width="170" Click="PreviousBackgroundBtn_Click"/>
+            <Button x:Name="NextBackgroundBtn" Content="Next background" HorizontalAlignment="Right" Margin="0,76,0,0" VerticalAlignment="Top" Width="170" Click="NextBackgroundBtn_Click"/>
         </Grid>
     </Grid>
 </Window>

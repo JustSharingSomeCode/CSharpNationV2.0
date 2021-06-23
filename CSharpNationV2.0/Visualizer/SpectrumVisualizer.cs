@@ -6,6 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 using CSharpNationV2._0.Analyzer;
+using CSharpNationV2._0.Textures;
+using CSharpNationV2._0.Configuration;
+
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
@@ -35,8 +38,14 @@ namespace CSharpNationV2._0.Visualizer
             {
                 Waves[i].DegreesIncrement = 180f / (Analyzer._lines - 1);
             }
+
+            Textures = new TextureManager();
+
+            Textures.LoadBackgrounds(ConfigManager.GetBackgroundsFolder(), "*.jpg");
+            Textures.LoadBackgrounds(ConfigManager.GetBackgroundsFolder(), "*.png");       
         }
 
+        public TextureManager Textures;
         private SpectrumAnalyzer Analyzer;
         private SpectrumReplay Replay;
 
@@ -92,7 +101,12 @@ namespace CSharpNationV2._0.Visualizer
 
         protected override void OnRenderFrame(FrameEventArgs e)
         {
-            GL.Clear(ClearBufferMask.ColorBufferBit);           
+            GL.Clear(ClearBufferMask.ColorBufferBit);     
+            
+            if(Textures.LoadedBackgrounds != 0)
+            {
+                Textures.DrawTexture(Textures.GetActualBackground(), 0 - power, 0 - power, Width + power, Height + power, 255, 150, 150, 150);
+            }
                         
             for (int i = Waves.Length - 1; i >= 0; i--)
             {
@@ -106,7 +120,7 @@ namespace CSharpNationV2._0.Visualizer
             Context.SwapBuffers();
 
             base.OnRenderFrame(e);
-        }
+        }        
 
         private void DrawCircle(double X, double Y, double Radius, Color C)
         {

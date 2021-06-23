@@ -139,5 +139,21 @@ namespace CSharpNationV2._0.WpfGUI
                 EditorList.Items.Add(editor);
             }
         }
+
+        private void PreviousBackgroundBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if(Visualizer != null)
+            {
+                Visualizer.Textures.PreviousBackground();
+            }
+        }
+
+        private void NextBackgroundBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (Visualizer != null)
+            {
+                Visualizer.Textures.NextBackground();
+            }
+        }
     }
 }
