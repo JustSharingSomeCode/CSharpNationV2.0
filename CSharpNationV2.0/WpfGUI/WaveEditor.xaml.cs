@@ -63,11 +63,7 @@ namespace CSharpNationV2._0.WpfGUI
             {
                 BlueSlider.Value = value;
             }
-        }
-
-        //public float Increment { get; set; }
-        //public int BarsInfluence { get; set; }
-        //public int PromLoops { get; set; }
+        }        
 
         public void UpdateColorPicker()
         {

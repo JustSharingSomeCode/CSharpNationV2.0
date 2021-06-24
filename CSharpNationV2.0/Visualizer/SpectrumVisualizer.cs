@@ -17,7 +17,7 @@ namespace CSharpNationV2._0.Visualizer
 {
     public class SpectrumVisualizer : GameWindow
     {
-        public SpectrumVisualizer(int width, int height, string title, SpectrumAnalyzer _analyzer, SpectrumWave[] waves, float[] offset) : base(width, height, new GraphicsMode(new ColorFormat(8, 8, 8, 0), 24, 8, 4), title)
+        public SpectrumVisualizer(int width, int height, string title, SpectrumAnalyzer _analyzer, SpectrumWave[] waves, TextureManager txtmanager, float[] offset) : base(width, height, new GraphicsMode(new ColorFormat(8, 8, 8, 0), 24, 8, 4), title)
         {
             VSync = VSyncMode.On;
 
@@ -37,15 +37,14 @@ namespace CSharpNationV2._0.Visualizer
             for(int i = 0; i < Waves.Length; i++)
             {
                 Waves[i].DegreesIncrement = 180f / (Analyzer._lines - 1);
-            }
+            }            
 
-            Textures = new TextureManager();
+            Textures = txtmanager;
 
-            Textures.LoadBackgrounds(ConfigManager.BackgroundsFolder, "*.jpg");
-            Textures.LoadBackgrounds(ConfigManager.BackgroundsFolder, "*.png");
+            Textures.LoadBackgrounds();
 
-            LogoTexture = Textures.LoadTexture(ConfigManager.configDirectoryPath + @"\Particles\Logo.png");
-
+            LogoTexture = TextureManager.LoadTexture(ConfigManager.configDirectoryPath + @"\Particles\Logo.png");
+    
             LogoOffset = offset;
         }
 
@@ -115,8 +114,8 @@ namespace CSharpNationV2._0.Visualizer
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);     
             
             if(Textures.LoadedBackgrounds != 0)
-            {
-                Textures.DrawTexture(Textures.GetActualBackground(), 0 - power, 0 - power, Width + power, Height + power, 255, 150, 150, 150);
+            {                
+                Textures.DrawBackground(0, 0, Width, Height, power, 255, 150, 150, 150);
             }
                         
             for (int i = Waves.Length - 1; i >= 0; i--)

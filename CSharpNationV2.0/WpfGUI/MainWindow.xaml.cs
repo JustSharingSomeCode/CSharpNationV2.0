@@ -16,6 +16,7 @@ using System.Drawing;
 using CSharpNationV2._0.Analyzer;
 using CSharpNationV2._0.Visualizer;
 using CSharpNationV2._0.Configuration;
+using CSharpNationV2._0.Textures;
 using System.Threading;
 
 namespace CSharpNationV2._0.WpfGUI
@@ -39,6 +40,12 @@ namespace CSharpNationV2._0.WpfGUI
             Waves = ConfigManager.GetWaveConfig();
 
             UpdateWaveEditor();
+
+            textureManager = new TextureManager();
+
+            ReloadTextures();
+
+            //Console.WriteLine(ConfigManager.GetBackgroundConfig()[0]);
         }
 
         private SpectrumAnalyzer Analyzer;
@@ -46,6 +53,8 @@ namespace CSharpNationV2._0.WpfGUI
         private SpectrumVisualizer Visualizer;
 
         private SpectrumWave[] Waves;
+
+        private TextureManager textureManager;
 
         private float[] LogoOffset = new float[4];
 
@@ -77,7 +86,7 @@ namespace CSharpNationV2._0.WpfGUI
 
         private void VisualizerProcess()
         {
-            using (Visualizer = new SpectrumVisualizer(1280, 720, "CSharpNation_V2.0", Analyzer, Waves, LogoOffset))
+            using (Visualizer = new SpectrumVisualizer(1280, 720, "CSharpNation_V2.0", Analyzer, Waves, textureManager, LogoOffset))
             {
                 Visualizer.Run();
             }
@@ -102,7 +111,7 @@ namespace CSharpNationV2._0.WpfGUI
 
             Analyzer.Free();
 
-            ConfigManager.SaveConfig(BackgroundsTxt.Text, Waves);
+            ConfigManager.SaveConfig(BackgroundsTxt.Text, Waves, textureManager.LoadedTextures);
         }
 
         private void PauseBtn_Click(object sender, RoutedEventArgs e)
@@ -224,6 +233,19 @@ namespace CSharpNationV2._0.WpfGUI
                     RightOffsetTxt.Text = LogoOffset[2].ToString();
                 }
             }
+        }
+
+        private void ReloadTextures()
+        {
+            textureManager.Clean();
+
+            textureManager.LoadTextureData(ConfigManager.BackgroundsFolder, "*.jpg");
+            textureManager.LoadTextureData(ConfigManager.BackgroundsFolder, "*.png");
+        }
+
+        private void ReloadTexturesBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ReloadTextures();
         }
     }
 }

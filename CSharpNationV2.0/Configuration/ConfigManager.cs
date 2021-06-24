@@ -9,6 +9,7 @@ using System.IO;
 using System.Drawing;
 
 using CSharpNationV2._0.Visualizer;
+using CSharpNationV2._0.Textures;
 
 namespace CSharpNationV2._0.Configuration
 {
@@ -29,7 +30,7 @@ namespace CSharpNationV2._0.Configuration
 
                 if(configData.Length <= 1 || configData[0] == "")
                 {
-                    SaveConfig("Default", GetWaveConfig());
+                    SaveConfig("Default", GetWaveConfig(), new List<TextureData>());
                     LoadConfigFile();
                 }                
             }
@@ -48,6 +49,35 @@ namespace CSharpNationV2._0.Configuration
             set
             {
                 configData[0] = value;
+            }
+        }
+
+        public static string[] GetBackgroundConfig()
+        {
+            return configData[2].Split((char)47);
+        }
+
+        public static TextureManager.DisplayMode GetDisplayMode(string path)
+        {
+            try
+            {
+                string[] config = GetBackgroundConfig();
+
+                for (int i = 0; i < config.Length; i++)
+                {
+                    if (config[i].Contains(path))
+                    {
+                        string dp = config[i].Split(sep.ToCharArray())[1];
+
+                        return (TextureManager.DisplayMode)Enum.Parse(typeof(TextureManager.DisplayMode), dp);
+                    }
+                }
+
+                return TextureManager.DisplayMode.NotFound;
+            }
+            catch
+            {
+                return TextureManager.DisplayMode.NotFound;
             }
         }
 
@@ -220,9 +250,9 @@ namespace CSharpNationV2._0.Configuration
             }
         }
 
-        private static readonly string sep = "-";
+        private static readonly string sep = "#";
 
-        public static void SaveConfig(string backgroundsPath, SpectrumWave[] waves)
+        public static void SaveConfig(string backgroundsPath, SpectrumWave[] waves, List<TextureData> textures)
         {
             string config = "";
 
@@ -246,6 +276,18 @@ namespace CSharpNationV2._0.Configuration
 
                 config += waves[i].WaveColor.R + sep + waves[i].WaveColor.G + sep + waves[i].WaveColor.B
                     + sep + waves[i].Increment + sep + waves[i].BarsInfluence + sep + waves[i].PromLoops;                
+            }
+
+            config += "|";
+
+            for(int i = 0; i < textures.Count; i++)
+            {
+                if (i > 0)
+                {
+                    config += "/";
+                }
+
+                config += textures[i].Path + sep + textures[i].DisplayMode.ToString();
             }
 
             CheckLocalDirectory();

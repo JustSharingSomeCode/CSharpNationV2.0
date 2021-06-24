@@ -9,62 +9,105 @@ using System.Drawing;
 using OpenTK.Graphics.OpenGL;
 using System.Drawing.Imaging;
 
+using CSharpNationV2._0.Configuration;
+
 namespace CSharpNationV2._0.Textures
 {
     public class TextureManager
     {        
+        public enum DisplayMode
+        {
+            NotFound,
+            Fullscreen,
+            MirroredLeftHalf,
+            MirroredRightHalf
+        }               
+
         public int LoadedBackgrounds
         {
             get
             {
-                return loadedTextures.Count;
+                return LoadedTextures.Count;
             }
         }
 
-        private int actualBackground = 0;
-        private List<int> loadedTextures = new List<int>();
+        private int actualBackground = 0;        
+        public List<TextureData> LoadedTextures = new List<TextureData>();        
 
-        public void LoadBackgrounds(string path, string extension)
+        public void Clean()
         {
-            if(!Directory.Exists(path))
+            LoadedTextures.Clear();
+        }        
+
+        public void LoadTextureData(string path, string extension)
+        {
+            if (!Directory.Exists(path))
             {
                 return;
             }
 
             string[] backgroundPaths = Directory.GetFiles(path, extension);
 
-            int texture;
-
             for(int i = 0; i < backgroundPaths.Length; i++)
             {
-                texture = LoadTexture(backgroundPaths[i]);
-
-                if(texture != -1)
-                {
-                    loadedTextures.Add(texture);
-                }
-            }            
+                LoadedTextures.Add(new TextureData(backgroundPaths[i]));
+            }
         }
 
-        public int LoadTexture(string path)
+        public void LoadBackgrounds()
         {
-            if(!File.Exists(path))
+            for (int i = 0; i < LoadedTextures.Count; i++)
             {
-                return -1;
+                LoadedTextures[i].LoadTexture();
+            }
+        }       
+
+        public static Bitmap GetBitmap(string path)
+        {
+            if (!File.Exists(path))
+            {
+                return null;
             }
 
             try
             {
-                Bitmap bitmap = new Bitmap(path);
+                return new Bitmap(path);
+            }
+            catch
+            {
+                return null;
+            }
+        }
 
+        public static int LoadTexture(string path)
+        {
+            return LoadTexture(GetBitmap(path));
+        }
+
+        public static int LoadTexture(Bitmap bitmap, DisplayMode displayMode = DisplayMode.Fullscreen)
+        {            
+            try
+            {                
                 GL.Hint(HintTarget.PerspectiveCorrectionHint, HintMode.Nicest);
 
                 GL.GenTextures(1, out int tex);
                 GL.BindTexture(TextureTarget.Texture2D, tex);
 
-                BitmapData data = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
-                    ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+                BitmapData data = null;
 
+                switch(displayMode)
+                {
+                    case DisplayMode.Fullscreen:
+                        data = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+                        break;
+                    case DisplayMode.MirroredLeftHalf:
+                        data = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width / 2, bitmap.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+                        break;
+                    case DisplayMode.MirroredRightHalf:
+                        data = bitmap.LockBits(new Rectangle(bitmap.Width / 2, 0, bitmap.Width / 2, bitmap.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+                        break;                        
+                }
+                    
                 GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, data.Width, data.Height, 0,
                     OpenTK.Graphics.OpenGL.PixelFormat.Bgra, PixelType.UnsignedByte, data.Scan0);
                 bitmap.UnlockBits(data);
@@ -74,17 +117,20 @@ namespace CSharpNationV2._0.Textures
                 GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.Repeat);
                 GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.Repeat);
 
+                bitmap.Dispose();
+
                 return tex;
             }
-            catch
+            catch (Exception ex)
             {
+                Console.WriteLine("ERROR: {0}", ex.Message);
                 return -1;
             }
         }
 
         public int GetActualBackground()
-        {
-            return loadedTextures[actualBackground];
+        {            
+            return LoadedTextures[actualBackground].Texture;
         }
 
         public void DrawTexture(int texture, float x, float y, float xMax, float yMax, int a, int r, int g, int b)
@@ -114,13 +160,37 @@ namespace CSharpNationV2._0.Textures
             GL.Disable(EnableCap.Blend);
         }
 
+        public void DrawBackground(float x, float y, float xMax, float yMax, float power, int a, int r, int g, int b)
+        {
+            TextureData td = LoadedTextures[actualBackground];
+
+            switch(td.DisplayMode)
+            {
+                case DisplayMode.Fullscreen:
+                    DrawTexture(td.Texture, x - power, y - power, xMax + power, yMax + power, a, r, g, b);
+                    break;
+
+                case DisplayMode.MirroredLeftHalf:
+                case DisplayMode.MirroredRightHalf:
+
+                    DrawTexture(td.Texture, x - power, y - power, xMax / 2, yMax + power, a, r, g, b);
+                    DrawTexture(td.Texture, xMax + power, 0 - power, xMax / 2, yMax + power, a, r, g, b);
+                    break;
+            }
+        }
+
         public void NextBackground()
         {
             actualBackground++;
 
-            if(actualBackground >= LoadedBackgrounds)
+            if(actualBackground >= LoadedTextures.Count)
             {
                 actualBackground = 0;
+            }
+
+            if(GetActualBackground() == -1)
+            {
+                NextBackground();
             }
         }
 
@@ -128,9 +198,14 @@ namespace CSharpNationV2._0.Textures
         {
             actualBackground--;
 
-            if (actualBackground <= 0)
+            if (actualBackground < 0)
             {
-                actualBackground = LoadedBackgrounds - 1;
+                actualBackground = LoadedTextures.Count - 1;
+            }
+
+            if (GetActualBackground() == -1)
+            {
+                PreviousBackground();
             }
         }
     }

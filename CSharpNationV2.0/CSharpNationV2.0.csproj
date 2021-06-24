@@ -68,6 +68,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Configuration\ConfigManager.cs" />
+    <Compile Include="Textures\TextureData.cs" />
     <Compile Include="Textures\TextureManager.cs" />
     <Compile Include="Visualizer\SpectrumReplay.cs" />
     <Compile Include="Visualizer\SpectrumVisualizer.cs" />
