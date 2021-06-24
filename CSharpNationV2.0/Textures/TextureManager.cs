@@ -38,6 +38,7 @@ namespace CSharpNationV2._0.Textures
         public void Clean()
         {
             LoadedTextures.Clear();
+            actualBackground = 0;
         }        
 
         public void LoadTextureData(string path, string extension)
@@ -55,13 +56,23 @@ namespace CSharpNationV2._0.Textures
             }
         }
 
-        public void LoadBackgrounds()
+        public void LoadBackgrounds(float screenWidth, float screenHeight)
         {
             for (int i = 0; i < LoadedTextures.Count; i++)
             {
-                LoadedTextures[i].LoadTexture();
+                LoadedTextures[i].LoadTexture();                
             }
+
+            UpdateScales(screenWidth, screenHeight);
         }       
+
+        public void UpdateScales(float screenWidth, float screenHeight)
+        {
+            for (int i = 0; i < LoadedTextures.Count; i++)
+            {                
+                LoadedTextures[i].UpdateScale(screenWidth, screenHeight);
+            }
+        }
 
         public static Bitmap GetBitmap(string path)
         {
@@ -166,18 +177,22 @@ namespace CSharpNationV2._0.Textures
         {
             TextureData td = LoadedTextures[actualBackground];
 
-            switch(td.DisplayMode)
+            float wp = power * td.WidthRatio;
+            float hp = wp * td.HeightRatio;
+
+            switch (td.DisplayMode)
             {
                 case DisplayMode.Fullscreen:
-                    DrawTexture(td.Texture, x - power, y - power, xMax + power, yMax + power, a, r, g, b);
+                    DrawTexture(td.Texture, x - td.FillX - wp, y - td.FillY - hp, xMax + td.FillX + wp, yMax + td.FillY + hp, a, r, g, b);
+                    //DrawTexture(td.Texture, x - (td.FillX * power), y - (td.FillY * power), xMax + (td.FillX * power), yMax + (td.FillY * power), a, r, g, b);
                     break;
 
                 case DisplayMode.Halfscreen:
                 case DisplayMode.MirroredLeftHalf:
-                case DisplayMode.MirroredRightHalf:
+                case DisplayMode.MirroredRightHalf:                    
 
-                    DrawTexture(td.Texture, x - power, y - power, xMax / 2, yMax + power, a, r, g, b);
-                    DrawTexture(td.Texture, xMax + power, 0 - power, xMax / 2, yMax + power, a, r, g, b);
+                    DrawTexture(td.Texture, x - (td.FillX * 2) - (wp * 2), y - td.FillY - hp, xMax / 2, yMax + td.FillY + hp, a, r, g, b);
+                    DrawTexture(td.Texture, xMax + (td.FillX * 2) + (wp * 2), 0 - td.FillY - hp, xMax / 2, yMax + td.FillY + hp, a, r, g, b);
                     break;
             }
         }
@@ -190,6 +205,8 @@ namespace CSharpNationV2._0.Textures
             {
                 actualBackground = 0;
             }
+
+            //LoadedTextures[actualBackground].Write();
 
             if(GetActualBackground() == -1)
             {

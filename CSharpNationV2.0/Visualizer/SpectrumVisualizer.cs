@@ -41,7 +41,7 @@ namespace CSharpNationV2._0.Visualizer
 
             Textures = txtmanager;
 
-            Textures.LoadBackgrounds();
+            Textures.LoadBackgrounds(Width, Height);
 
             LogoTexture = TextureManager.LoadTexture(ConfigManager.configDirectoryPath + @"\Particles\Logo.png");
     
@@ -78,7 +78,9 @@ namespace CSharpNationV2._0.Visualizer
             GL.LoadIdentity();
             GL.Ortho(0.0f, Width, 0.0f, Height, 0.0f, 1.0f);
 
-            Analyzer.multiplier = Height / 4;            
+            Analyzer.multiplier = Height / 4;
+
+            Textures.UpdateScales(Width, Height);
 
             base.OnResize(e);
         }
@@ -115,7 +117,7 @@ namespace CSharpNationV2._0.Visualizer
             
             if(Textures.LoadedBackgrounds != 0)
             {                
-                Textures.DrawBackground(0, 0, Width, Height, power, 255, 150, 150, 150);
+                Textures.DrawBackground(0, 0, Width, Height, power / 4, 255, 150, 150, 150);
             }
                         
             for (int i = Waves.Length - 1; i >= 0; i--)
