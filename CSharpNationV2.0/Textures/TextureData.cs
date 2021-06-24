@@ -22,11 +22,12 @@ namespace CSharpNationV2._0.Textures
         private void LoadConfig()
         {
             DisplayMode = ConfigManager.GetDisplayMode(Path);
-
+            /*
             if(DisplayMode == TextureManager.DisplayMode.NotFound)
             {
                 DisplayMode = TextureManager.DisplayMode.Fullscreen;
             }
+            */
         }
 
         public void LoadTexture()
@@ -40,6 +41,18 @@ namespace CSharpNationV2._0.Textures
 
             OriginalWidth = textureBitmap.Width;
             OriginalHeight = textureBitmap.Height;
+
+            if (DisplayMode == TextureManager.DisplayMode.NotFound)
+            {                
+                if(OriginalHeight > OriginalWidth)
+                {
+                    DisplayMode = TextureManager.DisplayMode.Halfscreen;
+                }
+                else
+                {
+                    DisplayMode = TextureManager.DisplayMode.Fullscreen;
+                }
+            }
 
             Texture = TextureManager.LoadTexture(textureBitmap, DisplayMode);
 

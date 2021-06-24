@@ -19,6 +19,7 @@ namespace CSharpNationV2._0.Textures
         {
             NotFound,
             Fullscreen,
+            Halfscreen,
             MirroredLeftHalf,
             MirroredRightHalf
         }               
@@ -97,6 +98,7 @@ namespace CSharpNationV2._0.Textures
 
                 switch(displayMode)
                 {
+                    case DisplayMode.Halfscreen:
                     case DisplayMode.Fullscreen:
                         data = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
                         break;
@@ -170,6 +172,7 @@ namespace CSharpNationV2._0.Textures
                     DrawTexture(td.Texture, x - power, y - power, xMax + power, yMax + power, a, r, g, b);
                     break;
 
+                case DisplayMode.Halfscreen:
                 case DisplayMode.MirroredLeftHalf:
                 case DisplayMode.MirroredRightHalf:
 
