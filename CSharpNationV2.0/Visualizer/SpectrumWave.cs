@@ -9,10 +9,17 @@ using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 
+using CSharpNationV2._0.Analyzer;
+
 namespace CSharpNationV2._0.Visualizer
 {
     public class SpectrumWave
     {
+        public SpectrumWave()
+        {
+            DegreesIncrement = 180f / (SpectrumAnalyzer._lines - 1);
+        }
+
         public List<float> SpectrumData { get; set; }
 
         public Color WaveColor { get; set; }

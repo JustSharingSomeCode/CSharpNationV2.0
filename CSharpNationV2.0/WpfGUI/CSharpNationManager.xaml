@@ -1,0 +1,44 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CSharpNationV2._0.WpfGUI"
+        xmlns:WpfLightControls="clr-namespace:WpfLightControls;assembly=WpfLightControls" x:Name="Manager" x:Class="CSharpNationV2._0.WpfGUI.CSharpNationManager"
+        mc:Ignorable="d"
+        Title="CSharpNationManager" Height="576" Width="1024" MinWidth="1024" MinHeight="576" AllowsTransparency="True" WindowStyle="None" ResizeMode="CanResizeWithGrip" Background="#FF2D2D2D">
+
+    <Window.Resources>
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Century Gothic"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid x:Name="MainGrid">
+        <Grid x:Name="TitleGrid" Height="30" VerticalAlignment="Top" Background="#FF3C3C3C" MouseDown="TitleGrid_MouseDown">
+            <WpfLightControls:LightButton x:Name="CloseBtn" IconText="&#xE106;" HorizontalAlignment="Right" VerticalAlignment="Top" Width="30" Background="#00000000" Height="30" FontSize="12" Padding="0" CornerRadius="0" Click="CloseBtn_Click"/>
+            <WpfLightControls:LightButton x:Name="MaximizeBtn" IconText="&#xE923;" HorizontalAlignment="Right" VerticalAlignment="Top" Width="30" Background="#00000000" Height="30" FontSize="12" Padding="0" CornerRadius="0" Margin="0,0,30,0"/>
+            <WpfLightControls:LightButton x:Name="MinimizeBtn" IconText="&#xE108;" HorizontalAlignment="Right" VerticalAlignment="Top" Width="30" Background="#00000000" Height="30" FontSize="12" Padding="0" CornerRadius="0" Margin="0,0,60,0"/>
+            <Label x:Name="TitleLbl" Content="CSharpNation Manager" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="520" BorderBrush="#FFDE2424" BorderThickness="0"/>
+        </Grid>
+        <Border x:Name="DevicesBorder" BorderBrush="White" BorderThickness="0,1,0,0" Height="30" VerticalAlignment="Bottom">
+            <Grid x:Name="DevicesGrid" Margin="0,0,0,0">
+                <Label Content="Device: " HorizontalAlignment="Left" VerticalAlignment="Top" Height="29"/>
+                <ComboBox x:Name="DeviceCb" HorizontalAlignment="Left" Margin="58,4,0,0" VerticalAlignment="Top" Width="270"/>
+            </Grid>
+        </Border>
+        <Grid Margin="0,30">
+            <Grid x:Name="MenuGrid" HorizontalAlignment="Left" Width="50" Background="#FF323232" ClipToBounds="True" SizeChanged="MenuGrid_SizeChanged">
+                <WpfLightControls:LightButton x:Name="WavesBtn" Content="Waves" VerticalAlignment="Top" IconText="&#xF61F;" IconSize="20" ShowIcon="True" Background="#00000000" Foreground="White" IconForeground="White" Height="50" BorderBrush="White" Click="WavesBtn_Click"/>
+                <WpfLightControls:LightButton x:Name="TexturesBtn" Content="Backgrounds" Margin="0,50,0,0" VerticalAlignment="Top" IconText="&#xEB9F;" IconSize="20" ShowIcon="True" Background="#00000000" Foreground="White" IconForeground="White" Height="50" BorderBrush="White" Click="TexturesBtn_Click"/>
+                <WpfLightControls:LightButton x:Name="ExpandBtn" Content="Expand" HorizontalAlignment="Left" Margin="0,0,-100,0" VerticalAlignment="Bottom" Width="150" IconText="&#xE013;" IconSize="20" ShowIcon="True" Background="#00000000" Foreground="White" IconForeground="White" Height="50" Click="ExpandBtn_Click"/>
+            </Grid>
+            <Grid x:Name="ContentGrid" Margin="50,0,0,0">
+
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

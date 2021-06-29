@@ -247,5 +247,11 @@ namespace CSharpNationV2._0.WpfGUI
         {
             ReloadTextures();
         }
+
+        private void TestWBtn_Click(object sender, RoutedEventArgs e)
+        {
+            CSharpNationManager cm = new CSharpNationManager();
+            cm.Show();
+        }
     }
 }

@@ -21,9 +21,9 @@
         <Grid Margin="550,47,10,35">
             <Label Content="Backgrounds location: " HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0"/>
             <TextBox x:Name="BackgroundsTxt" Height="50" Margin="0,21,0,0" TextWrapping="Wrap" Text="Default" VerticalAlignment="Top" KeyUp="BackgroundsTxt_KeyUp"/>
-            <Button x:Name="ReloadTexturesBtn" Content="Reload textures" HorizontalAlignment="Left" Margin="0,76,0,0" VerticalAlignment="Top" Width="206" Click="ReloadTexturesBtn_Click"/>
-            <Button x:Name="PreviousBackgroundBtn" Content="Previous background" HorizontalAlignment="Left" Margin="211,76,0,0" VerticalAlignment="Top" Width="120" Click="PreviousBackgroundBtn_Click"/>
-            <Button x:Name="NextBackgroundBtn" Content="Next background" HorizontalAlignment="Right" Margin="0,76,0,0" VerticalAlignment="Top" Width="120" Click="NextBackgroundBtn_Click"/>
+            <Button x:Name="ReloadTexturesBtn" Content="Reload textures" HorizontalAlignment="Left" Margin="0,76,0,0" VerticalAlignment="Top" Width="180" Click="ReloadTexturesBtn_Click"/>
+            <Button x:Name="PreviousBackgroundBtn" Content="Previous background" HorizontalAlignment="Left" Margin="185,76,0,0" VerticalAlignment="Top" Width="139" Click="PreviousBackgroundBtn_Click"/>
+            <Button x:Name="NextBackgroundBtn" Content="Next background" HorizontalAlignment="Left" Margin="329,76,0,0" VerticalAlignment="Top" Width="127" Click="NextBackgroundBtn_Click"/>
             <Label Content="Logo offset: " HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0" Margin="0,101,0,0"/>
             <TextBox x:Name="TopOffsetTxt" HorizontalAlignment="Left" Height="23" Margin="25,130,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" KeyUp="TopOffsetTxt_KeyUp"/>
             <Label Content="Top: " HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0" Margin="0,132,0,0"/>
@@ -33,6 +33,7 @@
             <Label Content="Left: " HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0" Margin="243,132,0,0"/>
             <TextBox x:Name="RightOffsetTxt" HorizontalAlignment="Left" Height="23" Margin="406,128,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" KeyUp="RightOffsetTxt_KeyUp"/>
             <Label Content="Right: " HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0" Margin="367,132,0,0"/>
+            <Button x:Name="TestWBtn" Content="Open new visual manager" HorizontalAlignment="Left" Margin="10,433,0,0" VerticalAlignment="Top" Width="195" Click="TestWBtn_Click"/>
         </Grid>
     </Grid>
 </Window>

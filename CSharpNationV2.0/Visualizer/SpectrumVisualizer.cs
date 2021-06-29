@@ -34,10 +34,12 @@ namespace CSharpNationV2._0.Visualizer
 
             Waves = waves;            
            
+            /*
             for(int i = 0; i < Waves.Length; i++)
             {
                 Waves[i].DegreesIncrement = 180f / (Analyzer._lines - 1);
-            }            
+            }         
+            */
 
             Textures = txtmanager;
 

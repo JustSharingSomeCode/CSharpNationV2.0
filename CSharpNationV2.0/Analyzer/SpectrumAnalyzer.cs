@@ -18,7 +18,7 @@ namespace CSharpNationV2._0.Analyzer
         private int previousDevice = -1;
 
         public float multiplier = 1;
-        public int _lines = 50;
+        public static int _lines = 50;
 
         #region Constructor
         public SpectrumAnalyzer()
