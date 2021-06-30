@@ -31,6 +31,8 @@ namespace CSharpNationV2._0.WpfGUI
 
             windowManager = new WindowManager();
 
+            errorWindow = new ErrorWindow();
+
             ChangeWindows(windowManager.GetWaveWindow());
 
             VisualizerThread = new Thread(VisualizerProcess);
@@ -45,6 +47,7 @@ namespace CSharpNationV2._0.WpfGUI
         }
 
         private WindowManager windowManager;
+        private ErrorWindow errorWindow;
 
         private SpectrumAnalyzer Analyzer;
         private Thread VisualizerThread;
@@ -160,6 +163,11 @@ namespace CSharpNationV2._0.WpfGUI
         private void ResumeBtn_Click(object sender, RoutedEventArgs e)
         {
             Analyzer.ResumeCapture();
+        }
+
+        private void ErrorBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeWindows(errorWindow);
         }
     }
 }

@@ -38,6 +38,7 @@
                 <WpfLightControls:LightButton x:Name="WavesBtn" Content="Waves" VerticalAlignment="Top" IconText="&#xF61F;" IconSize="20" ShowIcon="True" Background="#00000000" Foreground="White" IconForeground="White" Height="50" BorderBrush="White" Click="WavesBtn_Click"/>
                 <WpfLightControls:LightButton x:Name="TexturesBtn" Content="Backgrounds" Margin="0,50,0,0" VerticalAlignment="Top" IconText="&#xEB9F;" IconSize="20" ShowIcon="True" Background="#00000000" Foreground="White" IconForeground="White" Height="50" BorderBrush="White" Click="TexturesBtn_Click"/>
                 <WpfLightControls:LightButton x:Name="ExpandBtn" Content="Expand" HorizontalAlignment="Left" Margin="0,0,-100,0" VerticalAlignment="Bottom" Width="150" IconText="&#xE013;" IconSize="20" ShowIcon="True" Background="#00000000" Foreground="White" IconForeground="White" Height="50" Click="ExpandBtn_Click"/>
+                <WpfLightControls:LightButton x:Name="ErrorBtn" Content="Error log" Margin="0,100,0,0" VerticalAlignment="Top" IconText="&#xE15E;" IconSize="20" ShowIcon="True" Background="#00000000" Foreground="White" IconForeground="White" Height="50" BorderBrush="White" Click="ErrorBtn_Click"/>
             </Grid>
             <Grid x:Name="ContentGrid" Margin="50,0,0,0">
 

@@ -73,6 +73,7 @@
     </Compile>
     <Compile Include="Configuration\ConfigManager.cs" />
     <Compile Include="Configuration\ConfigurationManager.cs" />
+    <Compile Include="Configuration\ErrorManager.cs" />
     <Compile Include="Textures\TextureData.cs" />
     <Compile Include="Textures\TextureManager.cs" />
     <Compile Include="Visualizer\SpectrumReplay.cs" />
@@ -81,6 +82,9 @@
     <Compile Include="Visualizer\WaveTools.cs" />
     <Compile Include="WpfGUI\CSharpNationManager.xaml.cs">
       <DependentUpon>CSharpNationManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfGUI\ErrorWindow.xaml.cs">
+      <DependentUpon>ErrorWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="WpfGUI\LightWaveEditor.xaml.cs">
       <DependentUpon>LightWaveEditor.xaml</DependentUpon>
@@ -129,6 +133,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="WpfGUI\CSharpNationManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WpfGUI\ErrorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

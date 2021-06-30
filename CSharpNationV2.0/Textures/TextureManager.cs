@@ -112,6 +112,7 @@ namespace CSharpNationV2._0.Textures
             }
             catch
             {
+                ErrorManager.AddErrorMessage("Can't load file: " + path);
                 return null;
             }
         }
