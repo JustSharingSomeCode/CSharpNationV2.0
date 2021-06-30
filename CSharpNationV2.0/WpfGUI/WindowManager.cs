@@ -13,13 +13,20 @@ namespace CSharpNationV2._0.WpfGUI
         public WindowManager()
         {
             wavesWindow = new WavesWindow();
+            texturesWindow = new TexturesWindow();
         }
 
-        WavesWindow wavesWindow;
+        private WavesWindow wavesWindow;
+        private TexturesWindow texturesWindow;
 
         public WavesWindow GetWaveWindow()
         {
             return wavesWindow;
+        }
+
+        public TexturesWindow GetTexturesWindow()
+        {
+            return texturesWindow;
         }
     }
 }

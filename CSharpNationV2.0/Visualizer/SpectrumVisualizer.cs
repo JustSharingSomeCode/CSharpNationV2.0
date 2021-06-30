@@ -117,7 +117,7 @@ namespace CSharpNationV2._0.Visualizer
         {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);     
             
-            if(Textures.LoadedBackgrounds != 0)
+            if(Textures.LoadedTexturesCount != 0)
             {                
                 Textures.DrawBackground(0, 0, Width, Height, power / 4, 255, 150, 150, 150);
             }

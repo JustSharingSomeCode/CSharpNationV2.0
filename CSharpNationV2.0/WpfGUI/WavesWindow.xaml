@@ -8,12 +8,15 @@
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="900" Background="#FF2D2D2D">
     <Grid>
-        <WpfLightControls:LightScrollViewer x:Name="WavesViewer" Height="341" Margin="10,10,10,0" VerticalAlignment="Top" Background="#FF3C3C3C" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Auto"
+        <WpfLightControls:LightScrollViewer x:Name="WavesViewer" Height="341" Margin="10,10,50,0" VerticalAlignment="Top" Background="#FF3C3C3C" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Auto"
                                                     CornerRadius="5" ScrollBarBackground="#FF646464" ThumbBrush="#FF969696">
             <Grid x:Name="WavesViewerGrid" Height="Auto" Width="Auto"/>
         </WpfLightControls:LightScrollViewer>
-        <WpfLightControls:LightButton Content="Pause capture" IconText="&#xE103;" IconSize="18" HorizontalAlignment="Left" Margin="10,356,0,0" VerticalAlignment="Top" Width="200" Height="50" CornerRadius="5"/>
-        <WpfLightControls:LightButton Content="Resume capture" IconText="&#xE102;" IconSize="18" HorizontalAlignment="Left" Margin="215,356,0,0" VerticalAlignment="Top" Width="200" Height="50" CornerRadius="5"/>
-        <WpfLightControls:LightButton Content="Reset waves" IconText="&#xE149;" IconSize="18" HorizontalAlignment="Right" Margin="0,356,10,0" VerticalAlignment="Top" Width="200" Height="50" CornerRadius="5"/>
+        <WpfLightControls:LightButton Content="Pause capture" IconText="&#xE103;" IconSize="18" HorizontalAlignment="Left" Margin="10,356,0,0" VerticalAlignment="Top" Width="200" Height="50" CornerRadius="5" Background="#FF464646"/>
+        <WpfLightControls:LightButton Content="Resume capture" IconText="&#xE102;" IconSize="18" HorizontalAlignment="Left" Margin="215,356,0,0" VerticalAlignment="Top" Width="200" Height="50" CornerRadius="5" Background="#FF464646"/>
+        <WpfLightControls:LightButton Content="Reset waves" IconText="&#xE149;" IconSize="18" HorizontalAlignment="Right" Margin="0,356,50,0" VerticalAlignment="Top" Width="200" Height="50" CornerRadius="5" Background="#FF464646"/>
+        <WpfLightControls:LightButton Content="Reset waves" IconText="&#xE109;" IconSize="14" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="35" Height="35" CornerRadius="5" Background="#FF464646"/>
+        <WpfLightControls:LightButton Content="Reset waves" IconText="&#xE108;" IconSize="14" HorizontalAlignment="Right" Margin="0,50,10,0" VerticalAlignment="Top" Width="35" Height="35" CornerRadius="5" Background="#FF464646"/>
+        <WpfLightControls:LightButton x:Name="SaveConfigBtn" Content="Save actual configuration" IconText="&#xE105;" IconSize="18" Margin="10,0,50,10" VerticalAlignment="Bottom" Height="50" CornerRadius="5" Background="#FF464646" Click="SaveConfigBtn_Click"/>
     </Grid>
 </UserControl>

@@ -15,6 +15,11 @@ namespace CSharpNationV2._0.Textures
 {
     public class TextureManager
     {        
+        public TextureManager()
+        {
+            LoadFolder(ConfigManager.BackgroundsFolder);
+        }
+
         public enum DisplayMode
         {
             NotFound,
@@ -22,9 +27,11 @@ namespace CSharpNationV2._0.Textures
             Halfscreen,
             MirroredLeftHalf,
             MirroredRightHalf
-        }               
+        }
 
-        public int LoadedBackgrounds
+        public string LoadedFolder { get; private set; }                       
+
+        public int LoadedTexturesCount
         {
             get
             {
@@ -33,13 +40,23 @@ namespace CSharpNationV2._0.Textures
         }
 
         private int actualBackground = 0;        
-        public List<TextureData> LoadedTextures = new List<TextureData>();        
+        public List<TextureData> LoadedTextures { get; private set; } = new List<TextureData>();        
 
         public void Clean()
         {
             LoadedTextures.Clear();
             actualBackground = 0;
         }        
+
+        public void LoadFolder(string folder)
+        {            
+            Clean();
+
+            LoadTextureData(folder, "*.jpg");
+            LoadTextureData(folder, "*.png");
+
+            LoadedFolder = folder;
+        }
 
         public void LoadTextureData(string path, string extension)
         {
@@ -228,5 +245,29 @@ namespace CSharpNationV2._0.Textures
                 PreviousBackground();
             }
         }
+
+        public string[] GetFileNames()
+        {
+            string[] names = new string[LoadedTexturesCount];
+
+            for(int i = 0; i < LoadedTexturesCount; i++)
+            {
+                names[i] = LoadedTextures[i].FileName;
+            }
+
+            return names;
+        }
+        
+        /*
+        public TextureData GetTextureData(int index)
+        {
+            if(index < LoadedTexturesCount)
+            {
+                return LoadedTextures[index];
+            }
+
+            return null;
+        }
+        */
     }
 }

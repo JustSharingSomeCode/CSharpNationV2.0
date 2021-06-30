@@ -21,7 +21,8 @@ namespace CSharpNationV2._0.Textures
 
         private void LoadConfig()
         {
-            DisplayMode = ConfigManager.GetDisplayMode(Path);            
+            //DisplayMode = ConfigManager.GetDisplayMode(Path);
+            DisplayMode = ConfigurationManager.GetDisplayMode(FileName);
         }
 
         public void LoadTexture()
@@ -103,6 +104,13 @@ namespace CSharpNationV2._0.Textures
         }
 
         public string Path { get; private set; }
+        public string FileName
+        {
+            get
+            {
+                return Path.Split((char)92).Last();
+            }
+        }
 
         private Bitmap textureBitmap;
         public int Texture { get; set; } = -1;
@@ -126,6 +134,11 @@ namespace CSharpNationV2._0.Textures
             Console.WriteLine("RWidth: {0}, RHeight: {1}", WidthRatio, HeightRatio);
             Console.WriteLine("A_Width: {0}, A_Height: {1}", ActualWidth, ActualHeight);
             Console.WriteLine("CY: {0}, CX: {1}", FillY, FillX);
+        }
+
+        public string GetConfig()
+        {
+            return FileName + "|" + DisplayMode.ToString();
         }
     }
 }

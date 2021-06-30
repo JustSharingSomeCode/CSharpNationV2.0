@@ -72,6 +72,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Configuration\ConfigManager.cs" />
+    <Compile Include="Configuration\ConfigurationManager.cs" />
     <Compile Include="Textures\TextureData.cs" />
     <Compile Include="Textures\TextureManager.cs" />
     <Compile Include="Visualizer\SpectrumReplay.cs" />
@@ -86,6 +87,9 @@
     </Compile>
     <Compile Include="WpfGUI\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfGUI\TexturesWindow.xaml.cs">
+      <DependentUpon>TexturesWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="WpfGUI\WaveEditor.xaml.cs">
       <DependentUpon>WaveEditor.xaml</DependentUpon>
@@ -133,6 +137,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WpfGUI\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WpfGUI\TexturesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

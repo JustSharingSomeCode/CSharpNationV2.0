@@ -35,6 +35,10 @@ namespace CSharpNationV2._0.WpfGUI
             G = wave.WaveColor.G;
             B = wave.WaveColor.B;
 
+            IncrementTxt.Text = wave.Increment.ToString();
+            BarsInfluenceTxt.Text = wave.BarsInfluence.ToString();
+            PromLoopsTxt.Text = wave.PromLoops.ToString();
+
             Handled = false;
 
             UpdateColorPicker();

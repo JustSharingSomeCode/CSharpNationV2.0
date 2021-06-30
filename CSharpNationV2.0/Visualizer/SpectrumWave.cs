@@ -129,5 +129,10 @@ namespace CSharpNationV2._0.Visualizer
                 GL.End();
             }
         }
+
+        public string GetConfig()
+        {
+            return WaveColor.R.ToString() + "|" + WaveColor.G.ToString() + "|" + WaveColor.B.ToString() + "|" + Increment.ToString() + "|" + BarsInfluence.ToString() + "|" + PromLoops.ToString();
+        }
     }
 }

@@ -30,15 +30,18 @@ namespace CSharpNationV2._0.WpfGUI
             LoadWaves();
         }
 
+        SpectrumWave[] Waves;
+
         private void LoadWaves()
         {
-            SpectrumWave[] waves = ConfigManager.GetWaveConfig();
+            //SpectrumWave[] waves = ConfigManager.GetWaveConfig();
+            Waves = ConfigurationManager.LoadWaves();
 
             double left = 10;
 
-            for (int i = 0; i < waves.Length; i++)
+            for (int i = 0; i < Waves.Length; i++)
             {
-                LightWaveEditor lwe = new LightWaveEditor(waves[i])
+                LightWaveEditor lwe = new LightWaveEditor(Waves[i])
                 {
                     HorizontalAlignment = HorizontalAlignment.Left,
                     VerticalAlignment = VerticalAlignment.Top,
@@ -49,6 +52,11 @@ namespace CSharpNationV2._0.WpfGUI
 
                 left += lwe.MinWidth + 10;
             }
+        }
+
+        private void SaveConfigBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ConfigurationManager.SaveWaves(Waves);
         }
     }
 }

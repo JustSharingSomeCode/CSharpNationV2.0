@@ -43,7 +43,7 @@ namespace CSharpNationV2._0.WpfGUI
 
             textureManager = new TextureManager();
 
-            ReloadTextures();
+            //ReloadTextures();
 
             //Console.WriteLine(ConfigManager.GetBackgroundConfig()[0]);
         }
@@ -111,7 +111,7 @@ namespace CSharpNationV2._0.WpfGUI
 
             Analyzer.Free();
 
-            ConfigManager.SaveConfig(BackgroundsTxt.Text, Waves, textureManager.LoadedTextures);
+            //ConfigManager.SaveConfig(BackgroundsTxt.Text, Waves, textureManager.LoadedTextures);
         }
 
         private void PauseBtn_Click(object sender, RoutedEventArgs e)

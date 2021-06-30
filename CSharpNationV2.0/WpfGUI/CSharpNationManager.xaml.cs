@@ -30,7 +30,7 @@ namespace CSharpNationV2._0.WpfGUI
             ChangeWindows(windowManager.GetWaveWindow());
         }
 
-        WindowManager windowManager;
+        private WindowManager windowManager;        
 
         private bool IsMenuExpanded = false;
 
@@ -73,7 +73,7 @@ namespace CSharpNationV2._0.WpfGUI
 
         private void TexturesBtn_Click(object sender, RoutedEventArgs e)
         {
-            ContentGrid.Children.Clear();
+            ChangeWindows(windowManager.GetTexturesWindow());
         }
 
         private void ChangeWindows(FrameworkElement window)
