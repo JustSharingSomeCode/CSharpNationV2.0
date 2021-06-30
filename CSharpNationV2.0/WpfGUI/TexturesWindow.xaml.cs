@@ -31,6 +31,7 @@ namespace CSharpNationV2._0.WpfGUI
             textureManager = new TextureManager();
 
             //BackgroundsFolderTxt.Text = ConfigManager.BackgroundsFolder;
+            BackgroundsFolderTxt.Text = ConfigurationManager.BackgroundsPath;
             LoadedFolderTxt.Text = TextureManager.LoadedFolder;            
 
             UpdateFileNamesList();
@@ -107,8 +108,16 @@ namespace CSharpNationV2._0.WpfGUI
 
         private void DisplayModeCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            textureData.DisplayMode = (TextureManager.DisplayMode)Enum.Parse(typeof(TextureManager.DisplayMode), DisplayModeCb.SelectedValue.ToString());
-            textureData.UpdateScale(ConfigurationManager.VisualizerWidth, ConfigurationManager.VisualizerHeight);
+            try
+            {
+                TextureManager.DisplayMode selectedDm = (TextureManager.DisplayMode)Enum.Parse(typeof(TextureManager.DisplayMode), DisplayModeCb.SelectedValue.ToString());
+                textureData.DisplayMode = selectedDm;
+                textureData.UpdateScale(ConfigurationManager.VisualizerWidth, ConfigurationManager.VisualizerHeight);
+            }
+            catch (Exception ex)
+            {
+                ErrorManager.AddErrorMessage(ex.Message);
+            }
         }
 
         private void PreviousBtn_Click(object sender, RoutedEventArgs e)

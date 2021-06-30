@@ -37,6 +37,7 @@
                 <WpfLightControls:LightTextBox x:Name="FilePathTxt" Height="35" Margin="110,10,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FF555555" CornerRadius="5" BorderThickness="1" Padding="0" VerticalContentAlignment="Center" Foreground="White" FontFamily="Century Gothic" IsEnabled="False"/>
                 <Label x:Name="FoundLbl_Copy2" Content="Display mode: " HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Height="25" Width="95" HorizontalContentAlignment="Right"/>
                 <ComboBox x:Name="DisplayModeCb" HorizontalAlignment="Left" Margin="110,50,0,0" VerticalAlignment="Top" Width="200" Height="25" SelectionChanged="DisplayModeCb_SelectionChanged"/>
+                <WpfLightControls:LightButton Content="Changing the display mode or the flip mode requires a visualizer restart to take effect" IconText="&#xE7BA;" IconSize="14" Margin="10,0,10,10" VerticalAlignment="Bottom" Height="30" CornerRadius="5" Background="{x:Null}" IsEnabled="False" BorderBrush="#FFFFF200" BorderThickness="1" IconForeground="Yellow" Foreground="Yellow"/>
             </Grid>
 
         </Border>
