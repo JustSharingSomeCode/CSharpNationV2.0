@@ -16,6 +16,7 @@ using System.Windows.Media.Animation;
 using CSharpNationV2._0.Analyzer;
 using System.Threading;
 using CSharpNationV2._0.Visualizer;
+using CSharpNationV2._0.Configuration;
 
 namespace CSharpNationV2._0.WpfGUI
 {
@@ -147,6 +148,8 @@ namespace CSharpNationV2._0.WpfGUI
             }
 
             Analyzer.Free();
+
+            ConfigurationManager.SaveConfig();
         }
 
         private void PauseBtn_Click(object sender, RoutedEventArgs e)

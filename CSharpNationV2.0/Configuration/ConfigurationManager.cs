@@ -16,19 +16,58 @@ namespace CSharpNationV2._0.Configuration
     {
         //public static List<string> WavesConfig { get; private set; }
         public static List<string> BackgroundsConfig { get; private set; } = new List<string>();
+        public static string[] GeneralConfig { get; private set; }
 
         public static readonly string configDirectoryPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\CSharpNationV2.0";
         public static readonly string wavesFilePath = configDirectoryPath + @"\Waves.txt";
         public static readonly string backgroundsFilePath = configDirectoryPath + @"\Backgrounds.txt";
+        public static readonly string configFilePath = configDirectoryPath + @"\Config.txt";
 
         public static int VisualizerWidth { get; set; } = 1280;
         public static int VisualizerHeight { get; set; } = 720;
+
+        public static string BackgroundsPath
+        {
+            get
+            {
+                return GeneralConfig[0].Split('=')[1];
+            }
+            set
+            {
+                GeneralConfig[0] = GeneralConfig[0].Split('=')[0] + "=" + value;
+            }
+        }
 
         static ConfigurationManager()
         {
             CheckLocalDir();
 
+            LoadConfig();
+
             LoadBackgrounds();
+        }
+
+        private static string[] DefaultConfig()
+        {
+            string[] config = new string[3];
+
+            config[0] = "Backgrounds folder="+ configDirectoryPath + @"\Backgrounds";
+            config[1] = "Background duration=10";
+            config[2] = "Particles=200";
+
+            return config;
+        }
+
+        public static void LoadConfig()
+        {
+            if(File.Exists(configFilePath))
+            {
+                GeneralConfig = File.ReadAllLines(configFilePath);
+            }
+            else
+            {
+                GeneralConfig = DefaultConfig();
+            }
         }
 
         public static SpectrumWave[] LoadWaves()
@@ -71,6 +110,19 @@ namespace CSharpNationV2._0.Configuration
                 string[] config = File.ReadAllLines(backgroundsFilePath);
                 BackgroundsConfig = new List<string>(config);
             }
+        }
+
+        public static void SaveConfig()
+        {
+            /*
+            string[] config = new string[3];
+
+            config[0] = "Backgrounds folder=" + TextureManager.LoadedFolder;
+            config[1] = "Background duration=10";
+            config[2] = "Particles=200";
+            */
+
+            File.WriteAllLines(configFilePath, GeneralConfig);
         }
 
         public static void SaveWaves(SpectrumWave[] waves)

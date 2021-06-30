@@ -31,7 +31,7 @@ namespace CSharpNationV2._0.WpfGUI
             textureManager = new TextureManager();
 
             //BackgroundsFolderTxt.Text = ConfigManager.BackgroundsFolder;
-            LoadedFolderTxt.Text = textureManager.LoadedFolder;            
+            LoadedFolderTxt.Text = TextureManager.LoadedFolder;            
 
             UpdateFileNamesList();
 
@@ -124,9 +124,9 @@ namespace CSharpNationV2._0.WpfGUI
         private void LoadFolderBtn_Click(object sender, RoutedEventArgs e)
         {
             textureManager.LoadFolder(BackgroundsFolderTxt.Text);
-            LoadedFolderTxt.Text = textureManager.LoadedFolder;
+            LoadedFolderTxt.Text = TextureManager.LoadedFolder;
 
-            UpdateFileNamesList();
+            UpdateFileNamesList();            
         }
     }
 }

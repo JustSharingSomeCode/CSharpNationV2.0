@@ -17,7 +17,7 @@ namespace CSharpNationV2._0.Textures
     {        
         public TextureManager()
         {
-            //LoadFolder(ConfigurationManager.backgroundsFilePath);
+            LoadFolder(ConfigurationManager.BackgroundsPath);
         }
 
         public enum DisplayMode
@@ -29,7 +29,7 @@ namespace CSharpNationV2._0.Textures
             MirroredRightHalf
         }
 
-        public string LoadedFolder { get; private set; }                       
+        public static string LoadedFolder { get; private set; }                       
 
         public int LoadedTexturesCount
         {
@@ -62,6 +62,8 @@ namespace CSharpNationV2._0.Textures
             LoadTextureData(folder, "*.png");
 
             LoadedFolder = folder;
+
+            ConfigurationManager.BackgroundsPath = folder;
         }
 
         public void LoadTextureData(string path, string extension)
