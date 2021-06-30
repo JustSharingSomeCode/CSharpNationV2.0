@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CSharpNationV2._0.WpfGUI"
         xmlns:WpfLightControls="clr-namespace:WpfLightControls;assembly=WpfLightControls" x:Name="Manager" x:Class="CSharpNationV2._0.WpfGUI.CSharpNationManager"
         mc:Ignorable="d"
-        Title="CSharpNationManager" Height="576" Width="1024" MinWidth="1024" MinHeight="576" AllowsTransparency="True" WindowStyle="None" ResizeMode="CanResizeWithGrip" Background="#FF2D2D2D">
+        Title="CSharpNationManager" Height="576" Width="1024" MinWidth="1024" MinHeight="576" AllowsTransparency="True" WindowStyle="None" ResizeMode="CanResizeWithGrip" Background="#FF2D2D2D" WindowStartupLocation="CenterScreen" Closing="Manager_Closing">
 
     <Window.Resources>
         <Style TargetType="{x:Type Label}">
@@ -24,13 +24,16 @@
             <WpfLightControls:LightButton x:Name="MinimizeBtn" IconText="&#xE108;" HorizontalAlignment="Right" VerticalAlignment="Top" Width="30" Background="#00000000" Height="30" FontSize="12" Padding="0" CornerRadius="0" Margin="0,0,60,0"/>
             <Label x:Name="TitleLbl" Content="CSharpNation Manager" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="520" BorderBrush="#FFDE2424" BorderThickness="0"/>
         </Grid>
-        <Border x:Name="DevicesBorder" BorderBrush="White" BorderThickness="0,1,0,0" Height="30" VerticalAlignment="Bottom">
+        <Border x:Name="DevicesBorder" BorderBrush="White" BorderThickness="0,1,0,0" Height="50" VerticalAlignment="Bottom">
             <Grid x:Name="DevicesGrid" Margin="0,0,0,0">
-                <Label Content="Device: " HorizontalAlignment="Left" VerticalAlignment="Top" Height="29"/>
-                <ComboBox x:Name="DeviceCb" HorizontalAlignment="Left" Margin="58,4,0,0" VerticalAlignment="Top" Width="270"/>
+                <Label Content="Device: " HorizontalAlignment="Left" VerticalAlignment="Top" Height="49"/>
+                <ComboBox x:Name="DevicesCb" HorizontalAlignment="Left" Margin="58,10,0,0" VerticalAlignment="Top" Width="270" Height="29" SelectionChanged="DevicesCb_SelectionChanged"/>
+                <WpfLightControls:LightButton x:Name="StartBtn" Content="Start visualizer" HorizontalAlignment="Left" Margin="333,10,0,0" VerticalAlignment="Top" Width="200" Height="29" IconText="&#xE2B4;" BorderThickness="0" CornerRadius="5" Background="#FF474747" Click="StartBtn_Click"/>
+                <WpfLightControls:LightButton x:Name="PauseBtn" Content="Pause capture" HorizontalAlignment="Right" Margin="0,10,215,0" VerticalAlignment="Top" Width="200" Height="29" IconText="&#xE103;" BorderThickness="0" CornerRadius="5" Background="#FF474747" Click="PauseBtn_Click"/>
+                <WpfLightControls:LightButton x:Name="ResumeBtn" Content="Resume capture" Margin="0,10,10,0" VerticalAlignment="Top" Height="29" IconText="&#xE102;" BorderThickness="0" CornerRadius="5" Background="#FF474747" Click="ResumeBtn_Click" HorizontalAlignment="Right" Width="200"/>
             </Grid>
         </Border>
-        <Grid Margin="0,30">
+        <Grid Margin="0,30,0,50">
             <Grid x:Name="MenuGrid" HorizontalAlignment="Left" Width="50" Background="#FF323232" ClipToBounds="True" SizeChanged="MenuGrid_SizeChanged">
                 <WpfLightControls:LightButton x:Name="WavesBtn" Content="Waves" VerticalAlignment="Top" IconText="&#xF61F;" IconSize="20" ShowIcon="True" Background="#00000000" Foreground="White" IconForeground="White" Height="50" BorderBrush="White" Click="WavesBtn_Click"/>
                 <WpfLightControls:LightButton x:Name="TexturesBtn" Content="Backgrounds" Margin="0,50,0,0" VerticalAlignment="Top" IconText="&#xEB9F;" IconSize="20" ShowIcon="True" Background="#00000000" Foreground="White" IconForeground="White" Height="50" BorderBrush="White" Click="TexturesBtn_Click"/>

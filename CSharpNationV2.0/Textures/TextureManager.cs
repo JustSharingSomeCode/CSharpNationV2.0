@@ -17,7 +17,7 @@ namespace CSharpNationV2._0.Textures
     {        
         public TextureManager()
         {
-            LoadFolder(ConfigManager.BackgroundsFolder);
+            //LoadFolder(ConfigurationManager.backgroundsFilePath);
         }
 
         public enum DisplayMode
@@ -39,7 +39,7 @@ namespace CSharpNationV2._0.Textures
             }
         }
 
-        private int actualBackground = 0;        
+        public int actualBackground = 0;        
         public List<TextureData> LoadedTextures { get; private set; } = new List<TextureData>();        
 
         public void Clean()
@@ -50,6 +50,12 @@ namespace CSharpNationV2._0.Textures
 
         public void LoadFolder(string folder)
         {            
+            /*
+            if(!Directory.Exists(folder))
+            {
+                return;
+            }
+            */
             Clean();
 
             LoadTextureData(folder, "*.jpg");
@@ -211,6 +217,14 @@ namespace CSharpNationV2._0.Textures
                     DrawTexture(td.Texture, x - (td.FillX * 2) - (wp * 2), y - td.FillY - hp, xMax / 2, yMax + td.FillY + hp, a, r, g, b);
                     DrawTexture(td.Texture, xMax + (td.FillX * 2) + (wp * 2), 0 - td.FillY - hp, xMax / 2, yMax + td.FillY + hp, a, r, g, b);
                     break;
+            }
+        }
+
+        public void SetBackground(int index)
+        {
+            if(index >= 0 && index < LoadedTexturesCount)
+            {
+                actualBackground = index;
             }
         }
 

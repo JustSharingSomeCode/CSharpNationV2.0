@@ -21,6 +21,9 @@ namespace CSharpNationV2._0.Configuration
         public static readonly string wavesFilePath = configDirectoryPath + @"\Waves.txt";
         public static readonly string backgroundsFilePath = configDirectoryPath + @"\Backgrounds.txt";
 
+        public static int VisualizerWidth { get; set; } = 1280;
+        public static int VisualizerHeight { get; set; } = 720;
+
         static ConfigurationManager()
         {
             CheckLocalDir();

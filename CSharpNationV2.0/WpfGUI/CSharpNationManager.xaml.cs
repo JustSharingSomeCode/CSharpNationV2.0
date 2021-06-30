@@ -13,6 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 using System.Windows.Media.Animation;
+using CSharpNationV2._0.Analyzer;
+using System.Threading;
+using CSharpNationV2._0.Visualizer;
 
 namespace CSharpNationV2._0.WpfGUI
 {
@@ -28,9 +31,23 @@ namespace CSharpNationV2._0.WpfGUI
             windowManager = new WindowManager();
 
             ChangeWindows(windowManager.GetWaveWindow());
+
+            VisualizerThread = new Thread(VisualizerProcess);
+            Analyzer = new SpectrumAnalyzer();
+
+            DevicesCb.ItemsSource = Analyzer.GetDevices();
+
+            if (DevicesCb.HasItems)
+            {
+                DevicesCb.SelectedIndex = 0;
+            }
         }
 
-        private WindowManager windowManager;        
+        private WindowManager windowManager;
+
+        private SpectrumAnalyzer Analyzer;
+        private Thread VisualizerThread;
+        private SpectrumVisualizer Visualizer;
 
         private bool IsMenuExpanded = false;
 
@@ -81,6 +98,65 @@ namespace CSharpNationV2._0.WpfGUI
             ContentGrid.Children.Clear();
 
             ContentGrid.Children.Add(window);
+        }
+
+        private void StartBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (VisualizerThread.IsAlive)
+            {
+                MessageBoxResult result = MessageBox.Show("The visualizer is actually running, ¿Do you want to start a new one?", "Visualizer actually running", MessageBoxButton.YesNo);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    Visualizer.Close();
+
+                    StartVisualizerThread();
+                }
+            }
+            else
+            {
+                StartVisualizerThread();
+            }
+        }
+
+        private void StartVisualizerThread()
+        {
+            VisualizerThread = new Thread(VisualizerProcess);
+
+            VisualizerThread.Start();
+        }
+
+        private void VisualizerProcess()
+        {
+            using (Visualizer = new SpectrumVisualizer(1280, 720, "CSharpNation_V2.0", Analyzer, windowManager.GetWaves(), windowManager.GetTextureManager(), new float[4]))
+            {
+                Visualizer.Run();
+            }
+        }
+
+        private void DevicesCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Analyzer.ChangeDevice(DevicesCb.SelectedIndex);
+        }
+
+        private void Manager_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (VisualizerThread.IsAlive)
+            {
+                Visualizer.Close();
+            }
+
+            Analyzer.Free();
+        }
+
+        private void PauseBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Analyzer.PauseCapture();
+        }
+
+        private void ResumeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Analyzer.ResumeCapture();
         }
     }
 }

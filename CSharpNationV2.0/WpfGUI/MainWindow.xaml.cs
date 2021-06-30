@@ -31,7 +31,7 @@ namespace CSharpNationV2._0.WpfGUI
             InitializeComponent();
 
             VisualizerThread = new Thread(VisualizerProcess);
-            Analyzer = new SpectrumAnalyzer();
+            //Analyzer = new SpectrumAnalyzer();
 
             ConfigManager.LoadConfigFile();
 
@@ -94,16 +94,19 @@ namespace CSharpNationV2._0.WpfGUI
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            /*
             DevicesCb.ItemsSource = Analyzer.GetDevices();
 
             if (DevicesCb.HasItems)
             {
                 DevicesCb.SelectedIndex = 0;
             }
+            */
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            /*
             if (VisualizerThread.IsAlive)
             {
                 Visualizer.Close();
@@ -111,6 +114,7 @@ namespace CSharpNationV2._0.WpfGUI
 
             Analyzer.Free();
 
+    */
             //ConfigManager.SaveConfig(BackgroundsTxt.Text, Waves, textureManager.LoadedTextures);
         }
 

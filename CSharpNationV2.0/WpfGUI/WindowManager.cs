@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CSharpNationV2._0.Textures;
+using CSharpNationV2._0.Visualizer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,6 +29,16 @@ namespace CSharpNationV2._0.WpfGUI
         public TexturesWindow GetTexturesWindow()
         {
             return texturesWindow;
+        }
+
+        public SpectrumWave[] GetWaves()
+        {
+            return wavesWindow.Waves;
+        }
+
+        public TextureManager GetTextureManager()
+        {
+            return texturesWindow.textureManager;
         }
     }
 }

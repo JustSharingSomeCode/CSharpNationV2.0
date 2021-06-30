@@ -30,7 +30,7 @@ namespace CSharpNationV2._0.WpfGUI
             LoadWaves();
         }
 
-        SpectrumWave[] Waves;
+        public SpectrumWave[] Waves { get; private set; }
 
         private void LoadWaves()
         {

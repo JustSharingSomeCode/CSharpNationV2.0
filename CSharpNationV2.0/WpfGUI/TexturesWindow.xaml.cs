@@ -30,10 +30,8 @@ namespace CSharpNationV2._0.WpfGUI
 
             textureManager = new TextureManager();
 
-            BackgroundsFolderTxt.Text = ConfigManager.BackgroundsFolder;
-            LoadedFolderTxt.Text = textureManager.LoadedFolder;
-
-            FoundLbl.Content = "Founded files: " + textureManager.LoadedTexturesCount.ToString();
+            //BackgroundsFolderTxt.Text = ConfigManager.BackgroundsFolder;
+            LoadedFolderTxt.Text = textureManager.LoadedFolder;            
 
             UpdateFileNamesList();
 
@@ -50,12 +48,12 @@ namespace CSharpNationV2._0.WpfGUI
             }
         }
 
-        TextureManager textureManager;
+        public TextureManager textureManager { get; private set; }
         TextureData textureData;
 
         private void UpdateFileNamesList()
         {
-            FileNamesSp.Children.Clear();
+            FileNamesSp.Children.Clear();           
 
             string[] names = textureManager.GetFileNames();
 
@@ -73,11 +71,15 @@ namespace CSharpNationV2._0.WpfGUI
 
                 FileNamesSp.Children.Add(btn);
             }
+
+            FoundLbl.Content = "Founded files: " + textureManager.LoadedTexturesCount.ToString();
         }
 
         private void Btn_Click(object sender, RoutedEventArgs e)
         {
-            LoadTextureData(int.Parse(((LightButton)sender).Content.ToString().Split(')')[0]) - 1);
+            int index = int.Parse(((LightButton)sender).Content.ToString().Split(')')[0]) - 1;
+            LoadTextureData(index);
+            textureManager.SetBackground(index);
         }
 
         private void LoadTextureData(int index)
@@ -106,6 +108,25 @@ namespace CSharpNationV2._0.WpfGUI
         private void DisplayModeCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             textureData.DisplayMode = (TextureManager.DisplayMode)Enum.Parse(typeof(TextureManager.DisplayMode), DisplayModeCb.SelectedValue.ToString());
+            textureData.UpdateScale(ConfigurationManager.VisualizerWidth, ConfigurationManager.VisualizerHeight);
+        }
+
+        private void PreviousBtn_Click(object sender, RoutedEventArgs e)
+        {
+            textureManager.PreviousBackground();
+        }
+
+        private void NextBtn_Click(object sender, RoutedEventArgs e)
+        {
+            textureManager.NextBackground();
+        }
+
+        private void LoadFolderBtn_Click(object sender, RoutedEventArgs e)
+        {
+            textureManager.LoadFolder(BackgroundsFolderTxt.Text);
+            LoadedFolderTxt.Text = textureManager.LoadedFolder;
+
+            UpdateFileNamesList();
         }
     }
 }

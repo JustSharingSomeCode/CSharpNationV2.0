@@ -82,6 +82,9 @@ namespace CSharpNationV2._0.Visualizer
 
             Analyzer.multiplier = Height / 4;
 
+            ConfigurationManager.VisualizerWidth = Width;
+            ConfigurationManager.VisualizerHeight = Height;
+
             Textures.UpdateScales(Width, Height);
 
             base.OnResize(e);
