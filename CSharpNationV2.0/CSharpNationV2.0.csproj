@@ -71,7 +71,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Configuration\ConfigManager.cs" />
     <Compile Include="Configuration\ConfigurationManager.cs" />
     <Compile Include="Configuration\ErrorManager.cs" />
     <Compile Include="Textures\TextureData.cs" />
@@ -89,14 +88,8 @@
     <Compile Include="WpfGUI\LightWaveEditor.xaml.cs">
       <DependentUpon>LightWaveEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WpfGUI\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="WpfGUI\TexturesWindow.xaml.cs">
       <DependentUpon>TexturesWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="WpfGUI\WaveEditor.xaml.cs">
-      <DependentUpon>WaveEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="WpfGUI\WavesWindow.xaml.cs">
       <DependentUpon>WavesWindow.xaml</DependentUpon>
@@ -144,15 +137,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="WpfGUI\MainWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="WpfGUI\TexturesWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="WpfGUI\WaveEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
