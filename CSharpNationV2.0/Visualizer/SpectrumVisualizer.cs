@@ -45,7 +45,7 @@ namespace CSharpNationV2._0.Visualizer
 
             Textures.LoadBackgrounds(Width, Height);
 
-            LogoTexture = TextureManager.LoadTexture(ConfigManager.configDirectoryPath + @"\Particles\Logo.png");
+            LogoTexture = TextureManager.LoadTexture(ConfigurationManager.resourcesDirectoryPath + @"\Logo.png");
     
             LogoOffset = offset;
         }

@@ -14,17 +14,61 @@ namespace CSharpNationV2._0.Configuration
 {
     public static class ConfigurationManager
     {
+        static ConfigurationManager()
+        {
+            CheckConfigDirectory();
+
+            CheckResourcesDirectory();
+
+            CheckBackgroundsDirectory();
+
+            LoadConfig();
+
+            LoadBackgrounds();
+        }
+
         //public static List<string> WavesConfig { get; private set; }
         public static List<string> BackgroundsConfig { get; private set; } = new List<string>();
         public static string[] GeneralConfig { get; private set; }
 
         public static readonly string configDirectoryPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\CSharpNationV2.0";
+        public static readonly string resourcesDirectoryPath = configDirectoryPath + @"\Resources";
         public static readonly string wavesFilePath = configDirectoryPath + @"\Waves.txt";
         public static readonly string backgroundsFilePath = configDirectoryPath + @"\Backgrounds.txt";
         public static readonly string configFilePath = configDirectoryPath + @"\Config.txt";
 
         public static int VisualizerWidth { get; set; } = 1280;
         public static int VisualizerHeight { get; set; } = 720;
+
+        private static void CheckConfigDirectory()
+        {
+            if(!Directory.Exists(configDirectoryPath))
+            {
+                Directory.CreateDirectory(configDirectoryPath);
+            }
+        }
+
+        private static void CheckBackgroundsDirectory()
+        {
+            if(!Directory.Exists(configDirectoryPath + @"\Backgrounds"))
+            {
+                Directory.CreateDirectory(configDirectoryPath + @"\Backgrounds");
+
+                //copy backgrounds
+            }
+        }
+
+        private static void CheckResourcesDirectory()
+        {
+            if (!Directory.Exists(resourcesDirectoryPath))
+            {
+                Directory.CreateDirectory(resourcesDirectoryPath);
+
+                Bitmap logo = new Bitmap(Properties.Resources.Logo);
+                logo.Save(resourcesDirectoryPath + @"\Logo.png");
+                logo.Dispose();
+            }
+        }
 
         public static string BackgroundsPath
         {
@@ -36,16 +80,7 @@ namespace CSharpNationV2._0.Configuration
             {
                 GeneralConfig[0] = GeneralConfig[0].Split('=')[0] + "=" + value;
             }
-        }
-
-        static ConfigurationManager()
-        {
-            CheckLocalDir();
-
-            LoadConfig();
-
-            LoadBackgrounds();
-        }
+        }        
 
         private static string[] DefaultConfig()
         {
@@ -167,15 +202,7 @@ namespace CSharpNationV2._0.Configuration
             }
 
             File.WriteAllLines(backgroundsFilePath, BackgroundsConfig.ToArray());
-        }
-
-        private static void CheckLocalDir()
-        {
-            if (!Directory.Exists(configDirectoryPath))
-            {
-                Directory.CreateDirectory(configDirectoryPath);
-            }
-        }
+        }        
 
         #region DefaultWaves
         public static SpectrumWave[] GetDefaultWaves()
