@@ -10,12 +10,6 @@ namespace CSharpNationV2._0.Particles
 {
     public class Particle
     {
-        public enum X_Direction
-        {
-            Left = -1,
-            Right = 1
-        }
-
         public enum Y_Direction
         {
             Top = 1,
@@ -27,7 +21,7 @@ namespace CSharpNationV2._0.Particles
             X = x;
             Y = y;
 
-            Speed = speed <= 0 ? 0.1f : speed;
+            Speed = speed < 0.2 ? 0.2f : speed;
 
             Px = px;
             Py = 1.0f - px;
@@ -75,7 +69,10 @@ namespace CSharpNationV2._0.Particles
             X += (Speed * Px) + (Speed * Px * power);
             Y += (Speed * Py) + (Speed * Py * power);
 
-            ActualSize = InitialSize + (Math.Abs((ConfigurationManager.VisualizerWidth / 2) - X) * (FinalSize - InitialSize) / (ConfigurationManager.VisualizerWidth / 2));
+            float xSize = InitialSize + (Math.Abs((ConfigurationManager.VisualizerWidth / 2) - X) * (FinalSize - InitialSize) / (ConfigurationManager.VisualizerWidth / 2));
+            float ySize = InitialSize + (Math.Abs((ConfigurationManager.VisualizerHeight / 2) - Y) * (FinalSize - InitialSize) / (ConfigurationManager.VisualizerHeight / 2));
+
+            ActualSize = xSize * Math.Abs(Px) + ySize * Math.Abs(Py);
         }
 
         public bool IsOutOfBounds()

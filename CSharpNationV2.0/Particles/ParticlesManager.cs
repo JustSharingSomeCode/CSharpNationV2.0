@@ -33,8 +33,8 @@ namespace CSharpNationV2._0.Particles
         {
             while(particles.Count < ConfigurationManager.ParticlesOnScreen / 2)
             {
-                float size = random.Next(5, 25);
-                Particle p = new Particle(ConfigurationManager.VisualizerWidth / 2, ConfigurationManager.VisualizerHeight / 2, (float)random.NextDouble() * 4.0f, (float)random.NextDouble(), Random_Y_Direction(), size, size * 3);
+                float size = random.Next(8, 12);
+                Particle p = new Particle(ConfigurationManager.VisualizerWidth / 2, ConfigurationManager.VisualizerHeight / 2, (float)random.NextDouble(), (float)random.NextDouble(), Random_Y_Direction(), size, size * random.Next(2, 8));
                 particles.Add(p);
                 particles.Add(new Particle(p));
             }
@@ -63,19 +63,7 @@ namespace CSharpNationV2._0.Particles
                 Particle p = particles[i];
                 TextureManager.DrawTexture(ParticleTexture, p.X - p.HalfSize, p.Y - p.HalfSize, p.X + p.HalfSize, p.Y + p.HalfSize, 255, 255, 255, 255);
             }
-        }
-
-        private Particle.X_Direction Random_X_Direction()
-        {
-            double r = random.NextDouble();
-
-            if(r < 0.5)
-            {
-                return Particle.X_Direction.Left;
-            }
-
-            return Particle.X_Direction.Right;
-        }
+        }        
 
         private Particle.Y_Direction Random_Y_Direction()
         {
