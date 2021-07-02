@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using CSharpNationV2._0.Analyzer;
 using CSharpNationV2._0.Textures;
 using CSharpNationV2._0.Configuration;
+using CSharpNationV2._0.Particles;
 
 using OpenTK;
 using OpenTK.Graphics;
@@ -48,7 +49,11 @@ namespace CSharpNationV2._0.Visualizer
             LogoTexture = TextureManager.LoadTexture(ConfigurationManager.resourcesDirectoryPath + @"\Logo.png");
     
             LogoOffset = offset;
+
+            particles = new ParticlesManager();
         }
+
+        private ParticlesManager particles;
 
         public TextureManager Textures;
         private SpectrumAnalyzer Analyzer;
@@ -113,6 +118,8 @@ namespace CSharpNationV2._0.Visualizer
 
             Radius = Height / 4 + power;
 
+            particles.UpdateParticles(power);
+
             base.OnUpdateFrame(e);
         }
 
@@ -124,6 +131,8 @@ namespace CSharpNationV2._0.Visualizer
             {                
                 Textures.DrawBackground(0, 0, Width, Height, power / 4, 255, 150, 150, 150);
             }
+
+            particles.DrawParticles();
                         
             for (int i = Waves.Length - 1; i >= 0; i--)
             {
@@ -136,7 +145,7 @@ namespace CSharpNationV2._0.Visualizer
 
             if(LogoTexture != -1)
             {
-                Textures.DrawTexture(LogoTexture, (Width / 2) - (Radius + LogoOffset[0]), (Height / 2) - (Radius + LogoOffset[1]), (Width / 2) + (Radius + LogoOffset[2]), (Height / 2) + (Radius + LogoOffset[3]), 255, 255, 255, 255);                
+                TextureManager.DrawTexture(LogoTexture, (Width / 2) - (Radius + LogoOffset[0]), (Height / 2) - (Radius + LogoOffset[1]), (Width / 2) + (Radius + LogoOffset[2]), (Height / 2) + (Radius + LogoOffset[3]), 255, 255, 255, 255);                
             }
 
             Context.SwapBuffers();

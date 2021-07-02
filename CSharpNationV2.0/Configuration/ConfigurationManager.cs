@@ -40,6 +40,8 @@ namespace CSharpNationV2._0.Configuration
         public static int VisualizerWidth { get; set; } = 1280;
         public static int VisualizerHeight { get; set; } = 720;
 
+        public static int ParticlesOnScreen = 500;
+
         private static void CheckConfigDirectory()
         {
             if(!Directory.Exists(configDirectoryPath))

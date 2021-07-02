@@ -172,7 +172,7 @@ namespace CSharpNationV2._0.Textures
             return LoadedTextures[actualBackground].Texture;
         }
 
-        public void DrawTexture(int texture, float x, float y, float xMax, float yMax, int a, int r, int g, int b)
+        public static void DrawTexture(int texture, float x, float y, float xMax, float yMax, int a, int r, int g, int b)
         {
             GL.Enable(EnableCap.Texture2D);
             GL.BindTexture(TextureTarget.Texture2D, texture);

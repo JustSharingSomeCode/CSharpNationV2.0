@@ -73,6 +73,8 @@
     </Compile>
     <Compile Include="Configuration\ConfigurationManager.cs" />
     <Compile Include="Configuration\ErrorManager.cs" />
+    <Compile Include="Particles\Particle.cs" />
+    <Compile Include="Particles\ParticlesManager.cs" />
     <Compile Include="Textures\TextureData.cs" />
     <Compile Include="Textures\TextureManager.cs" />
     <Compile Include="Visualizer\SpectrumReplay.cs" />
