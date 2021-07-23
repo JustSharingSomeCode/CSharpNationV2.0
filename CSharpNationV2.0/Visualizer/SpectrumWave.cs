@@ -69,6 +69,58 @@ namespace CSharpNationV2._0.Visualizer
             }            
         }
 
+        public void DrawGlow(float x, float y)
+        {
+            GL.Enable(EnableCap.Blend);
+            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+
+            int alpha = 60;
+            float inc = 0.05f;
+
+            for (int i = 0; i < CatmullRomPoints.Count - 1; i++)
+            {                
+                GL.Begin(PrimitiveType.Quads);
+
+                GL.Color4(Color.FromArgb(alpha, WaveColor));
+                GL.Vertex2(CatmullRomPoints[i]);
+                GL.Color4(Color.FromArgb(0, WaveColor));
+                GL.Vertex2(WaveTools.IncreaseVector(inc, CatmullRomPoints[i]));
+                GL.Color4(Color.FromArgb(0, WaveColor));
+                GL.Vertex2(WaveTools.IncreaseVector(inc, CatmullRomPoints[i + 1]));
+                GL.Color4(Color.FromArgb(alpha, WaveColor));
+                GL.Vertex2(CatmullRomPoints[i + 1]);
+
+                GL.End();
+            }
+
+            Vector2 increasedVector;
+
+            for (int i = 0; i < CatmullRomPoints.Count - 1; i++)
+            {
+                increasedVector = WaveTools.IncreaseVector(inc, CatmullRomPoints[i]);
+
+                GL.Begin(PrimitiveType.Quads);
+
+                GL.Color4(Color.FromArgb(alpha, WaveColor));
+                GL.Vertex2(MirrorPosition(x, CatmullRomPoints[i]), CatmullRomPoints[i].Y);
+
+                GL.Color4(Color.FromArgb(0, WaveColor));                
+
+                GL.Vertex2(MirrorPosition(x, increasedVector), increasedVector.Y);
+
+                increasedVector = WaveTools.IncreaseVector(inc, CatmullRomPoints[i + 1]);
+
+                GL.Color4(Color.FromArgb(0, WaveColor));                
+                GL.Vertex2(MirrorPosition(x, increasedVector), increasedVector.Y);
+
+                GL.Color4(Color.FromArgb(alpha, WaveColor));
+                GL.Vertex2(MirrorPosition(x, CatmullRomPoints[i + 1]), CatmullRomPoints[i + 1].Y);
+
+                GL.End();
+            }
+            GL.Disable(EnableCap.Blend);
+        }
+
         private Vector2 GetPosition(float x, float y, int i, float circleRadius)
         {
             rads = Math.PI * (i * DegreesIncrement) / 180;

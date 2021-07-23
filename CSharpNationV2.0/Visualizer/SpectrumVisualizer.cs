@@ -129,16 +129,24 @@ namespace CSharpNationV2._0.Visualizer
             
             if(Textures.LoadedTexturesCount != 0)
             {                
-                Textures.DrawBackground(0, 0, Width, Height, power / 4, 255, 150, 150, 150);
+                Textures.DrawBackground(0, 0, Width, Height, power / 4, 255, 100, 100, 100);
             }
 
             particles.DrawParticles();
-                        
+
+            
             for (int i = Waves.Length - 1; i >= 0; i--)
             {
-                Waves[i].DrawWave(Width / 2, Height / 2, Height / 4 + power);
-                //Waves[i].DrawLines(0);
+                Waves[i].DrawGlow(Width / 2, Height / 2);                
             }
+            
+
+            for (int i = Waves.Length - 1; i >= 0; i--)
+            {
+                //Waves[i].DrawGlow(Width / 2, Height / 2);
+                Waves[i].DrawWave(Width / 2, Height / 2, Height / 4 + power);                
+                //Waves[i].DrawLines(0);
+            }            
 
             DrawCircle(Width / 2, Height / 2, (Height / 4) + power, Color.White);
             DrawCircle(Width / 2, Height / 2, (Height / 4.2) + power, Color.Black);

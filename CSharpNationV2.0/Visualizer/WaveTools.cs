@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using CSharpNationV2._0.Configuration;
+
 namespace CSharpNationV2._0.Visualizer
 {
     public class WaveTools
@@ -133,6 +135,16 @@ namespace CSharpNationV2._0.Visualizer
             Vector2 pos = 0.5f * (a + (b * t) + (c * t * t) + (d * t * t * t));
 
             return pos;
-        }                     
+        }
+
+        public static Vector2 IncreaseVector(float multiplier, Vector2 vectorToIncrease)
+        {
+            Vector2 vectorToOrigin = new Vector2((vectorToIncrease.X - ConfigurationManager.VisualizerWidth / 2) * multiplier,
+                (vectorToIncrease.Y - ConfigurationManager.VisualizerHeight / 2) * multiplier);
+
+            Vector2 increasedVector = new Vector2(vectorToIncrease.X + vectorToOrigin.X, vectorToIncrease.Y + vectorToOrigin.Y);
+
+            return increasedVector;
+        }
     }
 }
