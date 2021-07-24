@@ -16,7 +16,7 @@ namespace CSharpNationV2._0.Particles
             Bottom = -1
         }
 
-        public Particle(float x, float y, float speed, float px, Y_Direction ydir, float initialSize, float finalSize)
+        public Particle(float x, float y, float speed, float px, Y_Direction ydir, float initialSize, float finalSize, int opacity)
         {
             X = x;
             Y = y;
@@ -35,9 +35,11 @@ namespace CSharpNationV2._0.Particles
 
             InitialSize = initialSize;
             FinalSize = finalSize;
+
+            Opacity = opacity;
         }
 
-        public Particle(Particle mirror) : this(mirror.X, mirror.Y, mirror.Speed, mirror.Px, mirror.Y_Dir, mirror.InitialSize, mirror.FinalSize)
+        public Particle(Particle mirror) : this(mirror.X, mirror.Y, mirror.Speed, mirror.Px, mirror.Y_Dir, mirror.InitialSize, mirror.FinalSize, mirror.Opacity)
         {
             Px *= -1;
         }
@@ -50,6 +52,7 @@ namespace CSharpNationV2._0.Particles
         public float InitialSize { get; private set; }
         public float ActualSize { get; private set; }
         public float FinalSize { get; private set; }
+        public int Opacity { get; private set; }
 
         public float HalfSize
         {
@@ -72,7 +75,7 @@ namespace CSharpNationV2._0.Particles
             float xSize = InitialSize + (Math.Abs((ConfigurationManager.VisualizerWidth / 2) - X) * (FinalSize - InitialSize) / (ConfigurationManager.VisualizerWidth / 2));
             float ySize = InitialSize + (Math.Abs((ConfigurationManager.VisualizerHeight / 2) - Y) * (FinalSize - InitialSize) / (ConfigurationManager.VisualizerHeight / 2));
 
-            ActualSize = xSize * Math.Abs(Px) + ySize * Math.Abs(Py);
+            ActualSize = (xSize * Math.Abs(Px) + ySize * Math.Abs(Py)) * ConfigurationManager.ParticleScale;
         }
 
         public bool IsOutOfBounds()

@@ -137,5 +137,10 @@ namespace CSharpNationV2._0.WpfGUI
 
             UpdateFileNamesList();            
         }
+
+        private void LightSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            ConfigurationManager.BackgroundDim = (int)BackgroundDimSd.Value;
+        }
     }
 }

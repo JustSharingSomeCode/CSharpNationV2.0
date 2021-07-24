@@ -27,7 +27,7 @@ namespace CSharpNationV2._0.Visualizer
 
             Title = title;
 
-            _analyzer.multiplier = height / 4;            
+            _analyzer.multiplier = height / 4;
 
             Analyzer = _analyzer;            
 
@@ -92,6 +92,8 @@ namespace CSharpNationV2._0.Visualizer
 
             Textures.UpdateScales(Width, Height);
 
+            particles.Clear();
+
             base.OnResize(e);
         }
 
@@ -128,12 +130,11 @@ namespace CSharpNationV2._0.Visualizer
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);     
             
             if(Textures.LoadedTexturesCount != 0)
-            {                
-                Textures.DrawBackground(0, 0, Width, Height, power / 4, 255, 100, 100, 100);
+            {
+                Textures.DrawBackground(0, 0, Width, Height, power / 4, 255, ConfigurationManager.BackgroundDim, ConfigurationManager.BackgroundDim, ConfigurationManager.BackgroundDim);
             }
 
             particles.DrawParticles();
-
             
             for (int i = Waves.Length - 1; i >= 0; i--)
             {

@@ -14,6 +14,11 @@ namespace CSharpNationV2._0.Particles
         public ParticlesManager()
         {
             ParticleTexture = TextureManager.LoadTexture(ConfigurationManager.resourcesDirectoryPath + @"\Particle.png");
+
+            for(int i = 0; i < 100; i++)
+            {
+                random.NextDouble();
+            }
         }
 
         private int ParticleTexture = -1;
@@ -31,13 +36,14 @@ namespace CSharpNationV2._0.Particles
 
         private void CreateParticles()
         {
-            while(particles.Count < ConfigurationManager.ParticlesOnScreen / 2)
+            while (particles.Count < ConfigurationManager.ParticlesOnScreen)
             {
-                float size = random.Next(8, 12);
-                Particle p = new Particle(ConfigurationManager.VisualizerWidth / 2, ConfigurationManager.VisualizerHeight / 2, (float)random.NextDouble(), (float)random.NextDouble(), Random_Y_Direction(), size, size * random.Next(2, 8));
+                float size = random.Next(6, 12);
+                Particle p = new Particle(ConfigurationManager.VisualizerWidth / 2, ConfigurationManager.VisualizerHeight / 2,
+                    (float)random.NextDouble(), (float)random.NextDouble(), Random_Y_Direction(), size, size * random.Next(2, 8), random.Next(50, 256));
                 particles.Add(p);
                 particles.Add(new Particle(p));
-            }
+            }           
         }
 
         private void UpdateAndDeleteParticles(float power)
@@ -61,7 +67,7 @@ namespace CSharpNationV2._0.Particles
             for(int i = 0; i < particles.Count; i++)
             {
                 Particle p = particles[i];
-                TextureManager.DrawTexture(ParticleTexture, p.X - p.HalfSize, p.Y - p.HalfSize, p.X + p.HalfSize, p.Y + p.HalfSize, 255, 255, 255, 255);
+                TextureManager.DrawTexture(ParticleTexture, p.X - p.HalfSize, p.Y - p.HalfSize, p.X + p.HalfSize, p.Y + p.HalfSize, p.Opacity, 255, 255, 255);
             }
         }        
 
@@ -75,6 +81,11 @@ namespace CSharpNationV2._0.Particles
             }
 
             return Particle.Y_Direction.Top;
+        }
+
+        public void Clear()
+        {
+            particles.Clear();
         }
     }
 }

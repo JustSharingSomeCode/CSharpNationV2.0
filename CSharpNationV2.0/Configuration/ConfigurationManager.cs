@@ -40,7 +40,16 @@ namespace CSharpNationV2._0.Configuration
         public static int VisualizerWidth { get; set; } = 1280;
         public static int VisualizerHeight { get; set; } = 720;
 
-        public static int ParticlesOnScreen = 500;
+        public static int ParticlesOnScreen { get; set; } = 500;
+        public static int BackgroundDim { get; set; } = 100;
+
+        public static float ParticleScale
+        {
+            get
+            {
+                return VisualizerHeight / 720.0f;
+            }
+        }
 
         private static void CheckConfigDirectory()
         {
