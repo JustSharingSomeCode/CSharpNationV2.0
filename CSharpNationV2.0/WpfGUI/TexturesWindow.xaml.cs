@@ -29,8 +29,7 @@ namespace CSharpNationV2._0.WpfGUI
             InitializeComponent();
 
             textureManager = new TextureManager();
-
-            //BackgroundsFolderTxt.Text = ConfigManager.BackgroundsFolder;
+            
             BackgroundsFolderTxt.Text = ConfigurationManager.BackgroundsPath;
             LoadedFolderTxt.Text = TextureManager.LoadedFolder;            
 
@@ -47,6 +46,8 @@ namespace CSharpNationV2._0.WpfGUI
             {
                 LoadTextureData(0);
             }
+
+            BackgroundDimSd.Value = ConfigurationManager.BackgroundDim;
         }
 
         public TextureManager textureManager { get; private set; }

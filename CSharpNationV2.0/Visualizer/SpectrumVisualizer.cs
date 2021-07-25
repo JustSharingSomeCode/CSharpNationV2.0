@@ -131,14 +131,14 @@ namespace CSharpNationV2._0.Visualizer
             
             if(Textures.LoadedTexturesCount != 0)
             {
-                Textures.DrawBackground(0, 0, Width, Height, power / 4, 255, ConfigurationManager.BackgroundDim, ConfigurationManager.BackgroundDim, ConfigurationManager.BackgroundDim);
+                Textures.DrawBackground(0, 0, Width, Height, ConfigurationManager.BackgroundMovement ? power / 4.0f : 0, 255, ConfigurationManager.BackgroundDim, ConfigurationManager.BackgroundDim, ConfigurationManager.BackgroundDim);
             }
 
             particles.DrawParticles();
             
             for (int i = Waves.Length - 1; i >= 0; i--)
             {
-                Waves[i].DrawGlow(Width / 2, Height / 2);                
+                Waves[i].DrawGlow(Width / 2, Height / 2);
             }
             
 

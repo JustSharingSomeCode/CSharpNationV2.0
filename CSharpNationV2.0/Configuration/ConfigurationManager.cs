@@ -26,22 +26,25 @@ namespace CSharpNationV2._0.Configuration
 
             LoadBackgrounds();
         }
-
-        //public static List<string> WavesConfig { get; private set; }
-        public static List<string> BackgroundsConfig { get; private set; } = new List<string>();
-        public static string[] GeneralConfig { get; private set; }
+        
+        public static List<string> BackgroundsConfig { get; private set; } = new List<string>();        
 
         public static readonly string configDirectoryPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\CSharpNationV2.0";
         public static readonly string resourcesDirectoryPath = configDirectoryPath + @"\Resources";
+        public static readonly string backgroundsDirectoryPath = configDirectoryPath + @"\Backgrounds";
         public static readonly string wavesFilePath = configDirectoryPath + @"\Waves.txt";
         public static readonly string backgroundsFilePath = configDirectoryPath + @"\Backgrounds.txt";
         public static readonly string configFilePath = configDirectoryPath + @"\Config.txt";
+
+        public static string BackgroundsPath { get; set; }
 
         public static int VisualizerWidth { get; set; } = 1280;
         public static int VisualizerHeight { get; set; } = 720;
 
         public static int ParticlesOnScreen { get; set; } = 500;
         public static int BackgroundDim { get; set; } = 100;
+        public static bool BackgroundMovement { get; set; } = false;
+        public static int BackgroundDuration { get; set; }
 
         public static float ParticleScale
         {
@@ -61,9 +64,9 @@ namespace CSharpNationV2._0.Configuration
 
         private static void CheckBackgroundsDirectory()
         {
-            if(!Directory.Exists(configDirectoryPath + @"\Backgrounds"))
+            if(!Directory.Exists(backgroundsDirectoryPath))
             {
-                Directory.CreateDirectory(configDirectoryPath + @"\Backgrounds");
+                Directory.CreateDirectory(backgroundsDirectoryPath);
 
                 //copy backgrounds
             }
@@ -79,40 +82,40 @@ namespace CSharpNationV2._0.Configuration
                 logo.Save(resourcesDirectoryPath + @"\Logo.png");
                 logo.Dispose();
             }
-        }
-
-        public static string BackgroundsPath
-        {
-            get
-            {
-                return GeneralConfig[0].Split('=')[1];
-            }
-            set
-            {
-                GeneralConfig[0] = GeneralConfig[0].Split('=')[0] + "=" + value;
-            }
         }        
 
-        private static string[] DefaultConfig()
+        private static void DefaultConfig()
         {
-            string[] config = new string[3];
-
-            config[0] = "Backgrounds folder="+ configDirectoryPath + @"\Backgrounds";
-            config[1] = "Background duration=10";
-            config[2] = "Particles=200";
-
-            return config;
-        }
+            BackgroundsPath = backgroundsDirectoryPath;
+            ParticlesOnScreen = 500;
+            BackgroundDuration = 30;
+            BackgroundDim = 200;
+            BackgroundMovement = true;
+        }        
 
         public static void LoadConfig()
         {
             if(File.Exists(configFilePath))
-            {
-                GeneralConfig = File.ReadAllLines(configFilePath);
+            {                
+                try
+                {
+                    string[] config = File.ReadAllLines(configFilePath);
+
+                    BackgroundsPath = config[0];
+                    ParticlesOnScreen = int.Parse(config[1]);
+                    BackgroundDuration = int.Parse(config[2]);
+                    BackgroundDim = int.Parse(config[3]);
+                    BackgroundMovement = bool.Parse(config[4]);
+                }
+                catch (Exception ex)
+                {
+                    DefaultConfig();
+                    ErrorManager.AddErrorMessage("Error loading config file: " + ex.Message);
+                }
             }
             else
-            {
-                GeneralConfig = DefaultConfig();
+            {                
+                DefaultConfig();
             }
         }
 
@@ -159,16 +162,9 @@ namespace CSharpNationV2._0.Configuration
         }
 
         public static void SaveConfig()
-        {
-            /*
-            string[] config = new string[3];
-
-            config[0] = "Backgrounds folder=" + TextureManager.LoadedFolder;
-            config[1] = "Background duration=10";
-            config[2] = "Particles=200";
-            */
-
-            File.WriteAllLines(configFilePath, GeneralConfig);
+        {            
+            string[] config = new string[] { BackgroundsPath, ParticlesOnScreen.ToString(), BackgroundDuration.ToString(), BackgroundDim.ToString(), BackgroundMovement.ToString() };
+            File.WriteAllLines(configFilePath, config);
         }
 
         public static void SaveWaves(SpectrumWave[] waves)

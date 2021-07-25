@@ -233,6 +233,11 @@ namespace CSharpNationV2._0.Textures
 
         public void NextBackground()
         {
+            if(LoadedTextures.Count <= 0)
+            {
+                return;
+            }
+
             actualBackground++;
 
             if(actualBackground >= LoadedTextures.Count)
@@ -250,6 +255,11 @@ namespace CSharpNationV2._0.Textures
 
         public void PreviousBackground()
         {
+            if (LoadedTextures.Count <= 0)
+            {
+                return;
+            }
+
             actualBackground--;
 
             if (actualBackground < 0)
