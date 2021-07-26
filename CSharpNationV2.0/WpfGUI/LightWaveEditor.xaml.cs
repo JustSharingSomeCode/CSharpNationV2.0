@@ -101,5 +101,58 @@ namespace CSharpNationV2._0.WpfGUI
                 Wave.WaveColor = System.Drawing.Color.FromArgb(R, G, B);
             }            
         }
+
+        private void IncrementTxt_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(EnterKeyPressed(e.Key))
+            {
+                try
+                {
+                    Wave.Increment = float.Parse(IncrementTxt.Text);
+                }
+                catch
+                {
+                    MessageBox.Show("Insert a valid number between 0.0 and 1.0", "Not valid", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    IncrementTxt.Text = Wave.Increment.ToString();
+                }
+            }
+        }
+
+        private void BarsInfluenceTxt_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (EnterKeyPressed(e.Key))
+            {
+                try
+                {
+                    Wave.BarsInfluence = int.Parse(BarsInfluenceTxt.Text);
+                }
+                catch
+                {
+                    MessageBox.Show("Insert a valid number", "Not valid", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    BarsInfluenceTxt.Text = Wave.BarsInfluence.ToString();
+                }
+            }
+        }
+
+        private void PromLoopsTxt_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (EnterKeyPressed(e.Key))
+            {
+                try
+                {
+                    Wave.PromLoops = int.Parse(PromLoopsTxt.Text);
+                }
+                catch
+                {
+                    MessageBox.Show("Insert a valid number", "Not valid", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    PromLoopsTxt.Text = Wave.PromLoops.ToString();
+                }
+            }
+        }        
+
+        private bool EnterKeyPressed(Key key)
+        {
+            return key == Key.Enter;
+        }
     }
 }
