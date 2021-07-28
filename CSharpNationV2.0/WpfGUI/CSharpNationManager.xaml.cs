@@ -169,5 +169,24 @@ namespace CSharpNationV2._0.WpfGUI
         {
             ChangeWindows(errorWindow);
         }
+
+        private void MaximizeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if(WindowState == WindowState.Maximized)
+            {
+                WindowState = WindowState.Normal;
+                MainGrid.Margin = new Thickness(0);
+            }
+            else
+            {
+                WindowState = WindowState.Maximized;
+                MainGrid.Margin = new Thickness(8);
+            }                     
+        }
+
+        private void MinimizeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
     }
 }

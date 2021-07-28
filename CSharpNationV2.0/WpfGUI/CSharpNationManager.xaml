@@ -20,8 +20,8 @@
     <Grid x:Name="MainGrid">
         <Grid x:Name="TitleGrid" Height="30" VerticalAlignment="Top" Background="#FF3C3C3C" MouseDown="TitleGrid_MouseDown">
             <WpfLightControls:LightButton x:Name="CloseBtn" IconText="&#xE106;" HorizontalAlignment="Right" VerticalAlignment="Top" Width="30" Background="#00000000" Height="30" FontSize="12" Padding="0" CornerRadius="0" Click="CloseBtn_Click"/>
-            <WpfLightControls:LightButton x:Name="MaximizeBtn" IconText="&#xE923;" HorizontalAlignment="Right" VerticalAlignment="Top" Width="30" Background="#00000000" Height="30" FontSize="12" Padding="0" CornerRadius="0" Margin="0,0,30,0"/>
-            <WpfLightControls:LightButton x:Name="MinimizeBtn" IconText="&#xE108;" HorizontalAlignment="Right" VerticalAlignment="Top" Width="30" Background="#00000000" Height="30" FontSize="12" Padding="0" CornerRadius="0" Margin="0,0,60,0"/>
+            <WpfLightControls:LightButton x:Name="MaximizeBtn" IconText="&#xE923;" HorizontalAlignment="Right" VerticalAlignment="Top" Width="30" Background="#00000000" Height="30" FontSize="12" Padding="0" CornerRadius="0" Margin="0,0,30,0" Click="MaximizeBtn_Click"/>
+            <WpfLightControls:LightButton x:Name="MinimizeBtn" IconText="&#xE108;" HorizontalAlignment="Right" VerticalAlignment="Top" Width="30" Background="#00000000" Height="30" FontSize="12" Padding="0" CornerRadius="0" Margin="0,0,60,0" Click="MinimizeBtn_Click"/>
             <Label x:Name="TitleLbl" Content="CSharpNation Manager" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="520" BorderBrush="#FFDE2424" BorderThickness="0"/>
         </Grid>
         <Border x:Name="DevicesBorder" BorderBrush="White" BorderThickness="0,1,0,0" Height="50" VerticalAlignment="Bottom">
