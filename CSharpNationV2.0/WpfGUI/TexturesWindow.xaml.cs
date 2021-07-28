@@ -48,6 +48,10 @@ namespace CSharpNationV2._0.WpfGUI
             }
 
             BackgroundDimSd.Value = ConfigurationManager.BackgroundDim;
+
+            BackgroundDurationTxt.Text = ConfigurationManager.BackgroundDuration.ToString();
+
+            BackgroundMovementCb.IsChecked = ConfigurationManager.BackgroundMovement;
         }
 
         public TextureManager textureManager { get; private set; }
@@ -142,6 +146,26 @@ namespace CSharpNationV2._0.WpfGUI
         private void LightSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             ConfigurationManager.BackgroundDim = (int)BackgroundDimSd.Value;
+        }
+
+        private void BackgroundMovementCb_Click(object sender, RoutedEventArgs e)
+        {
+            ConfigurationManager.BackgroundMovement = BackgroundMovementCb.IsChecked.Value;
+        }
+
+        private void BackgroundDurationTxt_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                try
+                {
+                    ConfigurationManager.BackgroundDuration = int.Parse(BackgroundDurationTxt.Text);
+                }
+                catch
+                {
+                    BackgroundDurationTxt.Text = ConfigurationManager.BackgroundDuration.ToString();
+                }
+            }
         }
     }
 }

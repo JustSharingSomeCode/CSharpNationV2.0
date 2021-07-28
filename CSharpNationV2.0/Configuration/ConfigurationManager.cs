@@ -81,6 +81,10 @@ namespace CSharpNationV2._0.Configuration
                 Bitmap logo = new Bitmap(Properties.Resources.Logo);
                 logo.Save(resourcesDirectoryPath + @"\Logo.png");
                 logo.Dispose();
+
+                Bitmap particle = new Bitmap(Properties.Resources.Particle);
+                particle.Save(resourcesDirectoryPath + @"\Particle.png");
+                particle.Dispose();
             }
         }        
 

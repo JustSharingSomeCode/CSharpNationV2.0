@@ -163,6 +163,7 @@
     </Content>
     <None Include="Resources\Logo.png" />
     <Resource Include="CSharpNation.ico" />
+    <None Include="Resources\Particle.png" />
     <Content Include="WpfLightControls.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
