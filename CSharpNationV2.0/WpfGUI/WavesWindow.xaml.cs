@@ -33,9 +33,15 @@ namespace CSharpNationV2._0.WpfGUI
         public SpectrumWave[] Waves { get; private set; }
 
         private void LoadWaves()
-        {
-            //SpectrumWave[] waves = ConfigManager.GetWaveConfig();
+        {            
             Waves = ConfigurationManager.LoadWaves();
+
+            UpdateWaveViewer();
+        }
+
+        private void UpdateWaveViewer()
+        {
+            WavesViewerGrid.Children.Clear();
 
             double left = 10;
 
@@ -57,6 +63,13 @@ namespace CSharpNationV2._0.WpfGUI
         private void SaveConfigBtn_Click(object sender, RoutedEventArgs e)
         {
             ConfigurationManager.SaveWaves(Waves);
+        }
+
+        private void ResetWavesBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Waves = ConfigurationManager.GetDefaultWaves();
+
+            UpdateWaveViewer();
         }
     }
 }

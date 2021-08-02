@@ -46,6 +46,9 @@ namespace CSharpNationV2._0.Configuration
         public static bool BackgroundMovement { get; set; } = false;
         public static int BackgroundDuration { get; set; }
 
+        public static bool EnableParticles { get; set; } = true;
+        public static bool EnableGlow { get; set; } = false;
+
         public static float ParticleScale
         {
             get
@@ -127,28 +130,37 @@ namespace CSharpNationV2._0.Configuration
         {
             if (File.Exists(wavesFilePath))
             {
-                string[] config = File.ReadAllLines(wavesFilePath);
-                SpectrumWave[] waves = new SpectrumWave[config.Length];
+                try
+                {                    
+                    string[] config = File.ReadAllLines(wavesFilePath);
+                    SpectrumWave[] waves = new SpectrumWave[config.Length];
 
-                string[] data;
+                    string[] data;
 
-                for (int i = 0; i < config.Length; i++)
-                {
-                    data = config[i].Split('|');
-
-                    SpectrumWave wave = new SpectrumWave()
+                    for (int i = 0; i < config.Length; i++)
                     {
-                        WaveColor = Color.FromArgb(255, int.Parse(data[0]), int.Parse(data[1]),
-                        int.Parse(data[2])),
-                        Increment = float.Parse(data[3]),
-                        BarsInfluence = int.Parse(data[4]),
-                        PromLoops = int.Parse(data[5])
-                    };
+                        data = config[i].Split('|');
 
-                    waves[i] = wave;
+                        SpectrumWave wave = new SpectrumWave()
+                        {
+                            WaveColor = Color.FromArgb(255, int.Parse(data[0]), int.Parse(data[1]),
+                            int.Parse(data[2])),
+                            Increment = float.Parse(data[3]),
+                            BarsInfluence = int.Parse(data[4]),
+                            PromLoops = int.Parse(data[5]),
+                            WaveQuality = float.Parse(data[6])
+                        };
+
+                        waves[i] = wave;
+                    }
+
+                    return waves;
                 }
-
-                return waves;
+                catch
+                {
+                    ErrorManager.AddErrorMessage("Error loading wave data");
+                    return GetDefaultWaves();
+                }
             }
             else
             {
@@ -223,9 +235,10 @@ namespace CSharpNationV2._0.Configuration
             Waves[0] = new SpectrumWave
             {
                 WaveColor = Color.White,
-                Increment = 0,
-                BarsInfluence = 0,
-                PromLoops = 0
+                Increment = 0.5f,
+                BarsInfluence = 1,
+                PromLoops = 1,
+                WaveQuality = 5
             };
 
             Waves[1] = new SpectrumWave
@@ -233,7 +246,8 @@ namespace CSharpNationV2._0.Configuration
                 WaveColor = Color.Yellow,
                 Increment = 0.5f,
                 BarsInfluence = 2,
-                PromLoops = 1
+                PromLoops = 1,
+                WaveQuality = 5
             };
 
             Waves[2] = new SpectrumWave
@@ -241,7 +255,8 @@ namespace CSharpNationV2._0.Configuration
                 WaveColor = Color.FromArgb(255, 150, 0),
                 Increment = 0.5f,
                 BarsInfluence = 2,
-                PromLoops = 2
+                PromLoops = 2,
+                WaveQuality = 5
             };
 
             Waves[3] = new SpectrumWave
@@ -249,7 +264,8 @@ namespace CSharpNationV2._0.Configuration
                 WaveColor = Color.Red,
                 Increment = 0.5f,
                 BarsInfluence = 2,
-                PromLoops = 3
+                PromLoops = 3,
+                WaveQuality = 3
             };
 
             Waves[4] = new SpectrumWave
@@ -257,7 +273,8 @@ namespace CSharpNationV2._0.Configuration
                 WaveColor = Color.FromArgb(255, 100, 255),
                 Increment = 0.5f,
                 BarsInfluence = 2,
-                PromLoops = 4
+                PromLoops = 4,
+                WaveQuality = 3
             };
 
             Waves[5] = new SpectrumWave
@@ -265,7 +282,8 @@ namespace CSharpNationV2._0.Configuration
                 WaveColor = Color.FromArgb(50, 50, 155),
                 Increment = 0.5f,
                 BarsInfluence = 2,
-                PromLoops = 5
+                PromLoops = 5,
+                WaveQuality = 3
             };
 
             Waves[6] = new SpectrumWave
@@ -273,7 +291,8 @@ namespace CSharpNationV2._0.Configuration
                 WaveColor = Color.Blue,
                 Increment = 0.5f,
                 BarsInfluence = 2,
-                PromLoops = 6
+                PromLoops = 6,
+                WaveQuality = 2
             };
 
             Waves[7] = new SpectrumWave
@@ -281,7 +300,8 @@ namespace CSharpNationV2._0.Configuration
                 WaveColor = Color.FromArgb(50, 205, 255),
                 Increment = 0.5f,
                 BarsInfluence = 2,
-                PromLoops = 7
+                PromLoops = 7,
+                WaveQuality = 2
             };
 
             Waves[8] = new SpectrumWave
@@ -289,7 +309,8 @@ namespace CSharpNationV2._0.Configuration
                 WaveColor = Color.FromArgb(0, 255, 0),
                 Increment = 0.5f,
                 BarsInfluence = 2,
-                PromLoops = 8
+                PromLoops = 8,
+                WaveQuality = 2
             };
 
             return Waves;

@@ -34,7 +34,24 @@ namespace CSharpNationV2._0.Visualizer
 
         private float barWidth = 10;
 
-        private float qualityIncrement = 0.2f;
+        private float waveQuality;
+        public float WaveQuality
+        {
+            get
+            {
+                return waveQuality;
+            }
+            set
+            {
+                if(value >= 1.0f)
+                {
+                    waveQuality = value;
+                    qualityIncrease = 1.0f / waveQuality;
+                }                
+            }
+        }
+
+        private float qualityIncrease = 1.0f;
 
         private Vector2 p1, p2, p3, p4;
 
@@ -154,7 +171,7 @@ namespace CSharpNationV2._0.Visualizer
 
                 p4 = GetPosition(x, y, WaveTools.Clamp(0, SpectrumData.Count - 1, i + 2), circleRadius);
 
-                for (float j = 0f; j <= 1; j += qualityIncrement)
+                for (float j = 0f; j <= 1; j += qualityIncrease)
                 {
                     CatmullRomPoints.Add(WaveTools.CatmullRom(j, p1, p2, p3, p4));
                 }
@@ -184,7 +201,7 @@ namespace CSharpNationV2._0.Visualizer
 
         public string GetConfig()
         {
-            return WaveColor.R.ToString() + "|" + WaveColor.G.ToString() + "|" + WaveColor.B.ToString() + "|" + Increment.ToString() + "|" + BarsInfluence.ToString() + "|" + PromLoops.ToString();
+            return WaveColor.R.ToString() + "|" + WaveColor.G.ToString() + "|" + WaveColor.B.ToString() + "|" + Increment.ToString() + "|" + BarsInfluence.ToString() + "|" + PromLoops.ToString() + "|" + WaveQuality.ToString();
         }
     }
 }

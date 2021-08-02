@@ -31,16 +31,9 @@ namespace CSharpNationV2._0.Visualizer
 
             Analyzer = _analyzer;            
 
-            Replay = new SpectrumReplay(9);
+            Replay = new SpectrumReplay(waves.Length);
 
-            Waves = waves;            
-           
-            /*
-            for(int i = 0; i < Waves.Length; i++)
-            {
-                Waves[i].DegreesIncrement = 180f / (Analyzer._lines - 1);
-            }         
-            */
+            Waves = waves;                       
 
             Textures = txtmanager;
 
@@ -120,7 +113,10 @@ namespace CSharpNationV2._0.Visualizer
 
             Radius = Height / 4 + power;
 
-            particles.UpdateParticles(power);
+            if(ConfigurationManager.EnableParticles)
+            {
+                particles.UpdateParticles(power);
+            }            
 
             base.OnUpdateFrame(e);
         }
@@ -134,13 +130,18 @@ namespace CSharpNationV2._0.Visualizer
                 Textures.DrawBackground(0, 0, Width, Height, ConfigurationManager.BackgroundMovement ? power / 4.0f : 0, 255, ConfigurationManager.BackgroundDim, ConfigurationManager.BackgroundDim, ConfigurationManager.BackgroundDim);
             }
 
-            particles.DrawParticles();
-            
-            for (int i = Waves.Length - 1; i >= 0; i--)
+            if(ConfigurationManager.EnableParticles)
             {
-                Waves[i].DrawGlow(Width / 2, Height / 2);
+                particles.DrawParticles();
             }
-            
+
+            if (ConfigurationManager.EnableGlow)
+            {
+                for (int i = Waves.Length - 1; i >= 0; i--)
+                {
+                    Waves[i].DrawGlow(Width / 2, Height / 2);
+                }
+            }            
 
             for (int i = Waves.Length - 1; i >= 0; i--)
             {
