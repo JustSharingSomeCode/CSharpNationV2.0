@@ -209,8 +209,7 @@ namespace CSharpNationV2._0.Textures
             switch (td.DisplayMode)
             {
                 case DisplayMode.Fullscreen:
-                    DrawTexture(td.Texture, x - td.FillX - wp, y - td.FillY - hp, xMax + td.FillX + wp, yMax + td.FillY + hp, a, r, g, b);
-                    //DrawTexture(td.Texture, x - (td.FillX * power), y - (td.FillY * power), xMax + (td.FillX * power), yMax + (td.FillY * power), a, r, g, b);
+                    DrawTexture(td.Texture, x - td.FillX - wp, y - td.FillY - hp, xMax + td.FillX + wp, yMax + td.FillY + hp, a, r, g, b);                    
                     break;
 
                 case DisplayMode.Halfscreen:
@@ -243,9 +242,7 @@ namespace CSharpNationV2._0.Textures
             if(actualBackground >= LoadedTextures.Count)
             {
                 actualBackground = 0;
-            }
-
-            //LoadedTextures[actualBackground].Write();
+            }            
 
             if(GetActualBackground() == -1)
             {
@@ -283,18 +280,6 @@ namespace CSharpNationV2._0.Textures
             }
 
             return names;
-        }
-        
-        /*
-        public TextureData GetTextureData(int index)
-        {
-            if(index < LoadedTexturesCount)
-            {
-                return LoadedTextures[index];
-            }
-
-            return null;
-        }
-        */
+        }               
     }
 }

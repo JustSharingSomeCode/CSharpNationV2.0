@@ -19,9 +19,24 @@ namespace CSharpNationV2._0.Textures
             LoadConfig();            
         }
 
+        private Bitmap textureBitmap;
+        public int Texture { get; set; } = -1;
+        public TextureManager.DisplayMode DisplayMode { get; set; }
+
+        public int OriginalWidth { get; private set; }
+        public int OriginalHeight { get; private set; }
+
+        public float WidthRatio { get; private set; }
+        public float HeightRatio { get; private set; }
+
+        public float ActualWidth { get; private set; }
+        public float ActualHeight { get; private set; }
+
+        public float FillY { get; private set; }
+        public float FillX { get; private set; }
+
         private void LoadConfig()
-        {
-            //DisplayMode = ConfigManager.GetDisplayMode(Path);
+        {            
             DisplayMode = ConfigurationManager.GetDisplayMode(FileName);
         }
 
@@ -110,23 +125,7 @@ namespace CSharpNationV2._0.Textures
             {
                 return Path.Split((char)92).Last();
             }
-        }
-
-        private Bitmap textureBitmap;
-        public int Texture { get; set; } = -1;
-        public TextureManager.DisplayMode DisplayMode { get; set; }
-
-        public int OriginalWidth { get; private set; }
-        public int OriginalHeight { get; private set; }
-
-        public float WidthRatio { get; private set; }
-        public float HeightRatio { get; private set; }
-
-        public float ActualWidth { get; private set; }
-        public float ActualHeight { get; private set; }
-
-        public float FillY { get; private set; }
-        public float FillX { get; private set; }
+        }        
 
         public void Write()
         {
