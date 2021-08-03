@@ -32,18 +32,30 @@ namespace CSharpNationV2._0.WpfGUI
 
         public SpectrumWave[] Waves { get; private set; }
 
+        //private List<SpectrumWave> WaveList = new List<SpectrumWave>();  --planning change from array to list
+        private List<LightWaveEditor> EditorList = new List<LightWaveEditor>();
+
+        private double MinMargin = 10;
+        private double ActualMargin;
+        private int MaxEditors, xCount;
+        private double MissingMargin;
+        private double X, Y;
+
+        private bool loaded = false;
+
         private void LoadWaves()
         {            
-            Waves = ConfigurationManager.LoadWaves();
+            Waves = ConfigurationManager.LoadWaves();            
+        }        
 
-            UpdateWaveViewer();
-        }
-
-        private void UpdateWaveViewer()
+        private void LoadEditors()
         {
             WavesViewerGrid.Children.Clear();
+            EditorList.Clear();
 
-            double left = 10;
+            X = ActualMargin;
+            Y = MinMargin;
+            xCount = 0;
 
             for (int i = 0; i < Waves.Length; i++)
             {
@@ -51,13 +63,52 @@ namespace CSharpNationV2._0.WpfGUI
                 {
                     HorizontalAlignment = HorizontalAlignment.Left,
                     VerticalAlignment = VerticalAlignment.Top,
-                    Margin = new Thickness(left, 10, 0, 0)
+                    Margin = new Thickness(X, Y, 0, 0)
                 };
+                
+                EditorList.Add(lwe);
+                WavesViewerGrid.Children.Add(EditorList.Last());
 
-                WavesViewerGrid.Children.Add(lwe);
+                X += 200 + ActualMargin;
+                xCount++;
 
-                left += lwe.MinWidth + 10;
+                if(xCount >= MaxEditors)
+                {
+                    X = ActualMargin;
+                    Y += 300 + MinMargin;
+                    xCount = 0;
+                }
             }
+
+            loaded = true;
+        }
+
+        
+        private void FitEditorsToBounds()
+        {            
+            X = ActualMargin;
+            Y = MinMargin;
+            xCount = 0;
+
+            for(int i = 0; i < EditorList.Count; i++)
+            {
+                EditorList[i].Margin = new Thickness(X, Y, 0, 0);
+
+                X += 200 + ActualMargin;
+                xCount++;
+
+                if (xCount >= MaxEditors)
+                {
+                    X = ActualMargin;
+                    Y += 300 + MinMargin;
+                    xCount = 0;
+                }
+            }            
+        }        
+
+        private void AddEditor()
+        {
+
         }
 
         private void SaveConfigBtn_Click(object sender, RoutedEventArgs e)
@@ -68,8 +119,31 @@ namespace CSharpNationV2._0.WpfGUI
         private void ResetWavesBtn_Click(object sender, RoutedEventArgs e)
         {
             Waves = ConfigurationManager.GetDefaultWaves();
+            
+            LoadEditors();
+        }
 
-            UpdateWaveViewer();
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (!loaded)
+            {
+                LoadEditors();
+            }
+        }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            UpdateBounds();
+            
+            FitEditorsToBounds();
+        }
+
+        private void UpdateBounds()
+        {            
+            double w = (WavesViewer.ContentVisualWidth - MinMargin) / (200 + MinMargin);
+            MaxEditors = (int)w;
+            MissingMargin = (w - MaxEditors) * (200 + MinMargin);
+            ActualMargin = MinMargin + MissingMargin / MaxEditors;
         }
     }
 }
