@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CSharpNation.GUI"
         xmlns:WpfHoverControls="clr-namespace:WpfHoverControls;assembly=WpfHoverControls" x:Class="CSharpNation.GUI.CSharpNationGUI"
         mc:Ignorable="d"
-        Title="CSharpNationGUI" Height="576" Width="1024">
+        Title="CSharpNationGUI" Height="576" Width="1024" Closing="Window_Closing">
     <Grid>
 
         <WpfHoverControls:HoverButton x:Name="StartTemp" Content="HoverButton" HorizontalAlignment="Left" Margin="225,174,0,0" VerticalAlignment="Top" Width="291" Height="55" Click="StartTemp_Click"/>

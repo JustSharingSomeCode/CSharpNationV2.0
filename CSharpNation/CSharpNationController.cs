@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 
 using CSharpNation.Visualizer;
+using CSharpNation.Analyzer;
 
 namespace CSharpNation
 {
@@ -15,11 +16,12 @@ namespace CSharpNation
     {
         private Thread vth;
         private SpectrumVisualizer visualizer;
+        private SpectrumAnalyzer analyzer;
 
         public CSharpNationController()
         {
             vth = new Thread(VisualizerThread);
-            //visualizer = new SpectrumVisualizer(1024, 576, "CSharpNation");
+            analyzer = new SpectrumAnalyzer();
         }
 
         public void StartVisualizer()
@@ -50,10 +52,15 @@ namespace CSharpNation
 
         private void VisualizerThread()
         {
-            using (visualizer = new SpectrumVisualizer(1024, 576, "CSharpNation"))
+            using (visualizer = new SpectrumVisualizer(1280, 720, "CSharpNation", analyzer))
             {
-                visualizer.Run();
+                visualizer.Run(60.0f);
             }
+        }
+
+        public void Cleanup()
+        {
+            analyzer.Free();
         }
     }
 }
