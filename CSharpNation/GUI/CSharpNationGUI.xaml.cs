@@ -23,5 +23,12 @@ namespace CSharpNation.GUI
         {
             InitializeComponent();
         }
+
+        CSharpNationController controller = new CSharpNationController();
+
+        private void StartTemp_Click(object sender, RoutedEventArgs e)
+        {
+            controller.StartVisualizer();
+        }
     }
 }
