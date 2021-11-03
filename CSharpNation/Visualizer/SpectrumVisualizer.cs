@@ -9,6 +9,7 @@ using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 
 using CSharpNation.Analyzer;
+using CSharpNation.Tools;
 
 namespace CSharpNation.Visualizer
 {
@@ -46,7 +47,7 @@ namespace CSharpNation.Visualizer
 
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
-            spectrum = analyzer.GetSpectrum();
+            spectrum = WaveTools.FixDiscontinuities(analyzer.GetSpectrum());
 
             base.OnUpdateFrame(e);
         }
@@ -66,7 +67,7 @@ namespace CSharpNation.Visualizer
                 GL.Vertex2(i * 10, 0);
                 GL.Vertex2(i * 10, spectrum[i]);
                 GL.Vertex2(i * 10 + 10, spectrum[i]);
-                GL.Vertex2(i * 10 + 10, 0);                
+                GL.Vertex2(i * 10 + 10, 0);
 
                 GL.End();
             }

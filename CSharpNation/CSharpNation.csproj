@@ -68,6 +68,7 @@
     </ApplicationDefinition>
     <Compile Include="Analyzer\SpectrumAnalyzer.cs" />
     <Compile Include="CSharpNationController.cs" />
+    <Compile Include="Tools\WaveTools.cs" />
     <Compile Include="Visualizer\SpectrumVisualizer.cs" />
     <Page Include="GUI\CSharpNationGUI.xaml">
       <SubType>Designer</SubType>
