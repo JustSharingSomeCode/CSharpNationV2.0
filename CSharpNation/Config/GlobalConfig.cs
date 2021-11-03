@@ -6,8 +6,15 @@ using System.Threading.Tasks;
 
 namespace CSharpNation.Config
 {
-    class GlobalConfig
+    static class GlobalConfig
     {
+        static GlobalConfig()
+        {
+            Lines = 64;
+            WaveCount = 5;
+        }
 
+        public static int Lines { get; private set; }
+        public static int WaveCount { get; private set; }
     }
 }

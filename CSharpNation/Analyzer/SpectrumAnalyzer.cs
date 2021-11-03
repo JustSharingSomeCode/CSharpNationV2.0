@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Un4seen.Bass;
 using Un4seen.BassWasapi;
 
+using CSharpNation.Config;
+
 namespace CSharpNation.Analyzer
 {
     class SpectrumAnalyzer
@@ -18,7 +20,7 @@ namespace CSharpNation.Analyzer
         private int previousDevice = -1;
 
         public float multiplier = 1;
-        public static int _lines = 50;
+        public static int _lines = GlobalConfig.Lines;
 
         #region Constructor
         public SpectrumAnalyzer()

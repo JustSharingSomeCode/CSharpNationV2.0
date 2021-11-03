@@ -20,10 +20,15 @@ namespace CSharpNation.Visualizer
             analyzer = _analyzer;
 
             VSync = VSyncMode.On;
+
+            replay = new ReplayBuffer();
+            waveController = new WaveController();
         }
 
         private List<float> spectrum;
         private SpectrumAnalyzer analyzer;
+        private ReplayBuffer replay;
+        private WaveController waveController;
 
         protected override void OnLoad(EventArgs e)
         {
@@ -49,6 +54,10 @@ namespace CSharpNation.Visualizer
         {
             spectrum = WaveTools.FixDiscontinuities(analyzer.GetSpectrum());
 
+            replay.Push(spectrum);
+
+            waveController.UpdateWaves(replay);
+
             base.OnUpdateFrame(e);
         }
 
@@ -59,6 +68,8 @@ namespace CSharpNation.Visualizer
             if (spectrum == null)
             { return; }
 
+            waveController.DrawWaves();
+            /*
             for (int i = 0; i < spectrum.Count; i++)
             {
                 GL.Begin(PrimitiveType.Quads);
@@ -71,6 +82,7 @@ namespace CSharpNation.Visualizer
 
                 GL.End();
             }
+            */
 
             Context.SwapBuffers();
 

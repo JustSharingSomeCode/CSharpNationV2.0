@@ -69,7 +69,10 @@
     <Compile Include="Analyzer\SpectrumAnalyzer.cs" />
     <Compile Include="CSharpNationController.cs" />
     <Compile Include="Tools\WaveTools.cs" />
+    <Compile Include="Visualizer\ReplayBuffer.cs" />
     <Compile Include="Visualizer\SpectrumVisualizer.cs" />
+    <Compile Include="Visualizer\Wave.cs" />
+    <Compile Include="Visualizer\WaveController.cs" />
     <Page Include="GUI\CSharpNationGUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
