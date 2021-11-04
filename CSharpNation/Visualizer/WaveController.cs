@@ -17,11 +17,15 @@ namespace CSharpNation.Visualizer
         {
             waves = new Wave[GlobalConfig.WaveCount];
 
-            waves[0] = new Wave(255, 255, 255);
-            waves[1] = new Wave(200, 200, 200);
-            waves[2] = new Wave(150, 150, 150);
-            waves[3] = new Wave(100, 100, 100);
-            waves[4] = new Wave(50, 50, 50);
+            waves[0] = new Wave(255, 255, 255, 2);
+            waves[1] = new Wave(255, 255, 0, 3);
+            waves[2] = new Wave(255, 150, 0, 4);
+            waves[3] = new Wave(255, 0, 0, 5);
+            waves[4] = new Wave(255, 100, 255, 6);
+            waves[5] = new Wave(50, 50, 155, 7);
+            waves[6] = new Wave(0, 0, 255, 8);
+            waves[7] = new Wave(50, 200, 255, 9);
+            waves[8] = new Wave(0, 255, 0, 10);
         }
 
         private Wave[] waves;

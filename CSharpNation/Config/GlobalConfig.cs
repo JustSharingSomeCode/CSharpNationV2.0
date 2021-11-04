@@ -11,7 +11,7 @@ namespace CSharpNation.Config
         static GlobalConfig()
         {
             Lines = 64;
-            WaveCount = 5;
+            WaveCount = 9;
         }
 
         public static int Lines { get; private set; }
