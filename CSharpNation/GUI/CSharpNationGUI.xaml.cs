@@ -35,5 +35,15 @@ namespace CSharpNation.GUI
         {
             controller.Cleanup();
         }
+
+        private void PauseBtn_Click(object sender, RoutedEventArgs e)
+        {
+            controller.PauseCapture();
+        }
+
+        private void ResumeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            controller.ResumeCapture();
+        }
     }
 }

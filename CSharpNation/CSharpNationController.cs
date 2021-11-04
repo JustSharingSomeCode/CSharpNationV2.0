@@ -58,6 +58,16 @@ namespace CSharpNation
             }
         }
 
+        public void PauseCapture()
+        {
+            analyzer.PauseCapture();
+        }
+
+        public void ResumeCapture()
+        {
+            analyzer.ResumeCapture();
+        }
+
         public void Cleanup()
         {
             analyzer.Free();
