@@ -74,5 +74,15 @@ namespace CSharpNation.Tools
 
             return prom.ToList();
         }
+
+        public static List<float> LoopProm(List<float> spectrum, int bars, int loops)
+        {
+            for(int i = 0; i < loops; i++)
+            {
+                spectrum = PromSpectrum(spectrum, bars);
+            }
+
+            return spectrum;
+        }
     }
 }

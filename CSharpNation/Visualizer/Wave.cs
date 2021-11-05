@@ -15,12 +15,13 @@ namespace CSharpNation.Visualizer
             replay = new ReplayBuffer(5);
         }
 
-        public Wave(int r, int g, int b, int bars) : this()
+        public Wave(int r, int g, int b, int loops, int bars) : this()
         {
             R = r;
             G = g;
             B = b;
             AvgBars = bars;
+            AvgLoops = loops;
         }
 
         private ReplayBuffer replay;
@@ -31,6 +32,7 @@ namespace CSharpNation.Visualizer
         public int B { get; set; }
 
         public int AvgBars { get; set; }
+        public int AvgLoops { get; set; }
 
         public void Update(List<float> spectrum)
         {
@@ -43,7 +45,7 @@ namespace CSharpNation.Visualizer
                 return;
             }
 
-            Spectrum = WaveTools.PromSpectrum(Spectrum, AvgBars);
+            Spectrum = WaveTools.LoopProm(Spectrum, AvgBars, AvgLoops);
         }
     }
 }

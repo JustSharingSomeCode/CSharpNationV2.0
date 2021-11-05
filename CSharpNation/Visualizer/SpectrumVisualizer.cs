@@ -32,7 +32,7 @@ namespace CSharpNation.Visualizer
 
         protected override void OnLoad(EventArgs e)
         {
-            GL.ClearColor(new Color4(255, 0, 0, 255));
+            GL.ClearColor(new Color4(50, 50, 50, 255));
 
             base.OnLoad(e);
         }
@@ -45,7 +45,7 @@ namespace CSharpNation.Visualizer
             GL.LoadIdentity();
             GL.Ortho(0.0f, Width, 0.0f, Height, 0.0f, 1.0f);
 
-            analyzer.multiplier = Height / 4;
+            analyzer.multiplier = Height / 2;
 
             base.OnResize(e);
         }
