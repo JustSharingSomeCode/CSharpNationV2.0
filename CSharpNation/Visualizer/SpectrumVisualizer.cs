@@ -53,6 +53,7 @@ namespace CSharpNation.Visualizer
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
             spectrum = WaveTools.FixDiscontinuities(analyzer.GetSpectrum());
+            spectrum = WaveTools.LoopProm(spectrum, 1, 2);
 
             replay.Push(spectrum);
 
@@ -68,7 +69,7 @@ namespace CSharpNation.Visualizer
             if (spectrum == null)
             { return; }
 
-            waveController.DrawWaves();
+            waveController.DrawWaves(Width / 2, Height / 2);
 
             Context.SwapBuffers();
 

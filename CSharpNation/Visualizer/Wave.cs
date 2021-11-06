@@ -18,7 +18,7 @@ namespace CSharpNation.Visualizer
     {
         public Wave()
         {
-            replay = new ReplayBuffer(8);
+            replay = new ReplayBuffer(5);
         }
 
         public Wave(int r, int g, int b, int bars, int loops) : this()
@@ -42,7 +42,7 @@ namespace CSharpNation.Visualizer
 
         public int AvgBars { get; set; }
         public int AvgLoops { get; set; }
-        public float Quality { get; set; } = 1.0f;
+        public float Quality { get; set; } = 0.2f;
 
         private double rads, PosX, PosY;
         private Vector2 p1, p2, p3, p4;
