@@ -12,10 +12,10 @@ namespace CSharpNation.Visualizer
     {
         public Wave()
         {
-            replay = new ReplayBuffer(5);
+            replay = new ReplayBuffer(8);
         }
 
-        public Wave(int r, int g, int b, int loops, int bars) : this()
+        public Wave(int r, int g, int b, int bars, int loops) : this()
         {
             R = r;
             G = g;
@@ -26,6 +26,7 @@ namespace CSharpNation.Visualizer
 
         private ReplayBuffer replay;
         public List<float> Spectrum { get; private set; }
+        private List<float> promSpectrum;
 
         public int R { get; set; }
         public int G { get; set; }
@@ -45,7 +46,8 @@ namespace CSharpNation.Visualizer
                 return;
             }
 
-            Spectrum = WaveTools.LoopProm(Spectrum, AvgBars, AvgLoops);
+            promSpectrum = WaveTools.LoopProm(Spectrum, AvgBars, AvgLoops);
+            Spectrum = WaveTools.CombineWaves(Spectrum, promSpectrum);
         }
     }
 }

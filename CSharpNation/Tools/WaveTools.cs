@@ -84,5 +84,30 @@ namespace CSharpNation.Tools
 
             return spectrum;
         }
+
+        public static List<float> Normalize(List<float> spectrum)
+        {
+            float max = spectrum.Max();
+
+            for (int i = 0; i < spectrum.Count; i++)
+            {
+                spectrum[i] /= max;
+            }
+
+            return spectrum;
+        }        
+
+        public static List<float> CombineWaves(List<float> spectrum, List<float> promSpectrum)
+        {
+            List<float> norm = Normalize(promSpectrum);
+            float max = spectrum.Max();
+
+            for(int i = 0; i < norm.Count; i++)
+            {
+                norm[i] *= max;
+            }
+
+            return norm;
+        }
     }
 }

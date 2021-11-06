@@ -53,7 +53,7 @@ namespace CSharpNation.Visualizer
 
                 for(int j = 0; j < w.Spectrum.Count; j++)
                 {
-                    GL.Begin(PrimitiveType.LineLoop);
+                    GL.Begin(PrimitiveType.Quads);
                     GL.Color3(Color.FromArgb(255,w.R, w.G, w.B));                    
 
                     GL.Vertex2(j * 10, 0);

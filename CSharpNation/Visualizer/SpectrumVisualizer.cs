@@ -45,7 +45,7 @@ namespace CSharpNation.Visualizer
             GL.LoadIdentity();
             GL.Ortho(0.0f, Width, 0.0f, Height, 0.0f, 1.0f);
 
-            analyzer.multiplier = Height / 2;
+            analyzer.multiplier = Height / 4;
 
             base.OnResize(e);
         }
@@ -69,20 +69,6 @@ namespace CSharpNation.Visualizer
             { return; }
 
             waveController.DrawWaves();
-            /*
-            for (int i = 0; i < spectrum.Count; i++)
-            {
-                GL.Begin(PrimitiveType.Quads);
-                GL.Color3(255, 255, 255);
-
-                GL.Vertex2(i * 10, 0);
-                GL.Vertex2(i * 10, spectrum[i]);
-                GL.Vertex2(i * 10 + 10, spectrum[i]);
-                GL.Vertex2(i * 10 + 10, 0);
-
-                GL.End();
-            }
-            */
 
             Context.SwapBuffers();
 
