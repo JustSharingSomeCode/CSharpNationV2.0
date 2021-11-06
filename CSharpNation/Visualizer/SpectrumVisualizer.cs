@@ -10,6 +10,7 @@ using OpenTK.Graphics.OpenGL;
 
 using CSharpNation.Analyzer;
 using CSharpNation.Tools;
+using System.Drawing;
 
 namespace CSharpNation.Visualizer
 {
@@ -29,6 +30,8 @@ namespace CSharpNation.Visualizer
         private SpectrumAnalyzer analyzer;
         private ReplayBuffer replay;
         private WaveController waveController;
+
+        private float power;
 
         protected override void OnLoad(EventArgs e)
         {
@@ -57,7 +60,9 @@ namespace CSharpNation.Visualizer
 
             replay.Push(spectrum);
 
-            waveController.UpdateWaves(replay, Width / 2, Height / 2, Height / 4);
+            CalculateWavePower();
+
+            waveController.UpdateWaves(replay, Width / 2, Height / 2, Height / 4 + power);            
 
             base.OnUpdateFrame(e);
         }
@@ -71,9 +76,41 @@ namespace CSharpNation.Visualizer
 
             waveController.DrawWaves(Width / 2, Height / 2);
 
+            DrawCircle(Width / 2, Height / 2, (Height / 4) + power, Color.White);
+            DrawCircle(Width / 2, Height / 2, (Height / 4.2) + power, Color.Black);
+
             Context.SwapBuffers();
 
             base.OnRenderFrame(e);
+        }
+
+        private void DrawCircle(double X, double Y, double Radius, Color C)
+        {
+            GL.Color3(C);
+            GL.Begin(PrimitiveType.Polygon);
+
+            double rads, PosX, PosY;
+
+            for (int i = 0; i <= 360; i += 2)
+            {
+                rads = Math.PI * i / 180;
+                PosX = X + (Math.Sin(rads) * Radius);
+                PosY = Y + (Math.Cos(rads) * Radius);
+
+                GL.Vertex2(PosX, PosY);
+            }
+
+            GL.End();
+        }
+
+        private void CalculateWavePower()
+        {
+            for (int i = 0; i < spectrum.Count; i++)
+            {
+                power += spectrum[i];
+            }
+
+            power /= spectrum.Count;
         }
     }
 }
