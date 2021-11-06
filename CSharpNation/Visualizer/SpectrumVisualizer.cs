@@ -56,7 +56,7 @@ namespace CSharpNation.Visualizer
 
             replay.Push(spectrum);
 
-            waveController.UpdateWaves(replay);
+            waveController.UpdateWaves(replay, Width / 2, Height / 2, Height / 4);
 
             base.OnUpdateFrame(e);
         }

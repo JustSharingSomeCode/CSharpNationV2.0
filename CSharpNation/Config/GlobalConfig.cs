@@ -12,9 +12,11 @@ namespace CSharpNation.Config
         {
             Lines = 64;
             WaveCount = 9;
+            DegreesIncrement = 180f / (Lines - 1);
         }
 
         public static int Lines { get; private set; }
         public static int WaveCount { get; private set; }
+        public static float DegreesIncrement { get; private set; }
     }
 }

@@ -109,5 +109,10 @@ namespace CSharpNation.Tools
 
             return norm;
         }
+
+        public static int Clamp(int min, int max, int value)
+        {
+            return (value < min) ? min : (value > max) ? max : value;
+        }
     }
 }

@@ -30,11 +30,11 @@ namespace CSharpNation.Visualizer
 
         private Wave[] waves;
 
-        public void UpdateWaves(ReplayBuffer replay)
+        public void UpdateWaves(ReplayBuffer replay, float x, float y, float radius)
         {
             for (int i = 0; i < waves.Length; i++)
             {
-                waves[i].Update(replay.GetReplay(i));
+                waves[i].Update(replay.GetReplay(i), x, y, radius);
             }
         }
 
