@@ -67,7 +67,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Analyzer\SpectrumAnalyzer.cs" />
+    <Compile Include="Config\TexturesConfig.cs" />
     <Compile Include="CSharpNationController.cs" />
+    <Compile Include="Textures\Texture.cs" />
+    <Compile Include="Textures\TextureController.cs" />
     <Compile Include="Tools\WaveTools.cs" />
     <Compile Include="Visualizer\ReplayBuffer.cs" />
     <Compile Include="Visualizer\SpectrumVisualizer.cs" />
@@ -125,5 +128,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
