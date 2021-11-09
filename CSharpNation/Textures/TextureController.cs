@@ -79,6 +79,11 @@ namespace CSharpNation.Textures
             float wp = power * td.WidthRatio;
             float hp = wp * td.HeightRatio;
 
+            if(xMax % 2 != 0)
+            {
+                xMax++;
+            }
+
             switch (td.DisplayMode)
             {
                 case Texture.Display.Fullscreen:
@@ -90,9 +95,10 @@ namespace CSharpNation.Textures
                 case Texture.Display.MirroredRightHalf:
 
                     //left side
-                    DrawTexture(td.TextureData, x - (td.FillX * 2) - (wp * 2), y - td.FillY - hp, xMax / 2, yMax + td.FillY + hp, a, r, g, b);
+                    DrawTexture(td.TextureData, x - (td.FillX * 2.0f) - (wp * 2.0f), y - td.FillY - hp, xMax / 2.0f, yMax + td.FillY + hp, a, r, g, b);
+
                     //right side
-                    DrawTexture(td.TextureData, xMax + (td.FillX * 2) + (wp * 2), 0 - td.FillY - hp, xMax / 2, yMax + td.FillY + hp, a, r, g, b);
+                    DrawTexture(td.TextureData, xMax + (td.FillX * 2.0f) + (wp * 2.0f), 0.0f - td.FillY - hp, xMax / 2.0f, yMax + td.FillY + hp, a, r, g, b);
                     break;
             }
         }

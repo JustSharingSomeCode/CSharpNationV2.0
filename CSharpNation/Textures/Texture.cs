@@ -98,8 +98,8 @@ namespace CSharpNation.Textures
 
                 GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Linear);
                 GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
-                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.Repeat);
-                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.Repeat);
+                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.MirroredRepeat);
+                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.MirroredRepeat);
 
                 bitmap.Dispose();
 
@@ -187,7 +187,7 @@ namespace CSharpNation.Textures
             }
 
             FillY = (ActualHeight - screenHeight) / 2.0f;
-            FillX = (ActualWidth - screenWidth) / 2.0f;
+            FillX = (ActualWidth - screenWidth) / 2.0f;           
         }
 
         public override string ToString()
