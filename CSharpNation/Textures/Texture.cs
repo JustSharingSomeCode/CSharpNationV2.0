@@ -49,7 +49,7 @@ namespace CSharpNation.Textures
             }
         }
 
-        public static Bitmap GetBitmap(string path)
+        private Bitmap GetBitmap(string path)
         {
             if (!File.Exists(path))
             {
@@ -60,13 +60,14 @@ namespace CSharpNation.Textures
             {
                 return new Bitmap(path);
             }
-            catch
+            catch (Exception ex)
             {
+                Console.WriteLine("Error loading image: {0}, Error: {1}", FileName, ex.Message);
                 return null;
             }
         }
 
-        public static int LoadTextureData(Bitmap bitmap, Display displayMode = Display.Fullscreen)
+        private int LoadTextureData(Bitmap bitmap, Display displayMode = Display.Fullscreen)
         {
             try
             {
@@ -106,7 +107,7 @@ namespace CSharpNation.Textures
             }
             catch (Exception ex)
             {
-                Console.WriteLine("ERROR: {0}", ex.Message);
+                Console.WriteLine("Error loading image: {0}, Error: {1}", FileName, ex.Message);
                 return -1;
             }
         }

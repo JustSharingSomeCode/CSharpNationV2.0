@@ -28,6 +28,12 @@ namespace CSharpNation.Textures
             for(int i = 0; i < textures.Count; i++)
             {
                 textures[i].LoadTexture();
+
+                if(textures[i].TextureData == -1)
+                {
+                    textures.RemoveAt(i);
+                    i--;
+                }
             }
         }
 
