@@ -45,5 +45,15 @@ namespace CSharpNation.GUI
         {
             controller.ResumeCapture();
         }
+
+        private void PreviousBtn_Click(object sender, RoutedEventArgs e)
+        {
+            controller.NextBackground();
+        }
+
+        private void NextBtn_Click(object sender, RoutedEventArgs e)
+        {
+            controller.PreviousBackground();
+        }
     }
 }

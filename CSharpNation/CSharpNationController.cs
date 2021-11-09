@@ -72,5 +72,15 @@ namespace CSharpNation
         {
             analyzer.Free();
         }
+
+        public void NextBackground()
+        {
+            visualizer.NextBackground();
+        }
+
+        public void PreviousBackground()
+        {
+            visualizer.PreviousBackground();
+        }
     }
 }

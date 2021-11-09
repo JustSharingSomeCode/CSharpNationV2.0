@@ -12,6 +12,8 @@
         <WpfHoverControls:HoverButton x:Name="StartTemp" Content="HoverButton" HorizontalAlignment="Left" Margin="225,174,0,0" VerticalAlignment="Top" Width="291" Height="55" Click="StartTemp_Click"/>
         <WpfHoverControls:HoverButton x:Name="PauseBtn" Content="Pause" HorizontalAlignment="Left" Margin="75,371,0,0" VerticalAlignment="Top" Width="201" Height="48" Click="PauseBtn_Click"/>
         <WpfHoverControls:HoverButton x:Name="ResumeBtn" Content="Resume" HorizontalAlignment="Left" Margin="281,371,0,0" VerticalAlignment="Top" Width="201" Height="48" Click="ResumeBtn_Click"/>
+        <WpfHoverControls:HoverButton x:Name="PreviousBtn" Content="Resume" HorizontalAlignment="Left" Margin="75,424,0,0" VerticalAlignment="Top" Width="201" Height="48" Click="PreviousBtn_Click"/>
+        <WpfHoverControls:HoverButton x:Name="NextBtn" Content="Resume" HorizontalAlignment="Left" Margin="281,424,0,0" VerticalAlignment="Top" Width="201" Height="48" Click="NextBtn_Click"/>
 
     </Grid>
 </Window>
