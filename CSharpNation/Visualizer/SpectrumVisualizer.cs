@@ -10,6 +10,7 @@ using OpenTK.Graphics.OpenGL;
 
 using CSharpNation.Analyzer;
 using CSharpNation.Tools;
+using CSharpNation.Textures;
 using System.Drawing;
 
 namespace CSharpNation.Visualizer
@@ -24,12 +25,14 @@ namespace CSharpNation.Visualizer
 
             replay = new ReplayBuffer();
             waveController = new WaveController();
+            textureController = new TextureController();
         }
 
         private List<float> spectrum;
         private SpectrumAnalyzer analyzer;
         private ReplayBuffer replay;
         private WaveController waveController;
+        private TextureController textureController;
 
         private float power;
 
@@ -49,6 +52,8 @@ namespace CSharpNation.Visualizer
             GL.Ortho(0.0f, Width, 0.0f, Height, 0.0f, 1.0f);
 
             analyzer.multiplier = Height / 4;
+
+            textureController.ResizeTextures(Width, Height);
 
             base.OnResize(e);
         }
@@ -73,6 +78,8 @@ namespace CSharpNation.Visualizer
 
             if (spectrum == null)
             { return; }
+
+            textureController.DrawBackground(0, 0, Width, Height, power, 255, 255, 255, 255);
 
             waveController.DrawWaves(Width / 2, Height / 2);
 
@@ -111,6 +118,16 @@ namespace CSharpNation.Visualizer
             }
 
             power /= spectrum.Count;
+        }
+
+        public void NextBackground()
+        {
+            textureController.NextBackground();
+        }
+
+        public void PreviousBackground()
+        {
+            textureController.PreviousBackground();
         }
     }
 }
