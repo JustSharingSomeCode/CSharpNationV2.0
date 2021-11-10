@@ -99,7 +99,9 @@ namespace CSharpNation.Visualizer
             if (spectrum == null)
             { return; }
 
-            textureController.DrawBackground(0, 0, Width, Height, power, 255, 255, 255, 255);
+            int dim = GlobalConfig.BackgroundDim;
+
+            textureController.DrawBackground(0, 0, Width, Height, power, 255, dim, dim, dim);
 
             waveController.DrawWaves(Width / 2, Height / 2);
 

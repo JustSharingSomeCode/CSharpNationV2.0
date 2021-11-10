@@ -19,6 +19,7 @@ namespace CSharpNation.Config
             Fps = 60.0f;
             BackgroundTime = 5;
             AutoBackgroundChange = true;
+            BackgroundDim = 150;
 
             CheckConfigFolder();
             TexturesConfig.Initialize();
@@ -32,6 +33,7 @@ namespace CSharpNation.Config
 
         public static bool AutoBackgroundChange { get; private set; }
         public static int BackgroundTime { get; private set; } //seconds
+        public static int BackgroundDim { get; private set; }
 
         public static string ConfigDirectoryPath { get; } = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\CSharpNation";
         public static string TexturesPath { get; private set; }
