@@ -48,12 +48,12 @@ namespace CSharpNation.GUI
 
         private void PreviousBtn_Click(object sender, RoutedEventArgs e)
         {
-            controller.NextBackground();
+            controller.PreviousBackground();
         }
 
         private void NextBtn_Click(object sender, RoutedEventArgs e)
         {
-            controller.PreviousBackground();
+            controller.NextBackground();
         }
     }
 }
