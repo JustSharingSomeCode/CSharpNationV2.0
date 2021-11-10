@@ -16,6 +16,9 @@ namespace CSharpNation.Config
             WaveCount = 9;
             DegreesIncrement = 180f / (Lines - 1);
             TexturesPath = @"D:\USB\Bcg";
+            Fps = 60.0f;
+            BackgroundTime = 5;
+            AutoBackgroundChange = true;
 
             CheckConfigFolder();
             TexturesConfig.Initialize();
@@ -24,6 +27,11 @@ namespace CSharpNation.Config
         public static int Lines { get; private set; }
         public static int WaveCount { get; private set; }
         public static float DegreesIncrement { get; private set; }
+
+        public static float Fps { get; private set; }
+
+        public static bool AutoBackgroundChange { get; private set; }
+        public static int BackgroundTime { get; private set; } //seconds
 
         public static string ConfigDirectoryPath { get; } = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\CSharpNation";
         public static string TexturesPath { get; private set; }

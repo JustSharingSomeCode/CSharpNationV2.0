@@ -9,6 +9,7 @@ using System.Windows;
 
 using CSharpNation.Visualizer;
 using CSharpNation.Analyzer;
+using CSharpNation.Config;
 
 namespace CSharpNation
 {
@@ -54,7 +55,7 @@ namespace CSharpNation
         {
             using (visualizer = new SpectrumVisualizer(1280, 720, "CSharpNation", analyzer))
             {
-                visualizer.Run(60.0f);
+                visualizer.Run(GlobalConfig.Fps);
             }
         }
 
