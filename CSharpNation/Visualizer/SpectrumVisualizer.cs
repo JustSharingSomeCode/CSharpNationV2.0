@@ -11,6 +11,7 @@ using OpenTK.Graphics.OpenGL;
 using CSharpNation.Analyzer;
 using CSharpNation.Tools;
 using CSharpNation.Textures;
+using CSharpNation.Config;
 using System.Drawing;
 
 namespace CSharpNation.Visualizer
@@ -21,7 +22,7 @@ namespace CSharpNation.Visualizer
         {
             analyzer = _analyzer;
 
-            VSync = VSyncMode.On;
+            //VSync = VSyncMode.On;
 
             replay = new ReplayBuffer();
             waveController = new WaveController();
@@ -35,6 +36,8 @@ namespace CSharpNation.Visualizer
         private TextureController textureController;
 
         private float power;
+        private int bgSeconds = 0;
+        private int frameCount = 0;
 
         protected override void OnLoad(EventArgs e)
         {
@@ -67,7 +70,24 @@ namespace CSharpNation.Visualizer
 
             CalculateWavePower();
 
-            waveController.UpdateWaves(replay, Width / 2, Height / 2, Height / 4 + power);            
+            waveController.UpdateWaves(replay, Width / 2, Height / 2, Height / 4 + power);
+
+            if (GlobalConfig.AutoBackgroundChange)
+            {
+                frameCount++;
+
+                if (frameCount >= GlobalConfig.Fps)
+                {
+                    frameCount = 0;
+                    bgSeconds++;
+                }
+
+                if (bgSeconds >= GlobalConfig.BackgroundTime)
+                {
+                    bgSeconds = 0;
+                    textureController.NextBackground();
+                }
+            }
 
             base.OnUpdateFrame(e);
         }
@@ -79,7 +99,9 @@ namespace CSharpNation.Visualizer
             if (spectrum == null)
             { return; }
 
-            textureController.DrawBackground(0, 0, Width, Height, power, 255, 255, 255, 255);
+            int dim = GlobalConfig.BackgroundDim;
+
+            textureController.DrawBackground(0, 0, Width, Height, power, 255, dim, dim, dim);
 
             waveController.DrawWaves(Width / 2, Height / 2);
 
