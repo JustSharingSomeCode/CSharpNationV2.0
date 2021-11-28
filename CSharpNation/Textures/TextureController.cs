@@ -17,11 +17,16 @@ namespace CSharpNation.Textures
             textures = new List<Texture>(TexturesConfig.Textures);
 
             LoadTextures();
+
+            if(textures.Count > 0)
+            {
+                actualBackground = 0;
+            }
         }
 
         private List<Texture> textures = new List<Texture>();
 
-        private int actualBackground = 0;
+        private int actualBackground = -1;
 
         private void LoadTextures()
         {
@@ -74,6 +79,11 @@ namespace CSharpNation.Textures
 
         public void DrawBackground(float x, float y, float xMax, float yMax, float power, int a, int r, int g, int b)
         {
+            if(actualBackground < 0)
+            {
+                return;
+            }
+
             Texture td = textures[actualBackground];
 
             float wp = power * td.WidthRatio;

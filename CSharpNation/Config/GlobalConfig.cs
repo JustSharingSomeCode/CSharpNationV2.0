@@ -15,7 +15,7 @@ namespace CSharpNation.Config
             Lines = 64;
             WaveCount = 9;
             DegreesIncrement = 180f / (Lines - 1);
-            TexturesPath = @"D:\USB\Bcg";
+            TexturesPath = @"D:\USB\Backgrounds";
             Fps = 60.0f;
             BackgroundTime = 5;
             AutoBackgroundChange = true;

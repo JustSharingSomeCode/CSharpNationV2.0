@@ -25,6 +25,11 @@ namespace CSharpNation.Config
         {
             string path = GlobalConfig.TexturesPath;
 
+            if(!Directory.Exists(path))
+            {
+                return;
+            }
+
             string[] jpgFiles = Directory.GetFiles(path, "*.jpg");
             string[] pngFiles = Directory.GetFiles(path, "*.png");
 
