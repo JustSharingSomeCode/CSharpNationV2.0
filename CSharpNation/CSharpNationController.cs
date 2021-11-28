@@ -73,7 +73,11 @@ namespace CSharpNation
 
         public void Cleanup()
         {
-            visualizer.Close();
+            if(vth.IsAlive)
+            {
+                visualizer.Close();
+            }
+            
             analyzer.Free();
         }
 
