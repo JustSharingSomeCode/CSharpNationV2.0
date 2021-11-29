@@ -110,5 +110,10 @@ namespace CSharpNation.Visualizer
 
             return pos;
         }
+
+        public override string ToString()
+        {
+            return R.ToString() + "|" + G.ToString() + "|" + B.ToString() + "|" + AvgBars.ToString() + "|" + AvgLoops.ToString() + "|" + Quality.ToString();
+        }
     }
 }

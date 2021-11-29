@@ -68,6 +68,7 @@
     </ApplicationDefinition>
     <Compile Include="Analyzer\SpectrumAnalyzer.cs" />
     <Compile Include="Config\TexturesConfig.cs" />
+    <Compile Include="Config\WaveConfig.cs" />
     <Compile Include="CSharpNationController.cs" />
     <Compile Include="Textures\Texture.cs" />
     <Compile Include="Textures\TextureController.cs" />

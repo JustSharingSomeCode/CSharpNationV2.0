@@ -12,7 +12,7 @@ namespace CSharpNation.Visualizer
     {
         public ReplayBuffer()
         {
-            replay = new List<float>[GlobalConfig.WaveCount];
+            replay = new List<float>[WaveConfig.LoadedWaves];
         }
 
         public ReplayBuffer(int length)

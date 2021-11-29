@@ -15,7 +15,7 @@ namespace CSharpNation.Config
             LoadConfig();
 
             //Lines = 64;
-            WaveCount = 9;
+            //WaveCount = 9;
             DegreesIncrement = 180f / (Lines - 1);
             //TexturesPath = @"D:\Backgrounds";
             //Fps = 60.0f;
@@ -28,7 +28,7 @@ namespace CSharpNation.Config
         }
 
         public static int Lines { get; private set; }
-        public static int WaveCount { get; private set; }
+        //public static int WaveCount { get; private set; }
         public static float DegreesIncrement { get; private set; }
 
         public static float Fps { get; private set; }
@@ -85,6 +85,7 @@ namespace CSharpNation.Config
             {
                 WriteConfig(GetCurrentConfig());
                 TexturesConfig.SaveConfig();
+                WaveConfig.SaveConfig();
             }
             catch(Exception ex)
             {
