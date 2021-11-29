@@ -42,7 +42,7 @@ namespace CSharpNation.Config
                 {
 
                     waveData = config[i].Split('|');
-                    Waves.Add(new Wave(Convert.ToInt32(waveData[0]), Convert.ToInt32(waveData[1]), Convert.ToInt32(waveData[2]), Convert.ToInt32(waveData[3]), Convert.ToInt32(waveData[4])));
+                    Waves.Add(new Wave(Convert.ToInt32(waveData[0]), Convert.ToInt32(waveData[1]), Convert.ToInt32(waveData[2]), Convert.ToInt32(waveData[3]), Convert.ToInt32(waveData[4]), float.Parse(waveData[5])));
                     LoadedWaves++;
                 }
             }            
@@ -52,15 +52,15 @@ namespace CSharpNation.Config
         {
             Wave[] waves = new Wave[9];
 
-            waves[0] = new Wave(255, 255, 255, 2, 2);
-            waves[1] = new Wave(255, 255, 0, 2, 3);
-            waves[2] = new Wave(255, 150, 0, 2, 4);
-            waves[3] = new Wave(255, 0, 0, 2, 5);
-            waves[4] = new Wave(255, 100, 255, 2, 6);
-            waves[5] = new Wave(50, 50, 155, 2, 7);
-            waves[6] = new Wave(0, 0, 255, 2, 8);
-            waves[7] = new Wave(50, 200, 255, 2, 9);
-            waves[8] = new Wave(0, 255, 0, 2, 10);            
+            waves[0] = new Wave(255, 255, 255, 2, 20, 0.1f);
+            waves[1] = new Wave(255, 255, 0, 2, 3, 0.1f);
+            waves[2] = new Wave(255, 150, 0, 2, 4, 0.2f);
+            waves[3] = new Wave(255, 0, 0, 2, 5, 0.2f);
+            waves[4] = new Wave(255, 100, 255, 2, 6, 0.2f);
+            waves[5] = new Wave(50, 50, 155, 2, 7, 0.2f);
+            waves[6] = new Wave(0, 0, 255, 2, 8, 0.5f);
+            waves[7] = new Wave(50, 200, 255, 2, 9, 0.5f);
+            waves[8] = new Wave(0, 255, 0, 2, 10, 0.5f);            
 
             return waves.ToList();
         }

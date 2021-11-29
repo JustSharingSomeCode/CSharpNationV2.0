@@ -18,7 +18,7 @@ namespace CSharpNation.Visualizer
 {
     class SpectrumVisualizer : GameWindow
     {
-        public SpectrumVisualizer(int width, int height, string title, SpectrumAnalyzer _analyzer) : base(width, height, new GraphicsMode(new ColorFormat(8, 8, 8, 0), 24, 8, 4), title)
+        public SpectrumVisualizer(int width, int height, string title, SpectrumAnalyzer _analyzer) : base(width, height, new GraphicsMode(new ColorFormat(8, 8, 8, 0), 24, 8, 8), title)
         {
             analyzer = _analyzer;
 
