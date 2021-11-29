@@ -38,6 +38,7 @@ namespace CSharpNation.Visualizer
         private float power;
         private int bgSeconds = 0;
         private int frameCount = 0;
+        private float radius;
 
         protected override void OnLoad(EventArgs e)
         {
@@ -108,6 +109,8 @@ namespace CSharpNation.Visualizer
             DrawCircle(Width / 2, Height / 2, (Height / 4) + power, Color.White);
             DrawCircle(Width / 2, Height / 2, (Height / 4.2) + power, Color.Black);
 
+            textureController.DrawLogo(Width / 2 - radius, Height / 2 - radius, Width / 2 + radius, Height / 2 + radius);
+
             Context.SwapBuffers();
 
             base.OnRenderFrame(e);
@@ -140,6 +143,7 @@ namespace CSharpNation.Visualizer
             }
 
             power /= spectrum.Count;
+            radius = Height / 4 + power;
         }
 
         public void NextBackground()

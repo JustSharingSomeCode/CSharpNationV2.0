@@ -16,6 +16,13 @@ namespace CSharpNation.Textures
         {
             textures = new List<Texture>(TexturesConfig.Textures);
 
+            logo = new Texture()
+            {
+                Path = GlobalConfig.ResourcesDirectoryPath + @"\Logo.png"
+            };
+
+            logo.LoadTexture();
+
             LoadTextures();
 
             if(textures.Count > 0)
@@ -27,6 +34,8 @@ namespace CSharpNation.Textures
         private List<Texture> textures = new List<Texture>();
 
         private int actualBackground = -1;
+
+        private Texture logo;
 
         private void LoadTextures()
         {
@@ -48,6 +57,11 @@ namespace CSharpNation.Textures
             {
                 textures[i].UpdateScale(width, height);
             }
+        }
+
+        public void DrawLogo(float x, float y, float xMax, float yMax)
+        {
+            DrawTexture(logo.TextureData, x, y, xMax, yMax, 255, 255, 255, 255);
         }
 
         public void DrawTexture(int texture, float x, float y, float xMax, float yMax, int a, int r, int g, int b)

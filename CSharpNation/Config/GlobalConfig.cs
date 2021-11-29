@@ -41,7 +41,7 @@ namespace CSharpNation.Config
 
         public static string ConfigDirectoryPath { get; } = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\CSharpNation";
         private static string ConfigTxtPath = ConfigDirectoryPath + @"\Config.txt";
-        private static string resourcesDirectoryPath = ConfigDirectoryPath + @"\Resources";
+        public static string ResourcesDirectoryPath { get; } = ConfigDirectoryPath + @"\Resources";
         public static string TexturesPath { get; private set; }
 
         private static void CheckConfigFolder()
@@ -55,16 +55,16 @@ namespace CSharpNation.Config
 
         private static void CheckResourcesDirectory()
         {
-            if (!Directory.Exists(resourcesDirectoryPath))
+            if (!Directory.Exists(ResourcesDirectoryPath))
             {
-                Directory.CreateDirectory(resourcesDirectoryPath);
+                Directory.CreateDirectory(ResourcesDirectoryPath);
 
                 Bitmap logo = new Bitmap(Properties.Resources.Logo);
-                logo.Save(resourcesDirectoryPath + @"\Logo.png");
+                logo.Save(ResourcesDirectoryPath + @"\Logo.png");
                 logo.Dispose();
 
                 Bitmap particle = new Bitmap(Properties.Resources.Particle);
-                particle.Save(resourcesDirectoryPath + @"\Particle.png");
+                particle.Save(ResourcesDirectoryPath + @"\Particle.png");
                 particle.Dispose();
             }
         }
