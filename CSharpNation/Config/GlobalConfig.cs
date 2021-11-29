@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using System.IO;
+using System.Drawing;
 
 namespace CSharpNation.Config
 {
@@ -24,6 +25,7 @@ namespace CSharpNation.Config
             //BackgroundDim = 150;            
 
             CheckConfigFolder();
+            CheckResourcesDirectory();
             TexturesConfig.Initialize();
         }
 
@@ -39,6 +41,7 @@ namespace CSharpNation.Config
 
         public static string ConfigDirectoryPath { get; } = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\CSharpNation";
         private static string ConfigTxtPath = ConfigDirectoryPath + @"\Config.txt";
+        private static string resourcesDirectoryPath = ConfigDirectoryPath + @"\Resources";
         public static string TexturesPath { get; private set; }
 
         private static void CheckConfigFolder()
@@ -47,6 +50,22 @@ namespace CSharpNation.Config
             {
                 Directory.CreateDirectory(ConfigDirectoryPath);
                 WriteConfig(DefaultConfig());
+            }
+        }
+
+        private static void CheckResourcesDirectory()
+        {
+            if (!Directory.Exists(resourcesDirectoryPath))
+            {
+                Directory.CreateDirectory(resourcesDirectoryPath);
+
+                Bitmap logo = new Bitmap(Properties.Resources.Logo);
+                logo.Save(resourcesDirectoryPath + @"\Logo.png");
+                logo.Dispose();
+
+                Bitmap particle = new Bitmap(Properties.Resources.Particle);
+                particle.Save(resourcesDirectoryPath + @"\Particle.png");
+                particle.Dispose();
             }
         }
 
