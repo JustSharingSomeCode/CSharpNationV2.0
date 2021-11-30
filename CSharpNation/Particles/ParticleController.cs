@@ -54,20 +54,22 @@ namespace CSharpNation.Particles
 
         private void CreatePraticles()
         {
-            while (particles.Count < 500)
+            while (particles.Count < 1000)
             {
-                float iS = random.Next(5, 10);
-                float fs = random.Next(15, 25);
-                float freq = (float)random.NextDouble() * 2.0f;
                 float ys = (float)random.NextDouble();
                 float xs = (float)random.NextDouble();
 
-                if(ys < 0.2 && xs < 0.2)
+                if (ys < 0.2 && xs < 0.2)
                 {
                     continue;
                 }
 
-                particles.Add(new Particle(Width / 2, Height / 2, iS, fs, freq, ys, xs, dir));
+                float iS = random.Next(5, 10);
+                float fs = random.Next(15, 25);
+                float freq = (float)random.NextDouble() * 0.02f;
+                float amp = (float)random.NextDouble() * 0.5f;
+
+                particles.Add(new Particle(Width / 2, Height / 2, iS, fs, freq, amp, ys, xs, dir));
                 dir *= -1;
             }
         }
@@ -95,6 +97,8 @@ namespace CSharpNation.Particles
             {                
                 return;
             }
+
+            Console.WriteLine(particles.Count);
 
             for(int i = 0; i < particles.Count; i++)
             {

@@ -8,7 +8,7 @@ namespace CSharpNation.Particles
 {
     class Particle
     {
-        public Particle(float x, float y,float iS, float fS, float freq, float yS, float xS, int dir)
+        public Particle(float x, float y,float iS, float fS, float freq, float amp, float yS, float xS, int dir)
         {
             X = x;
             Y = y;
@@ -16,6 +16,7 @@ namespace CSharpNation.Particles
             initialSize = iS;
             finalSize = fS;
             frequency = freq;
+            amplitude = amp;
             ySpeed = yS;
             xSpeed = xS;
 
@@ -35,19 +36,20 @@ namespace CSharpNation.Particles
             }
         }
 
-        float initialSize, actualSize, finalSize, frequency, ySpeed, xSpeed;
+        float initialSize, actualSize, finalSize, frequency, freqCount, amplitude, ySpeed, xSpeed;
         int yDir;
 
         public void Update(float power)
-        {
-            /*
-            PositionX -= xSpeed * power;
-            PositionY += (ySpeed * power) * yDir;
-            */
+        {            
             X -= xSpeed + (xSpeed * power);
             Y += (ySpeed + (ySpeed * power)) * yDir;
-            //X -= xSpeed;
-            //Y += ySpeed * yDir;
+
+            if(xSpeed > ySpeed)
+            {
+                Y += (float)Math.Sin(freqCount) * amplitude;
+            }
+
+            freqCount += frequency + frequency * power;            
         }
 
         public bool IsOutOfBounds(float width, float height)
