@@ -39,6 +39,8 @@ namespace CSharpNation.Config
         public static int BackgroundTime { get; private set; } //seconds
         public static int BackgroundDim { get; private set; }
 
+        public static bool EnableShaking { get; set; } = true;
+
         public static string ConfigDirectoryPath { get; } = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\CSharpNation";
         private static string ConfigTxtPath = ConfigDirectoryPath + @"\Config.txt";
         public static string ResourcesDirectoryPath { get; } = ConfigDirectoryPath + @"\Resources";

@@ -83,31 +83,39 @@ namespace CSharpNation.Visualizer
 
             CalculateWavePower();
 
-            switch (ShakeCount)
+            if(GlobalConfig.EnableShaking)
             {
-                case 0:
-                    Dx = -1;
-                    Dy = 1;
-                    break;
-                case 1:
-                    Dx = 1;
-                    Dy = -1;
-                    break;
-                case 2:
-                    Dx = -1;
-                    Dy = -1;
-                    break;
-                case 3:
-                    Dx = 1;
-                    Dy = 1;
-                    ShakeCount = 0;
-                    break;
+                switch (ShakeCount)
+                {
+                    case 0:
+                        Dx = -1;
+                        Dy = 1;
+                        break;
+                    case 1:
+                        Dx = 1;
+                        Dy = -1;
+                        break;
+                    case 2:
+                        Dx = -1;
+                        Dy = -1;
+                        break;
+                    case 3:
+                        Dx = 1;
+                        Dy = 1;
+                        ShakeCount = 0;
+                        break;
+                }
+
+                Rx = (float)random.NextDouble() * (power * 0.25f) * Dx;
+                Ry = (float)random.NextDouble() * (power * 0.25f) * Dy;
+
+                ShakeCount++;
             }
-
-            Rx = (float)random.NextDouble() * (power * 0.25f) * Dx;
-            Ry = (float)random.NextDouble() * (power * 0.25f) * Dy;
-
-            ShakeCount++;                                   
+            else
+            {
+                Rx = 0;
+                Ry = 0;
+            }
 
             waveController.UpdateWaves(replay, Width / 2 + Rx, Height / 2 + Ry, Height / 4 + power);
 
