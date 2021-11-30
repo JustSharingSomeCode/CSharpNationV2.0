@@ -12,6 +12,7 @@ using CSharpNation.Analyzer;
 using CSharpNation.Tools;
 using CSharpNation.Textures;
 using CSharpNation.Config;
+using CSharpNation.Particles;
 using System.Drawing;
 
 namespace CSharpNation.Visualizer
@@ -27,6 +28,7 @@ namespace CSharpNation.Visualizer
             replay = new ReplayBuffer();
             waveController = new WaveController();
             textureController = new TextureController();
+            particlesController = new ParticleController(width, height);
         }
 
         private List<float> spectrum;
@@ -34,6 +36,7 @@ namespace CSharpNation.Visualizer
         private ReplayBuffer replay;
         private WaveController waveController;
         private TextureController textureController;
+        private ParticleController particlesController;
 
         private float power;
         private int bgSeconds = 0;
@@ -58,6 +61,8 @@ namespace CSharpNation.Visualizer
             analyzer.multiplier = Height / 4;
 
             textureController.ResizeTextures(Width, Height);
+
+            particlesController.UpdateBounds(Width, Height);
 
             base.OnResize(e);
         }
@@ -90,6 +95,8 @@ namespace CSharpNation.Visualizer
                 }
             }
 
+            particlesController.UpdateParticles(power);
+
             base.OnUpdateFrame(e);
         }
 
@@ -104,13 +111,15 @@ namespace CSharpNation.Visualizer
 
             textureController.DrawBackground(0, 0, Width, Height, power, 255, dim, dim, dim);
 
+            particlesController.DrawParticles();
+            
             waveController.DrawWaves(Width / 2, Height / 2);
 
             DrawCircle(Width / 2, Height / 2, (Height / 4) + power, Color.White);
             DrawCircle(Width / 2, Height / 2, (Height / 4.2) + power, Color.Black);
 
             textureController.DrawLogo(Width / 2 - radius, Height / 2 - radius, Width / 2 + radius, Height / 2 + radius);
-
+            
             Context.SwapBuffers();
 
             base.OnRenderFrame(e);

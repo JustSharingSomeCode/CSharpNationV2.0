@@ -45,38 +45,54 @@ namespace CSharpNation.Particles
 
         public void UpdateParticles(float power)
         {
-            float iS = random.Next(5, 10);
-            float fs = random.Next(15, 25);
-            float freq = (float)random.NextDouble() * 2.0f;
-            float ys = (float)random.NextDouble();
-            float xs = (float)random.NextDouble();
+            CreatePraticles();
 
-            if (ys < 0.2)
-            {
-                ys = 0.2f;
-            }
+            UpdateAndDeleteParticles(power);
 
-            if (xs < 0.2)
-            {
-                xs = 0.2f;
-            }
+            //Console.WriteLine(particles[0].X);
+        }
 
+        private void CreatePraticles()
+        {
             while (particles.Count < 500)
             {
+                float iS = random.Next(5, 10);
+                float fs = random.Next(15, 25);
+                float freq = (float)random.NextDouble() * 2.0f;
+                float ys = (float)random.NextDouble();
+                float xs = (float)random.NextDouble();
+
+                if(ys < 0.2 && xs < 0.2)
+                {
+                    continue;
+                }
+
                 particles.Add(new Particle(Width / 2, Height / 2, iS, fs, freq, ys, xs, dir));
                 dir *= -1;
             }
+        }
 
-            for(int i = 0; i < particles.Count; i++)
+        private void UpdateAndDeleteParticles(float power)
+        {
+            for (int i = 0; i < particles.Count; i++)
             {
-                particles[i].Update(power);
+                if (particles[i].IsOutOfBounds(Width, Height))
+                {
+                    particles.Remove(particles[i]);
+                    i--;
+                }
+                else
+                {
+                    particles[i].Update(power);
+                }
             }
         }
+
 
         public void DrawParticles()
         {
             if(texture.TextureData == -1)
-            {
+            {                
                 return;
             }
 
@@ -84,7 +100,7 @@ namespace CSharpNation.Particles
             {
                 Particle p = particles[i];
                 float half = p.HalfSize;
-                TextureController.DrawTexture(texture.TextureData, p.PositionX - half, p.PositionY - half, p.PositionX + half, p.PositionY + half, 255, 255, 255, 255);
+                TextureController.DrawTexture(texture.TextureData, p.X - half, p.Y - half, p.X + half, p.Y + half, 255, 255, 255, 255);
             }
         }
 
