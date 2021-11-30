@@ -44,12 +44,10 @@ namespace CSharpNation.Particles
         }
 
         public void UpdateParticles(float power)
-        {
+        {            
             CreatePraticles();
 
             UpdateAndDeleteParticles(power);
-
-            //Console.WriteLine(particles[0].X);
         }
 
         private void CreatePraticles()
@@ -68,8 +66,9 @@ namespace CSharpNation.Particles
                 float fs = random.Next(15, 25);
                 float freq = (float)random.NextDouble() * 0.02f;
                 float amp = (float)random.NextDouble() * 0.5f;
+                int opacity = random.Next(20, 256);
 
-                particles.Add(new Particle(Width / 2, Height / 2, iS, fs, freq, amp, ys, xs, dir));
+                particles.Add(new Particle(Width / 2, Height / 2, iS, fs, freq, amp, ys, xs, dir, opacity));
                 dir *= -1;
             }
         }
@@ -85,7 +84,7 @@ namespace CSharpNation.Particles
                 }
                 else
                 {
-                    particles[i].Update(power);
+                    particles[i].Update(power, Width, Height);
                 }
             }
         }
@@ -96,9 +95,7 @@ namespace CSharpNation.Particles
             if(texture.TextureData == -1)
             {                
                 return;
-            }
-
-            //Console.WriteLine(particles.Count);
+            }            
 
             for(int i = 0; i < particles.Count; i++)
             {
@@ -106,8 +103,8 @@ namespace CSharpNation.Particles
                 float half = p.HalfSize;
                 float diff = Math.Abs(Width / 2 - p.X);
                 diff = Width / 2 + diff;
-                TextureController.DrawTexture(texture.TextureData, p.X - half, p.Y - half, p.X + half, p.Y + half, 255, 255, 255, 255);
-                TextureController.DrawTexture(texture.TextureData, diff - half, p.Y - half, diff + half, p.Y + half, 255, 255, 255, 255);
+                TextureController.DrawTexture(texture.TextureData, p.X - half, p.Y - half, p.X + half, p.Y + half, p.Opacity, 255, 255, 255);
+                TextureController.DrawTexture(texture.TextureData, diff - half, p.Y - half, diff + half, p.Y + half, p.Opacity, 255, 255, 255);
             }
         }
 
