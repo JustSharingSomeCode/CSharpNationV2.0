@@ -98,13 +98,16 @@ namespace CSharpNation.Particles
                 return;
             }
 
-            Console.WriteLine(particles.Count);
+            //Console.WriteLine(particles.Count);
 
             for(int i = 0; i < particles.Count; i++)
             {
                 Particle p = particles[i];
                 float half = p.HalfSize;
+                float diff = Math.Abs(Width / 2 - p.X);
+                diff = Width / 2 + diff;
                 TextureController.DrawTexture(texture.TextureData, p.X - half, p.Y - half, p.X + half, p.Y + half, 255, 255, 255, 255);
+                TextureController.DrawTexture(texture.TextureData, diff - half, p.Y - half, diff + half, p.Y + half, 255, 255, 255, 255);
             }
         }
 
