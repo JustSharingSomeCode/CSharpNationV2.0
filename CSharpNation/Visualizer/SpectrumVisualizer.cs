@@ -29,6 +29,7 @@ namespace CSharpNation.Visualizer
             waveController = new WaveController();
             textureController = new TextureController();
             particlesController = new ParticleController(width, height);
+            random = new Random();
         }
 
         private List<float> spectrum;
@@ -36,12 +37,18 @@ namespace CSharpNation.Visualizer
         private ReplayBuffer replay;
         private WaveController waveController;
         private TextureController textureController;
-        private ParticleController particlesController;
+        private ParticleController particlesController;        
+
+        private Random random;
 
         private float power;
         private int bgSeconds = 0;
         private int frameCount = 0;
         private float radius;
+
+        private float Rx, Ry;
+        private int Dx = -1, Dy = 1;
+        private int ShakeCount = 0;
 
         protected override void OnLoad(EventArgs e)
         {
@@ -76,7 +83,33 @@ namespace CSharpNation.Visualizer
 
             CalculateWavePower();
 
-            waveController.UpdateWaves(replay, Width / 2, Height / 2, Height / 4 + power);
+            switch (ShakeCount)
+            {
+                case 0:
+                    Dx = -1;
+                    Dy = 1;
+                    break;
+                case 1:
+                    Dx = 1;
+                    Dy = -1;
+                    break;
+                case 2:
+                    Dx = -1;
+                    Dy = -1;
+                    break;
+                case 3:
+                    Dx = 1;
+                    Dy = 1;
+                    ShakeCount = 0;
+                    break;
+            }
+
+            Rx = (float)random.NextDouble() * (power * 0.25f) * Dx;
+            Ry = (float)random.NextDouble() * (power * 0.25f) * Dy;
+
+            ShakeCount++;                                   
+
+            waveController.UpdateWaves(replay, Width / 2 + Rx, Height / 2 + Ry, Height / 4 + power);
 
             if (GlobalConfig.AutoBackgroundChange)
             {
@@ -113,12 +146,12 @@ namespace CSharpNation.Visualizer
 
             particlesController.DrawParticles();
             
-            waveController.DrawWaves(Width / 2, Height / 2);
+            waveController.DrawWaves(Width / 2 + Rx, Height / 2 + Ry);
 
-            DrawCircle(Width / 2, Height / 2, (Height / 4) + power, Color.White);
-            DrawCircle(Width / 2, Height / 2, (Height / 4.2) + power, Color.Black);
+            //DrawCircle(Width / 2, Height / 2, (Height / 4) + power, Color.White);
+            //DrawCircle(Width / 2, Height / 2, (Height / 4.2) + power, Color.Black);
 
-            textureController.DrawLogo(Width / 2 - radius, Height / 2 - radius, Width / 2 + radius, Height / 2 + radius);
+            textureController.DrawLogo(Width / 2 - radius + Rx, Height / 2 - radius + Ry, Width / 2 + radius + Rx, Height / 2 + radius + Ry);
             
             Context.SwapBuffers();
 
