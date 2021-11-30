@@ -4,6 +4,9 @@
              xmlns:local="clr-namespace:CSharpNation"
              StartupUri="GUI/CSharpNationGUI.xaml">
     <Application.Resources>
-         
+        <SolidColorBrush x:Key="BackgroundColor" Color="#3c3c3c"/>
+        <SolidColorBrush x:Key="Menu" Color="#373737"/>
+        <SolidColorBrush x:Key="LowerMenu" Color="#323232"/>
+        <SolidColorBrush x:Key="TopMenu" Color="#2d2d2d"/>
     </Application.Resources>
 </Application>
