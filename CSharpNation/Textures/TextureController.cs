@@ -64,7 +64,7 @@ namespace CSharpNation.Textures
             DrawTexture(logo.TextureData, x, y, xMax, yMax, 255, 255, 255, 255);
         }
 
-        public void DrawTexture(int texture, float x, float y, float xMax, float yMax, int a, int r, int g, int b)
+        public static void DrawTexture(int texture, float x, float y, float xMax, float yMax, int a, int r, int g, int b)
         {
             GL.Enable(EnableCap.Texture2D);
             GL.BindTexture(TextureTarget.Texture2D, texture);

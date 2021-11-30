@@ -70,6 +70,8 @@
     <Compile Include="Config\TexturesConfig.cs" />
     <Compile Include="Config\WaveConfig.cs" />
     <Compile Include="CSharpNationController.cs" />
+    <Compile Include="Particles\Particle.cs" />
+    <Compile Include="Particles\ParticleController.cs" />
     <Compile Include="Textures\Texture.cs" />
     <Compile Include="Textures\TextureController.cs" />
     <Compile Include="Tools\WaveTools.cs" />
