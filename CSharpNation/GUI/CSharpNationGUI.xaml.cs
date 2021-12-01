@@ -23,9 +23,17 @@ namespace CSharpNation.GUI
         public CSharpNationGUI()
         {
             InitializeComponent();
+
+            waves = new WavesGUI();
+            backgrounds = new BackgroundsGUI();
+            errors = new ErrorsGUI();
         }
 
         CSharpNationController controller = new CSharpNationController();
+
+        private WavesGUI waves;
+        private BackgroundsGUI backgrounds;
+        private ErrorsGUI errors;
 
         private bool IsMenuExpanded = false;
 
@@ -87,6 +95,28 @@ namespace CSharpNation.GUI
             LeftMenu.BeginAnimation(WidthProperty, anim);
 
             IsMenuExpanded = !IsMenuExpanded;
+        }
+
+        private void WavesBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeControl(waves);
+        }
+
+        private void BackgroundsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeControl(backgrounds);
+        }
+
+        private void ErrorsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeControl(errors);
+        }
+
+        private void ChangeControl(FrameworkElement ui)
+        {
+            ContentGrid.Children.Clear();
+
+            ContentGrid.Children.Add(ui);
         }
     }
 }
