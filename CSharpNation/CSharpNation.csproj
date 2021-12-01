@@ -77,6 +77,9 @@
     <Compile Include="GUI\ErrorsGUI.xaml.cs">
       <DependentUpon>ErrorsGUI.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\WaveColorViewer.xaml.cs">
+      <DependentUpon>WaveColorViewer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\WavesGUI.xaml.cs">
       <DependentUpon>WavesGUI.xaml</DependentUpon>
     </Compile>
@@ -106,6 +109,10 @@
       <DependentUpon>CSharpNationGUI.xaml</DependentUpon>
     </Compile>
     <Page Include="GUI\ErrorsGUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\WaveColorViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

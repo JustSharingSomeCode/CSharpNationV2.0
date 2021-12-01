@@ -14,7 +14,7 @@ using CSharpNation.Config;
 
 namespace CSharpNation.Visualizer
 {
-    class Wave
+    public class Wave
     {
         public Wave()
         {
