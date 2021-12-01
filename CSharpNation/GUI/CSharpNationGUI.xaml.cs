@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
@@ -25,6 +26,8 @@ namespace CSharpNation.GUI
         }
 
         CSharpNationController controller = new CSharpNationController();
+
+        private bool IsMenuExpanded = false;
 
         private void StartTemp_Click(object sender, RoutedEventArgs e)
         {
@@ -64,11 +67,26 @@ namespace CSharpNation.GUI
         private void MinimizeBtn_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
-        }       
+        }
 
         private void TopMenu_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
+        }
+
+        private void ExpandBtn_Click(object sender, RoutedEventArgs e)
+        {
+            DoubleAnimation anim = new DoubleAnimation()
+            {
+                From = LeftMenu.ActualWidth,
+                To = IsMenuExpanded ? 50 : 150,
+                Duration = new Duration(TimeSpan.FromMilliseconds(200)),
+                EasingFunction = new CubicEase()
+            };
+
+            LeftMenu.BeginAnimation(WidthProperty, anim);
+
+            IsMenuExpanded = !IsMenuExpanded;
         }
     }
 }
