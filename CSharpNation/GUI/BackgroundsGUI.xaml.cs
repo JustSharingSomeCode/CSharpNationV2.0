@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using CSharpNation.Config;
+
 namespace CSharpNation.GUI
 {
     /// <summary>
@@ -23,6 +25,8 @@ namespace CSharpNation.GUI
         public BackgroundsGUI()
         {
             InitializeComponent();
+
+            LoadedFolderbl.Content = GlobalConfig.TexturesPath;
         }
     }
 }

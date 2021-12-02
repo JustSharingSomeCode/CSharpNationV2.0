@@ -27,6 +27,8 @@ namespace CSharpNation.GUI
             waves = new WavesGUI();
             backgrounds = new BackgroundsGUI();
             errors = new ErrorsGUI();
+
+            ChangeControl(waves);
         }
 
         CSharpNationController controller = new CSharpNationController();
@@ -117,6 +119,11 @@ namespace CSharpNation.GUI
             ContentGrid.Children.Clear();
 
             ContentGrid.Children.Add(ui);
+        }
+
+        private void LeftMenu_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            ContentGrid.Margin = new Thickness(LeftMenu.Width, TopMenu.Height, 0, BottomMenu.Height);
         }
     }
 }
