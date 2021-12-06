@@ -83,12 +83,18 @@ namespace CSharpNation
 
         public void NextBackground()
         {
-            visualizer.NextBackground();
+            if(visualizer != null)
+            {
+                visualizer.NextBackground();
+            }
         }
 
         public void PreviousBackground()
         {
-            visualizer.PreviousBackground();
+            if (visualizer != null)
+            {
+                visualizer.PreviousBackground();
+            }
         }
     }
 }

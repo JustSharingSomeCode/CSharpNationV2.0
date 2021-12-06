@@ -24,14 +24,16 @@ namespace CSharpNation.GUI
         {
             InitializeComponent();
 
+            controller = new CSharpNationController();
+
             waves = new WavesGUI();
-            backgrounds = new BackgroundsGUI();
+            backgrounds = new BackgroundsGUI(controller);
             errors = new ErrorsGUI();
 
             ChangeControl(waves);
         }
 
-        CSharpNationController controller = new CSharpNationController();
+        CSharpNationController controller;
 
         private WavesGUI waves;
         private BackgroundsGUI backgrounds;

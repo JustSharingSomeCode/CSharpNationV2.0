@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:CSharpNation.GUI"
              xmlns:WpfHoverControls="clr-namespace:WpfHoverControls;assembly=WpfHoverControls" x:Class="CSharpNation.GUI.BackgroundsGUI"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Background="{StaticResource BackgroundColor}">
+             d:DesignHeight="620" d:DesignWidth="1230" Background="{StaticResource BackgroundColor}">
     <Grid>
         <Border BorderBrush="Black" CornerRadius="5" Margin="10,10,10,0" Background="#FF505050" Height="90" VerticalAlignment="Top">
             <Grid>
@@ -16,5 +16,10 @@
                 <WpfHoverControls:HoverButton Content="HoverButton" IconText="&#xE188;" CornerRadius="0,5,5,0" BorderThickness="1,0,0,0" HorizontalAlignment="Right" Margin="0,41,10,0" VerticalAlignment="Top" Width="40" Height="40" Background="#FF646464" BorderBrush="#FFB2B2B2" BackgroundHover="#19FFFFFF" IconForegroundHover="Yellow" IconFontSize="15"/>
             </Grid>
         </Border>
+        <WpfHoverControls:HoverScrollViewer x:Name="BackgroundsScrollViewer" Background="#FF505050" CornerRadius="5" HorizontalAlignment="Left" Margin="10,105,0,65" Width="400">
+            <StackPanel x:Name="BackgroundsStackPnl" Width="Auto" Height="Auto"/>
+        </WpfHoverControls:HoverScrollViewer>
+        <WpfHoverControls:HoverButton x:Name="PrevBgBtn" IconText="&#xE26C;" Content="Previous background" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="195" Height="50" Click="PrevBgBtn_Click"/>
+        <WpfHoverControls:HoverButton x:Name="NextBgBtn" IconText="&#xE26B;" Content="Next background" HorizontalAlignment="Left" Margin="215,0,0,10" VerticalAlignment="Bottom" Width="195" Height="50" Click="NextBgBtn_Click"/>
     </Grid>
 </UserControl>
