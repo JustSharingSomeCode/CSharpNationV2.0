@@ -12,8 +12,9 @@
             <Grid>
                 <Label Content="Loaded folder: " Foreground="White" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                 <Label x:Name="LoadedFolderbl" Content="..." Foreground="White" Margin="100,10,10,0" VerticalAlignment="Top"/>
-                <WpfHoverControls:HoverTextBox Height="40" Margin="10,41,50,0" CornerRadius="5,0,0,5" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Background="#FF646464" BorderThickness="0" Foreground="White" Padding="5" BackgroundHover="#FF646464"/>
-                <WpfHoverControls:HoverButton Content="HoverButton" IconText="&#xE188;" CornerRadius="0,5,5,0" BorderThickness="1,0,0,0" HorizontalAlignment="Right" Margin="0,41,10,0" VerticalAlignment="Top" Width="40" Height="40" Background="#FF646464" BorderBrush="#FFB2B2B2" BackgroundHover="#FF6E6E6E" IconForegroundHover="Yellow" IconFontSize="15"/>
+                <WpfHoverControls:HoverTextBox x:Name="TexturesPathTxt" Height="40" Margin="10,41,90,0" CornerRadius="5,0,0,5" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Background="#FF646464" BorderThickness="0" Foreground="White" Padding="5" BackgroundHover="#FF646464"/>
+                <WpfHoverControls:HoverButton x:Name="LoadFolderBtn" Content="HoverButton" IconText="&#xE001;" CornerRadius="0,5,5,0" BorderThickness="1,0,0,0" HorizontalAlignment="Right" Margin="0,41,10,0" VerticalAlignment="Top" Width="40" Height="40" Background="#FF646464" BorderBrush="#FFB2B2B2" BackgroundHover="#FF6E6E6E" IconForegroundHover="Lime" IconFontSize="15" Click="LoadFolderBtn_Click"/>
+                <WpfHoverControls:HoverButton x:Name="SearchFolderBtn" Content="HoverButton" IconText="&#xE188;" CornerRadius="0" BorderThickness="1,0,0,0" HorizontalAlignment="Right" Margin="0,41,50,0" VerticalAlignment="Top" Width="40" Height="40" Background="#FF646464" BorderBrush="#FFB2B2B2" BackgroundHover="#FF6E6E6E" IconForegroundHover="Yellow" IconFontSize="15"/>
             </Grid>
         </Border>
         <WpfHoverControls:HoverScrollViewer x:Name="BackgroundsScrollViewer" Background="#FF505050" CornerRadius="5" HorizontalAlignment="Left" Margin="10,105,0,65" Width="400">

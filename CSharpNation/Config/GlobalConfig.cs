@@ -44,7 +44,17 @@ namespace CSharpNation.Config
         public static string ConfigDirectoryPath { get; } = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\CSharpNation";
         private static string ConfigTxtPath = ConfigDirectoryPath + @"\Config.txt";
         public static string ResourcesDirectoryPath { get; } = ConfigDirectoryPath + @"\Resources";
-        public static string TexturesPath { get; private set; }
+
+        private static string texturesPath;
+        public static string TexturesPath
+        {
+            get => texturesPath;
+            set
+            {
+                texturesPath = value;
+                TexturesConfig.LoadTextureFolder();
+            }
+        }
 
         private static void CheckConfigFolder()
         {

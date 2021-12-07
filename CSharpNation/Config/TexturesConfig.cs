@@ -21,7 +21,7 @@ namespace CSharpNation.Config
             LoadTextureFolder();
         }
 
-        private static void LoadTextureFolder()
+        public static void LoadTextureFolder()
         {
             string path = GlobalConfig.TexturesPath;
 
@@ -29,6 +29,8 @@ namespace CSharpNation.Config
             {
                 return;
             }
+
+            Textures.Clear();
 
             string[] jpgFiles = Directory.GetFiles(path, "*.jpg");
             string[] pngFiles = Directory.GetFiles(path, "*.png");

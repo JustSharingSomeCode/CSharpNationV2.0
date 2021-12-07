@@ -31,7 +31,7 @@ namespace CSharpNation.GUI
             controller = ctrl;
 
             LoadedFolderbl.Content = GlobalConfig.TexturesPath;
-            backgrounds = TexturesConfig.Textures;
+            //backgrounds = TexturesConfig.Textures;
 
             string[] enumNames = Enum.GetNames(typeof(Texture.Display));
 
@@ -53,7 +53,9 @@ namespace CSharpNation.GUI
         {
             BackgroundsStackPnl.Children.Clear();
 
-            if(backgrounds.Count > 0)
+            backgrounds = TexturesConfig.Textures;
+
+            if (backgrounds.Count > 0)
             {
                 LoadTextureData(0);
             }
@@ -142,7 +144,13 @@ namespace CSharpNation.GUI
 
         private void SaveConfigBtn_Click(object sender, RoutedEventArgs e)
         {
-            TexturesConfig.SaveConfig();
+            GlobalConfig.SaveConfig();
+        }
+
+        private void LoadFolderBtn_Click(object sender, RoutedEventArgs e)
+        {
+            GlobalConfig.TexturesPath = TexturesPathTxt.Text;
+            UpdateBackgroundList();
         }
     }
 }
