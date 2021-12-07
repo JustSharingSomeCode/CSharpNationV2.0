@@ -110,6 +110,22 @@ namespace CSharpNation.GUI
 
         private void DisplayModeCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            switch(DisplayModeCb.SelectedItem.ToString())
+            {
+                case "Fullscreen":
+                    PreviewImg.Source = new BitmapImage(new Uri(GlobalConfig.ResourcesDirectoryPath + @"\FullscreenPreview.jpg"));
+                    break;
+                case "Halfscreen":
+                    PreviewImg.Source = new BitmapImage(new Uri(GlobalConfig.ResourcesDirectoryPath + @"\HalfscreenPreview.jpg"));
+                    break;
+                case "MirroredLeftHalf":
+                    PreviewImg.Source = new BitmapImage(new Uri(GlobalConfig.ResourcesDirectoryPath + @"\MirroredLeftHalfPreview.jpg"));
+                    break;
+                case "MirroredRightHalf":
+                    PreviewImg.Source = new BitmapImage(new Uri(GlobalConfig.ResourcesDirectoryPath + @"\MirroredRightHalfPreview.jpg"));
+                    break;
+            }
+
             if (!HandledSelection)
             {
                 try

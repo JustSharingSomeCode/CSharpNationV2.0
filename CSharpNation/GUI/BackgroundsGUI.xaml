@@ -29,7 +29,7 @@
         <Border CornerRadius="5" Height="395" Margin="415,160,10,0" VerticalAlignment="Top" Background="#FF505050">
             <Grid>
                 <Label x:Name="TitleLbl" Content="Image title: " Foreground="White" VerticalContentAlignment="Center" Height="50" VerticalAlignment="Top" Margin="10,0" FontWeight="Bold" FontSize="14"/>
-                <Image Height="200" Margin="10,50,10,0" VerticalAlignment="Top" Source="pack://siteoforigin:,,,/Resources/Logo.png"/>
+                <Image x:Name="PreviewImg" Height="200" Margin="10,50,10,0" VerticalAlignment="Top" Source="pack://siteoforigin:,,,/Resources/FullscreenPreview.jpg"/>
                 <Label Content="Display mode: " Foreground="White" HorizontalAlignment="Left" Margin="10,255,0,90" VerticalContentAlignment="Center"/>
                 <ComboBox x:Name="DisplayModeCb" HorizontalAlignment="Left" Margin="103,271,0,0" VerticalAlignment="Top" Width="200" IsReadOnly="True" SelectionChanged="DisplayModeCb_SelectionChanged" />
                 <Label Content="Flip mode: " Foreground="White" HorizontalAlignment="Left" Margin="10,291,0,54" VerticalContentAlignment="Center"/>

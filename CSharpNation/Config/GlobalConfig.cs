@@ -59,7 +59,7 @@ namespace CSharpNation.Config
         {
             if (!Directory.Exists(ResourcesDirectoryPath))
             {
-                Directory.CreateDirectory(ResourcesDirectoryPath);
+                _ = Directory.CreateDirectory(ResourcesDirectoryPath);
 
                 Bitmap logo = new Bitmap(Properties.Resources.Logo);
                 logo.Save(ResourcesDirectoryPath + @"\Logo.png");
@@ -68,6 +68,22 @@ namespace CSharpNation.Config
                 Bitmap particle = new Bitmap(Properties.Resources.Particle);
                 particle.Save(ResourcesDirectoryPath + @"\Particle.png");
                 particle.Dispose();
+
+                Bitmap a = new Bitmap(Properties.Resources.FullscreenPreview);
+                a.Save(ResourcesDirectoryPath + @"\FullscreenPreview.jpg");
+                a.Dispose();
+
+                Bitmap b = new Bitmap(Properties.Resources.HalfscreenPreview);
+                b.Save(ResourcesDirectoryPath + @"\HalfscreenPreview.jpg");
+                b.Dispose();
+
+                Bitmap c = new Bitmap(Properties.Resources.MirroredLeftHalfPreview);
+                c.Save(ResourcesDirectoryPath + @"\MirroredLeftHalfPreview.jpg");
+                c.Dispose();
+
+                Bitmap d = new Bitmap(Properties.Resources.MirroredRightHalfPreview);
+                d.Save(ResourcesDirectoryPath + @"\MirroredRightHalfPreview.jpg");
+                d.Dispose();
             }
         }
 

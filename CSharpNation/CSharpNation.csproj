@@ -163,6 +163,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\CSharpNation.ico" />
+    <None Include="Resources\FullscreenPreview.jpg" />
+    <None Include="Resources\HalfscreenPreview.jpg" />
+    <None Include="Resources\MirroredLeftSidePreview.jpg" />
+    <None Include="Resources\MirroredRightSidePreview.jpg" />
     <Content Include="WpfHoverControls.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
