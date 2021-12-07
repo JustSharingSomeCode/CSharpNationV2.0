@@ -6,10 +6,8 @@
         xmlns:local="clr-namespace:CSharpNation.GUI"
         xmlns:WpfHoverControls="clr-namespace:WpfHoverControls;assembly=WpfHoverControls" x:Class="CSharpNation.GUI.CSharpNationGUI"
         mc:Ignorable="d"
-        Title="CSharpNationGUI" Height="720" Width="1280" Closing="Window_Closing" Background="{StaticResource BackgroundColor}" AllowsTransparency="True" WindowStyle="None" ResizeMode="NoResize">
+        Title="CSharpNationGUI" Height="720" Width="1280" Closing="Window_Closing" Background="{StaticResource BackgroundColor}" AllowsTransparency="True" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid x:Name="MainGrid">
-        <WpfHoverControls:HoverButton x:Name="PreviousBtn" Content="Previous" HorizontalAlignment="Left" Margin="403,357,0,0" VerticalAlignment="Top" Width="201" Height="48" Click="PreviousBtn_Click"/>
-        <WpfHoverControls:HoverButton x:Name="NextBtn" Content="Next" HorizontalAlignment="Left" Margin="609,357,0,0" VerticalAlignment="Top" Width="201" Height="48" Click="NextBtn_Click"/>
         <Grid x:Name="BottomMenu" Height="50" VerticalAlignment="Bottom" Background="{StaticResource LowerMenu}">
             <WpfHoverControls:HoverButton x:Name="StartTemp" Content="Start visualizer" IconText="&#xE143;" Click="StartTemp_Click" HorizontalAlignment="Right" Width="250" Background="#00000000" CornerRadius="0" BorderThickness="1,0,0,0" BackgroundHover="#FF505050" ForegroundHover="White" IconForegroundHover="#FF3AFF00" IconFontSize="15"/>
             <WpfHoverControls:HoverButton x:Name="ResumeBtn" Content="Resume capture" IconText="&#xE102;" HorizontalAlignment="Right" Margin="0,0,250,0" Width="200" Click="ResumeBtn_Click" BorderThickness="1,0,0,0" CornerRadius="0" Background="#00000000" BackgroundHover="#FF505050" ForegroundHover="White" IconForegroundHover="Yellow" IconFontSize="15"/>

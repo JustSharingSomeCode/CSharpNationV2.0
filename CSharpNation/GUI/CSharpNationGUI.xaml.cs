@@ -59,17 +59,7 @@ namespace CSharpNation.GUI
         private void ResumeBtn_Click(object sender, RoutedEventArgs e)
         {
             controller.ResumeCapture();
-        }
-
-        private void PreviousBtn_Click(object sender, RoutedEventArgs e)
-        {
-            controller.PreviousBackground();
-        }
-
-        private void NextBtn_Click(object sender, RoutedEventArgs e)
-        {
-            controller.NextBackground();
-        }
+        }        
 
         private void CloseBtn_Click(object sender, RoutedEventArgs e)
         {

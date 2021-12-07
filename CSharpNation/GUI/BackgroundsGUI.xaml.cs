@@ -33,21 +33,37 @@ namespace CSharpNation.GUI
             LoadedFolderbl.Content = GlobalConfig.TexturesPath;
             backgrounds = TexturesConfig.Textures;
 
+            string[] enumNames = Enum.GetNames(typeof(Texture.Display));
+
+            for(int i = 0; i < enumNames.Length; i++)
+            {
+                _ = DisplayModeCb.Items.Add(enumNames[i]);
+            }
+
             UpdateBackgroundList();
         }
 
         private CSharpNationController controller;
         private List<Texture> backgrounds;
 
+        private bool HandledSelection = false;
+        private int selectedBackground = 0;
+
         private void UpdateBackgroundList()
         {
             BackgroundsStackPnl.Children.Clear();
+
+            if(backgrounds.Count > 0)
+            {
+                LoadTextureData(0);
+            }
 
             for (int i = 0; i < backgrounds.Count; i++)
             {
                 HoverButton btn = new HoverButton()
                 {
                     Content = "  " +  (i + 1).ToString() + ") " + backgrounds[i].FileName,
+                    IconText = i.ToString(),
                     Height = 25,
                     CornerRadius = (i == 0) ? new CornerRadius(5, 5, 0, 0) : (i + 1 - backgrounds.Count == 0) ? new CornerRadius(0, 0, 5, 5) : new CornerRadius(0, 0, 0, 0),
                     //BorderThickness = (i == 0) ? new Thickness(1, 1, 1, 0) : (i + 1 - backgrounds.Count == 0) ? new Thickness(1, 0, 1, 1) : new Thickness(1, 0, 1, 0),
@@ -59,8 +75,27 @@ namespace CSharpNation.GUI
                     ShowIcon = false
                 };
 
+                btn.Click += Btn_Click;
+
                 _ = BackgroundsStackPnl.Children.Add(btn);
             }
+        }
+
+        private void Btn_Click(object sender, RoutedEventArgs e)
+        {
+            int index = Convert.ToInt32(((HoverButton)sender).IconText);
+
+            LoadTextureData(index);
+        }
+
+        private void LoadTextureData(int index)
+        {
+            selectedBackground = index;
+
+            TitleLbl.Content = backgrounds[index].FileName;
+            HandledSelection = true;
+            DisplayModeCb.SelectedItem = backgrounds[index].DisplayMode.ToString();
+            HandledSelection = false;
         }
 
         private void PrevBgBtn_Click(object sender, RoutedEventArgs e)
@@ -71,6 +106,27 @@ namespace CSharpNation.GUI
         private void NextBgBtn_Click(object sender, RoutedEventArgs e)
         {
             controller.NextBackground();
+        }
+
+        private void DisplayModeCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (!HandledSelection)
+            {
+                try
+                {
+                    Texture.Display selectedDm = (Texture.Display)Enum.Parse(typeof(Texture.Display), DisplayModeCb.SelectedValue.ToString());
+                    backgrounds[selectedBackground].DisplayMode = selectedDm;
+                }
+                catch (Exception ex)
+                {
+                    _ = MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void SaveConfigBtn_Click(object sender, RoutedEventArgs e)
+        {
+            TexturesConfig.SaveConfig();
         }
     }
 }
