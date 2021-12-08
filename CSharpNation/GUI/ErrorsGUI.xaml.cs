@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using CSharpNation.Tools;
+
 namespace CSharpNation.GUI
 {
     /// <summary>
@@ -23,6 +25,21 @@ namespace CSharpNation.GUI
         public ErrorsGUI()
         {
             InitializeComponent();
+
+            ErrorLog.OnErrorAdded += UpdateError;
+        }
+
+        public void UpdateError(object sender, EventArgs e)
+        {
+            Dispatcher.Invoke(new Action(() =>
+            {
+                _ = Test.Children.Add(new Label() { Content = (string)sender });
+            }));
+        }
+
+        private void HoverButton_Click(object sender, RoutedEventArgs e)
+        {
+            ErrorLog.AddError("test message");
         }
     }
 }

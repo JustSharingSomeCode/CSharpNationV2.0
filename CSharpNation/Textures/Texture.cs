@@ -11,6 +11,8 @@ using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using System.Drawing.Imaging;
 
+using CSharpNation.Tools;
+
 namespace CSharpNation.Textures
 {
     class Texture
@@ -63,6 +65,7 @@ namespace CSharpNation.Textures
             catch (Exception ex)
             {
                 Console.WriteLine("Error loading image: {0}, Error: {1}", FileName, ex.Message);
+                ErrorLog.AddError("Error loading bitmap on file: " + FileName + ", Details: " + ex.Message);
                 return null;
             }
         }

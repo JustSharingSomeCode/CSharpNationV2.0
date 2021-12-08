@@ -90,6 +90,7 @@
     <Compile Include="Particles\ParticleController.cs" />
     <Compile Include="Textures\Texture.cs" />
     <Compile Include="Textures\TextureController.cs" />
+    <Compile Include="Tools\ErrorLog.cs" />
     <Compile Include="Tools\WaveTools.cs" />
     <Compile Include="Visualizer\ReplayBuffer.cs" />
     <Compile Include="Visualizer\SpectrumVisualizer.cs" />
