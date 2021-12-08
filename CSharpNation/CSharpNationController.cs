@@ -58,7 +58,7 @@ namespace CSharpNation
                 visualizer.Run(GlobalConfig.Fps);
             }
 
-            GlobalConfig.SaveConfig();
+            //GlobalConfig.SaveConfig();
         }
 
         public void PauseCapture()
@@ -79,6 +79,8 @@ namespace CSharpNation
             }
             
             analyzer.Free();
+
+            GlobalConfig.SaveConfig();
         }
 
         public void NextBackground()
