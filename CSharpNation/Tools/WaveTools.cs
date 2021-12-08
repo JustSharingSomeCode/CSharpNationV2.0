@@ -95,7 +95,7 @@ namespace CSharpNation.Tools
             }
 
             return spectrum;
-        }        
+        }
 
         public static List<float> CombineWaves(List<float> spectrum, List<float> promSpectrum)
         {

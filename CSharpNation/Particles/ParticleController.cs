@@ -44,7 +44,7 @@ namespace CSharpNation.Particles
         }
 
         public void UpdateParticles(float power)
-        {            
+        {
             CreatePraticles();
 
             UpdateAndDeleteParticles(power);
@@ -79,7 +79,7 @@ namespace CSharpNation.Particles
             {
                 if (particles[i].IsOutOfBounds(Width, Height))
                 {
-                    particles.Remove(particles[i]);
+                    _ = particles.Remove(particles[i]);
                     i--;
                 }
                 else
@@ -92,12 +92,12 @@ namespace CSharpNation.Particles
 
         public void DrawParticles()
         {
-            if(texture.TextureData == -1)
-            {                
+            if (texture.TextureData == -1)
+            {
                 return;
-            }            
+            }
 
-            for(int i = 0; i < particles.Count; i++)
+            for (int i = 0; i < particles.Count; i++)
             {
                 Particle p = particles[i];
                 float half = p.HalfSize;

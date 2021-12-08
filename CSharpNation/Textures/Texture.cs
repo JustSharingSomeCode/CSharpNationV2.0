@@ -11,6 +11,8 @@ using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using System.Drawing.Imaging;
 
+using CSharpNation.Tools;
+
 namespace CSharpNation.Textures
 {
     class Texture
@@ -62,7 +64,8 @@ namespace CSharpNation.Textures
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error loading image: {0}, Error: {1}", FileName, ex.Message);
+                //Console.WriteLine("Error loading image: {0}, Error: {1}", FileName, ex.Message);
+                ErrorLog.AddError(new Error(Error.Type.NonCriticalError, "Error loading bitmap on file: " + FileName + ", Details: " + ex.Message));
                 return null;
             }
         }
@@ -107,7 +110,8 @@ namespace CSharpNation.Textures
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error loading image: {0}, Error: {1}", FileName, ex.Message);
+                //Console.WriteLine("Error loading image: {0}, Error: {1}", FileName, ex.Message);
+                ErrorLog.AddError(new Error(Error.Type.NonCriticalError, "Error processing file: " + FileName + ", Details: " + ex.Message));
                 return -1;
             }
         }
@@ -155,7 +159,7 @@ namespace CSharpNation.Textures
         {
             if (DisplayMode != Display.Fullscreen)
             {
-                screenWidth = screenWidth / 2.0f;
+                screenWidth /= 2.0f;
             }
 
             float missingWidth = screenWidth - OriginalWidth;
@@ -187,7 +191,7 @@ namespace CSharpNation.Textures
             }
 
             FillY = (ActualHeight - screenHeight) / 2.0f;
-            FillX = (ActualWidth - screenWidth) / 2.0f;           
+            FillX = (ActualWidth - screenWidth) / 2.0f;
         }
 
         public override string ToString()

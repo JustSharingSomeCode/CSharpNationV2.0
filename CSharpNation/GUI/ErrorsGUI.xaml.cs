@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using CSharpNation.Tools;
+
 namespace CSharpNation.GUI
 {
     /// <summary>
@@ -23,6 +25,17 @@ namespace CSharpNation.GUI
         public ErrorsGUI()
         {
             InitializeComponent();
+
+            ErrorLog.OnErrorAdded += UpdateError;
+        }
+
+        public void UpdateError(object sender, EventArgs e)
+        {
+            Dispatcher.Invoke(new Action(() =>
+            {
+                _ = LogStackPnl.Children.Add(new ErrorViewer((Error)sender) { Margin = new Thickness(0, 0, 0, 5) });
+                LogScrollViewer.ScrollToBottom();
+            }));
         }
     }
 }

@@ -15,19 +15,6 @@ namespace CSharpNation.Visualizer
     {
         public WaveController()
         {
-            /*
-            waves = new Wave[GlobalConfig.WaveCount];
-
-            waves[0] = new Wave(255, 255, 255, 2, 2);
-            waves[1] = new Wave(255, 255, 0, 2, 3);
-            waves[2] = new Wave(255, 150, 0, 2, 4);
-            waves[3] = new Wave(255, 0, 0, 2, 5);
-            waves[4] = new Wave(255, 100, 255, 2, 6);
-            waves[5] = new Wave(50, 50, 155, 2, 7);
-            waves[6] = new Wave(0, 0, 255, 2, 8);
-            waves[7] = new Wave(50, 200, 255, 2, 9);
-            waves[8] = new Wave(0, 255, 0, 2, 10);
-            */
             waves = WaveConfig.Waves.ToArray();
         }
 

@@ -80,6 +80,9 @@
     <Compile Include="GUI\ErrorsGUI.xaml.cs">
       <DependentUpon>ErrorsGUI.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\ErrorViewer.xaml.cs">
+      <DependentUpon>ErrorViewer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\WaveColorViewer.xaml.cs">
       <DependentUpon>WaveColorViewer.xaml</DependentUpon>
     </Compile>
@@ -90,6 +93,8 @@
     <Compile Include="Particles\ParticleController.cs" />
     <Compile Include="Textures\Texture.cs" />
     <Compile Include="Textures\TextureController.cs" />
+    <Compile Include="Tools\Error.cs" />
+    <Compile Include="Tools\ErrorLog.cs" />
     <Compile Include="Tools\WaveTools.cs" />
     <Compile Include="Visualizer\ReplayBuffer.cs" />
     <Compile Include="Visualizer\SpectrumVisualizer.cs" />
@@ -112,6 +117,10 @@
       <DependentUpon>CSharpNationGUI.xaml</DependentUpon>
     </Compile>
     <Page Include="GUI\ErrorsGUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\ErrorViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
