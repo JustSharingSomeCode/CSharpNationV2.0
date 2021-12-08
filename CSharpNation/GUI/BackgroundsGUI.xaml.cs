@@ -115,16 +115,16 @@ namespace CSharpNation.GUI
             switch(DisplayModeCb.SelectedItem.ToString())
             {
                 case "Fullscreen":
-                    PreviewImg.Source = new BitmapImage(new Uri(GlobalConfig.ResourcesDirectoryPath + @"\FullscreenPreview.jpg"));
+                    LoadImage(@"\FullscreenPreview.jpg");
                     break;
                 case "Halfscreen":
-                    PreviewImg.Source = new BitmapImage(new Uri(GlobalConfig.ResourcesDirectoryPath + @"\HalfscreenPreview.jpg"));
+                    LoadImage(@"\HalfscreenPreview.jpg");
                     break;
                 case "MirroredLeftHalf":
-                    PreviewImg.Source = new BitmapImage(new Uri(GlobalConfig.ResourcesDirectoryPath + @"\MirroredLeftHalfPreview.jpg"));
+                    LoadImage(@"\MirroredLeftHalfPreview.jpg");
                     break;
                 case "MirroredRightHalf":
-                    PreviewImg.Source = new BitmapImage(new Uri(GlobalConfig.ResourcesDirectoryPath + @"\MirroredRightHalfPreview.jpg"));
+                    LoadImage(@"\MirroredRightHalfPreview.jpg");
                     break;
             }
 
@@ -139,6 +139,18 @@ namespace CSharpNation.GUI
                 {
                     _ = MessageBox.Show(ex.Message);
                 }
+            }
+        }
+
+        private void LoadImage(string filename)
+        {
+            try
+            {
+                PreviewImg.Source = new BitmapImage(new Uri(GlobalConfig.ResourcesDirectoryPath + filename));
+            }
+            catch(Exception ex)
+            {
+                _ = MessageBox.Show(ex.Message);
             }
         }
 
