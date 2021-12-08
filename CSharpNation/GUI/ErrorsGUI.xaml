@@ -6,10 +6,12 @@
              xmlns:local="clr-namespace:CSharpNation.GUI"
              xmlns:WpfHoverControls="clr-namespace:WpfHoverControls;assembly=WpfHoverControls" x:Class="CSharpNation.GUI.ErrorsGUI"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Background="{StaticResource BackgroundColor}">
+             d:DesignHeight="620" d:DesignWidth="1230" Background="{StaticResource BackgroundColor}">
     <Grid>
-        <Label Content="ERRORS"/>
-        <StackPanel x:Name="Test" HorizontalAlignment="Left" Height="Auto" Margin="10,29,0,0" VerticalAlignment="Top" Width="387"/>
-        <WpfHoverControls:HoverButton Content="HoverButton" HorizontalAlignment="Left" Margin="10,391,0,0" VerticalAlignment="Top" Width="224" Height="49" Click="HoverButton_Click"/>
+        <WpfHoverControls:HoverScrollViewer x:Name="BackgroundsScrollViewer" Background="#FF505050" CornerRadius="5" HorizontalAlignment="Left" Margin="10,10,0,10" Width="1010">
+            <StackPanel x:Name="LogStackPnl" Width="Auto" Height="Auto"/>
+        </WpfHoverControls:HoverScrollViewer>
+        <WpfHoverControls:HoverButton x:Name="NextBgBtn" IconText="&#xE26B;" Content="Open app folder" HorizontalAlignment="Left" Margin="1025,0,0,560" VerticalAlignment="Bottom" Width="195" Height="50" Background="#FF505050" BorderThickness="0" BackgroundHover="#FF5A5A5A" ForegroundHover="White" IconForegroundHover="White"/>
+        <WpfHoverControls:HoverButton x:Name="NextBgBtn_Copy" IconText="&#xE26B;" Content="Clean log" HorizontalAlignment="Left" Margin="1025,0,0,505" VerticalAlignment="Bottom" Width="195" Height="50" Background="#FF505050" BorderThickness="0" BackgroundHover="#FF5A5A5A" ForegroundHover="White" IconForegroundHover="White"/>
     </Grid>
 </UserControl>

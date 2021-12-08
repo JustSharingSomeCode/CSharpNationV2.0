@@ -10,17 +10,17 @@ namespace CSharpNation.Tools
     {
         static ErrorLog()
         {
-            errorMessages = new List<string>();
+            errorMessages = new List<Error>();
         }
 
-        private static List<string> errorMessages;
+        private static List<Error> errorMessages;
 
-        public static void AddError(string message)
+        public static void AddError(Error error)
         {
-            errorMessages.Add(message);
+            errorMessages.Add(error);
             try
             {
-                OnErrorAdded?.Invoke(message, EventArgs.Empty);
+                OnErrorAdded?.Invoke(error, EventArgs.Empty);
             }
             catch(Exception ex)
             {

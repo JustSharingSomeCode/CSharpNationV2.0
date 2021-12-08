@@ -65,7 +65,7 @@ namespace CSharpNation.Textures
             catch (Exception ex)
             {
                 Console.WriteLine("Error loading image: {0}, Error: {1}", FileName, ex.Message);
-                ErrorLog.AddError("Error loading bitmap on file: " + FileName + ", Details: " + ex.Message);
+                ErrorLog.AddError(new Error(Error.Type.NonCriticalError, "Error loading bitmap on file: " + FileName + ", Details: " + ex.Message));
                 return null;
             }
         }

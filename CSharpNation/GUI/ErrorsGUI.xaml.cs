@@ -33,13 +33,8 @@ namespace CSharpNation.GUI
         {
             Dispatcher.Invoke(new Action(() =>
             {
-                _ = Test.Children.Add(new Label() { Content = (string)sender });
+                _ = LogStackPnl.Children.Add(new ErrorViewer((Error)sender) { Margin = new Thickness(0, 0, 0, 5) });
             }));
-        }
-
-        private void HoverButton_Click(object sender, RoutedEventArgs e)
-        {
-            ErrorLog.AddError("test message");
         }
     }
 }
