@@ -25,7 +25,7 @@ namespace CSharpNation.Config
         }
 
         private static void LoadConfig()
-        {            
+        {
             if (!File.Exists(path))
             {
                 File.Create(path).Close();
@@ -40,12 +40,11 @@ namespace CSharpNation.Config
 
                 for (int i = 0; i < config.Length; i++)
                 {
-
                     waveData = config[i].Split('|');
                     Waves.Add(new Wave(Convert.ToInt32(waveData[0]), Convert.ToInt32(waveData[1]), Convert.ToInt32(waveData[2]), Convert.ToInt32(waveData[3]), Convert.ToInt32(waveData[4]), float.Parse(waveData[5])));
                     LoadedWaves++;
                 }
-            }            
+            }
         }
 
         public static List<Wave> DefaultWaves()

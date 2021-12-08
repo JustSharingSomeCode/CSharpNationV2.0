@@ -149,8 +149,8 @@ namespace CSharpNation.Analyzer
         //cleanup
         public void Free()
         {
-            BassWasapi.BASS_WASAPI_Free();
-            Bass.BASS_Free();
+            _ = BassWasapi.BASS_WASAPI_Free();
+            _ = Bass.BASS_Free();
         }
         #endregion
     }

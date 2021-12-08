@@ -34,6 +34,7 @@ namespace CSharpNation.GUI
             Dispatcher.Invoke(new Action(() =>
             {
                 _ = LogStackPnl.Children.Add(new ErrorViewer((Error)sender) { Margin = new Thickness(0, 0, 0, 5) });
+                LogScrollViewer.ScrollToBottom();
             }));
         }
     }

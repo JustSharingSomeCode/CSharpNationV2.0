@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 
 using CSharpNation.Config;
 using CSharpNation.Textures;
+using CSharpNation.Tools;
 using WpfHoverControls;
 
 namespace CSharpNation.GUI
@@ -35,7 +36,7 @@ namespace CSharpNation.GUI
 
             string[] enumNames = Enum.GetNames(typeof(Texture.Display));
 
-            for(int i = 0; i < enumNames.Length; i++)
+            for (int i = 0; i < enumNames.Length; i++)
             {
                 _ = DisplayModeCb.Items.Add(enumNames[i]);
             }
@@ -137,7 +138,7 @@ namespace CSharpNation.GUI
                 }
                 catch (Exception ex)
                 {
-                    _ = MessageBox.Show(ex.Message);
+                    ErrorLog.AddError(new Error(Error.Type.CriticalError, "Error parsing display enum. Details: " + ex.Message));
                 }
             }
         }
@@ -148,9 +149,13 @@ namespace CSharpNation.GUI
             {
                 PreviewImg.Source = new BitmapImage(new Uri(GlobalConfig.ResourcesDirectoryPath + filename));
             }
-            catch(Exception ex)
+            catch (System.IO.FileNotFoundException)
             {
-                _ = MessageBox.Show(ex.Message);
+                ErrorLog.AddError(new Error(Error.Type.CriticalError, "Cant find preview image on resources folder. Missing file: " + filename));
+            }
+            catch (Exception ex)
+            {
+                ErrorLog.AddError(new Error(Error.Type.CriticalError, "Error loading preview image: " + filename + ", Details: " + ex.Message));
             }
         }
 

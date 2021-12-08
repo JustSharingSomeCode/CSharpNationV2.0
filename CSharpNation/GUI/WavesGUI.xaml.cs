@@ -36,11 +36,6 @@ namespace CSharpNation.GUI
         private List<Wave> waves;
         private List<WaveColorViewer> viewers;
 
-        private void WavesControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
         private void DrawWaves()
         {
             double x = 0;

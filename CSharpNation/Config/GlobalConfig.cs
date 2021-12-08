@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Drawing;
 
+using CSharpNation.Tools;
+
 namespace CSharpNation.Config
 {
     static class GlobalConfig
@@ -14,15 +16,8 @@ namespace CSharpNation.Config
         static GlobalConfig()
         {
             LoadConfig();
-
-            //Lines = 64;
-            //WaveCount = 9;
-            DegreesIncrement = 180f / (Lines - 1);
-            //TexturesPath = @"D:\Backgrounds";
-            //Fps = 60.0f;
-            //BackgroundTime = 5;
-            //AutoBackgroundChange = true;
-            //BackgroundDim = 150;            
+           
+            DegreesIncrement = 180f / (Lines - 1);                      
 
             CheckConfigFolder();
             CheckResourcesDirectory();
@@ -30,7 +25,6 @@ namespace CSharpNation.Config
         }
 
         public static int Lines { get; private set; }
-        //public static int WaveCount { get; private set; }
         public static float DegreesIncrement { get; private set; }
 
         public static float Fps { get; private set; }
@@ -58,9 +52,9 @@ namespace CSharpNation.Config
 
         private static void CheckConfigFolder()
         {
-            if(!Directory.Exists(ConfigDirectoryPath))
+            if (!Directory.Exists(ConfigDirectoryPath))
             {
-                Directory.CreateDirectory(ConfigDirectoryPath);
+                _ = Directory.CreateDirectory(ConfigDirectoryPath);
                 WriteConfig(DefaultConfig());
             }
         }
@@ -133,10 +127,13 @@ namespace CSharpNation.Config
                 WriteConfig(GetCurrentConfig());
                 TexturesConfig.SaveConfig();
                 WaveConfig.SaveConfig();
+
+                ErrorLog.AddError(new Error(Error.Type.Information, "Actual config saved successfully"));
             }
             catch(Exception ex)
             {
-                Console.WriteLine("Error: " + ex.Message);
+                //Console.WriteLine("Error: " + ex.Message);
+                ErrorLog.AddError(new Error(Error.Type.CriticalError, "Error saving actual config: " + ex.Message));
             }
         }
 
@@ -150,7 +147,7 @@ namespace CSharpNation.Config
                 Fps = Convert.ToInt32(config[2]);
                 BackgroundTime = Convert.ToInt32(config[3]);
                 AutoBackgroundChange = config[4] == "True";
-                BackgroundDim = Convert.ToInt32(config[5]);               
+                BackgroundDim = Convert.ToInt32(config[5]);
             }
             else
             {
