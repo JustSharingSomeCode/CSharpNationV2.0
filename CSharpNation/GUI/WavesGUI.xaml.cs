@@ -36,6 +36,9 @@ namespace CSharpNation.GUI
         private List<Wave> waves;
         private List<WaveColorViewer> viewers;
 
+        private Wave selectedWave;
+        private WaveColorViewer colorViewer;
+
         private void DrawWaves()
         {
             double x = 0;
@@ -50,10 +53,58 @@ namespace CSharpNation.GUI
                     Margin = new Thickness(x, 0, 0, 0)
                 };
 
+                wcv.MouseLeftButtonUp += Wcv_MouseLeftButtonUp;
+                wcv.SendLeftClick += Wcv_SendLeftClick;
+                wcv.SendRightClick += Wcv_SendRightClick;
+
                 viewers.Add(wcv);
                 _ = WavesViewerContent.Children.Add(wcv);
                 x += 100 + 10;
             }
+        }
+
+        private void Wcv_SendRightClick(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Wcv_SendLeftClick(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        /*
+        private void SwapWaves(Wave wave, )
+        {
+
+        }
+        */
+
+        private void Wcv_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            colorViewer = (WaveColorViewer)sender;
+            selectedWave = colorViewer.Wave;
+            RedAdder.Value = selectedWave.R;
+            GreenAdder.Value = selectedWave.G;
+            BlueAdder.Value = selectedWave.B;
+        }
+
+        private void RedAdder_OnValueChanged(object sender, EventArgs e)
+        {
+            selectedWave.R = (int)RedAdder.Value;
+            colorViewer.UpdateColorViewer();
+        }
+
+        private void GreenAdder_OnValueChanged(object sender, EventArgs e)
+        {
+            selectedWave.G = (int)GreenAdder.Value;
+            colorViewer.UpdateColorViewer();
+        }
+
+        private void BlueAdder_OnValueChanged(object sender, EventArgs e)
+        {
+            selectedWave.B = (int)BlueAdder.Value;
+            colorViewer.UpdateColorViewer();
         }
     }
 }
