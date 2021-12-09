@@ -65,20 +65,41 @@ namespace CSharpNation.GUI
 
         private void Wcv_SendRightClick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            WaveColorViewer wcv = (WaveColorViewer)sender;
+            SwapWaves(wcv.Wave, 1);
         }
 
         private void Wcv_SendLeftClick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            WaveColorViewer wcv = (WaveColorViewer)sender;
+            SwapWaves(wcv.Wave, -1);
         }
 
-        /*
-        private void SwapWaves(Wave wave, )
+
+        private void SwapWaves(Wave wave, int dir)
         {
+            int waveIndex = -1;
 
+            for (int i = 0; i < waves.Count; i++)
+            {
+                if (wave == waves[i])
+                {
+                    waveIndex = i;
+                }
+            }
+
+            if (waveIndex == -1 || (waveIndex == 0 && dir == -1) || (waveIndex == waves.Count - 1 && dir == 1))
+            {
+                return;
+            }
+
+            Wave waveTemp = waves[waveIndex + dir];
+
+            waves[waveIndex + dir] = wave;
+            viewers[waveIndex + dir].Wave = wave;
+            waves[waveIndex] = waveTemp;
+            viewers[waveIndex].Wave = waveTemp;
         }
-        */
 
         private void Wcv_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
@@ -105,6 +126,11 @@ namespace CSharpNation.GUI
         {
             selectedWave.B = (int)BlueAdder.Value;
             colorViewer.UpdateColorViewer();
+        }
+
+        private void SaveConfigBtn_Click(object sender, RoutedEventArgs e)
+        {
+            GlobalConfig.SaveConfig();
         }
     }
 }

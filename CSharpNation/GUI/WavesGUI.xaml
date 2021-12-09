@@ -25,5 +25,6 @@
 
             </Grid>
         </Border>
+        <WpfHoverControls:HoverButton x:Name="SaveConfigBtn" IconText="&#xE105;" IconFontSize="20" Content="Save actual config" Margin="10,0,10,10" VerticalAlignment="Bottom" Height="50" Background="#FF505050" BorderThickness="0" BackgroundHover="#FF5A5A5A" ForegroundHover="White" IconForegroundHover="White" Click="SaveConfigBtn_Click"/>
     </Grid>
 </UserControl>
