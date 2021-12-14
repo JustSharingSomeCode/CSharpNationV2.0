@@ -105,9 +105,14 @@ namespace CSharpNation.GUI
         {
             colorViewer = (WaveColorViewer)sender;
             selectedWave = colorViewer.Wave;
+
             RedAdder.Value = selectedWave.R;
             GreenAdder.Value = selectedWave.G;
             BlueAdder.Value = selectedWave.B;
+
+            BarsAdder.Value = selectedWave.AvgBars;
+            LoopsAdder.Value = selectedWave.AvgLoops;
+            QualityAdder.Value = selectedWave.Quality;
         }
 
         private void RedAdder_OnValueChanged(object sender, EventArgs e)
@@ -126,6 +131,21 @@ namespace CSharpNation.GUI
         {
             selectedWave.B = (int)BlueAdder.Value;
             colorViewer.UpdateColorViewer();
+        }
+
+        private void BarsAdder_OnValueChanged(object sender, EventArgs e)
+        {
+            selectedWave.AvgBars = (int)BarsAdder.Value;
+        }
+
+        private void LoopsAdder_OnValueChanged(object sender, EventArgs e)
+        {
+            selectedWave.AvgLoops = (int)LoopsAdder.Value;
+        }
+
+        private void QualityAdder_OnValueChanged(object sender, EventArgs e)
+        {
+            selectedWave.Quality = QualityAdder.Value;
         }
 
         private void SaveConfigBtn_Click(object sender, RoutedEventArgs e)

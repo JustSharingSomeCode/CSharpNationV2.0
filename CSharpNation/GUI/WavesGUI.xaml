@@ -13,16 +13,22 @@
 
             </Grid>
         </WpfHoverControls:HoverScrollViewer>
-        <Border BorderBrush="Black" CornerRadius="5" Margin="10,135,10,0" Background="#FF505050" Height="312" VerticalAlignment="Top">
+        <Border BorderBrush="Black" CornerRadius="5" Margin="10,135,10,0" Background="#FF505050" Height="195" VerticalAlignment="Top">
             <Grid>
-                <Label x:Name="TitleLbl" Content="Wave color " Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="50" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
-                <WpfHoverControls:HoverFloatAdder x:Name="RedAdder" HorizontalAlignment="Left" Margin="340,55,0,0" VerticalAlignment="Top" Height="40" Width="163" ButtonBrush="#FF282828" ButtonHoverBrush="#FF323232" OnValueChanged="RedAdder_OnValueChanged"/>
-                <Label Content="R:" HorizontalAlignment="Left" Margin="310,55,0,0" VerticalAlignment="Top" Height="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Width="30" Foreground="White"/>
-                <WpfHoverControls:HoverFloatAdder x:Name="GreenAdder" HorizontalAlignment="Left" Margin="538,55,0,0" VerticalAlignment="Top" Height="40" Width="163" ButtonBrush="#FF282828" ButtonHoverBrush="#FF323232" OnValueChanged="GreenAdder_OnValueChanged"/>
-                <Label Content="G:" HorizontalAlignment="Left" Margin="508,55,0,0" VerticalAlignment="Top" Height="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Width="30" Foreground="White"/>
-                <WpfHoverControls:HoverFloatAdder x:Name="BlueAdder" HorizontalAlignment="Left" Margin="736,55,0,0" VerticalAlignment="Top" Height="40" Width="163" ButtonBrush="#FF282828" ButtonHoverBrush="#FF323232" OnValueChanged="BlueAdder_OnValueChanged"/>
-                <Label Content="B:" HorizontalAlignment="Left" Margin="706,55,0,0" VerticalAlignment="Top" Height="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Width="30" Foreground="White"/>
-
+                <Label x:Name="TitleLbl" Content="Wave color" Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="50" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" HorizontalAlignment="Left" Width="605"/>
+                <WpfHoverControls:HoverFloatAdder x:Name="RedAdder" HorizontalAlignment="Left" Margin="238,55,0,0" VerticalAlignment="Top" Height="40" Width="163" ButtonBrush="#FF282828" ButtonHoverBrush="#FF323232" OnValueChanged="RedAdder_OnValueChanged"/>
+                <Label Content="R:" HorizontalAlignment="Left" Margin="208,55,0,0" VerticalAlignment="Top" Height="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Width="30" Foreground="White"/>
+                <WpfHoverControls:HoverFloatAdder x:Name="GreenAdder" HorizontalAlignment="Left" Margin="238,100,0,0" VerticalAlignment="Top" Height="40" Width="163" ButtonBrush="#FF282828" ButtonHoverBrush="#FF323232" OnValueChanged="GreenAdder_OnValueChanged"/>
+                <Label Content="G:" HorizontalAlignment="Left" Margin="208,100,0,0" VerticalAlignment="Top" Height="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Width="30" Foreground="White"/>
+                <WpfHoverControls:HoverFloatAdder x:Name="BlueAdder" HorizontalAlignment="Left" Margin="238,145,0,0" VerticalAlignment="Top" Height="40" Width="163" ButtonBrush="#FF282828" ButtonHoverBrush="#FF323232" OnValueChanged="BlueAdder_OnValueChanged"/>
+                <Label Content="B:" HorizontalAlignment="Left" Margin="208,145,0,0" VerticalAlignment="Top" Height="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Width="30" Foreground="White"/>
+                <Label x:Name="TitleLbl_Copy" Content="Wave settings" Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="50" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" HorizontalAlignment="Right" Width="605"/>
+                <WpfHoverControls:HoverFloatAdder x:Name="BarsAdder" HorizontalAlignment="Left" Margin="848,55,0,0" VerticalAlignment="Top" Height="40" Width="163" ButtonBrush="#FF282828" ButtonHoverBrush="#FF323232" OnValueChanged="BarsAdder_OnValueChanged"/>
+                <Label Content="Avg Bars:" HorizontalAlignment="Left" Margin="788,55,0,0" VerticalAlignment="Top" Height="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Width="60" Foreground="White"/>
+                <WpfHoverControls:HoverFloatAdder x:Name="LoopsAdder" HorizontalAlignment="Left" Margin="848,100,0,0" VerticalAlignment="Top" Height="40" Width="163" ButtonBrush="#FF282828" ButtonHoverBrush="#FF323232" OnValueChanged="LoopsAdder_OnValueChanged"/>
+                <Label Content="Avg Loops:" HorizontalAlignment="Left" Margin="778,100,0,0" VerticalAlignment="Top" Height="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Width="70" Foreground="White"/>
+                <WpfHoverControls:HoverFloatAdder x:Name="QualityAdder" HorizontalAlignment="Left" Margin="848,145,0,0" VerticalAlignment="Top" Height="40" Width="163" ButtonBrush="#FF282828" ButtonHoverBrush="#FF323232" OnValueChanged="QualityAdder_OnValueChanged" MaxValue="1"/>
+                <Label Content="Quality:" HorizontalAlignment="Left" Margin="798,145,0,0" VerticalAlignment="Top" Height="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Width="50" Foreground="White"/>
             </Grid>
         </Border>
         <WpfHoverControls:HoverButton x:Name="SaveConfigBtn" IconText="&#xE105;" IconFontSize="20" Content="Save actual config" Margin="10,0,10,10" VerticalAlignment="Bottom" Height="50" Background="#FF505050" BorderThickness="0" BackgroundHover="#FF5A5A5A" ForegroundHover="White" IconForegroundHover="White" Click="SaveConfigBtn_Click"/>
