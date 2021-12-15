@@ -150,7 +150,7 @@ namespace CSharpNation.Visualizer
 
             int dim = GlobalConfig.BackgroundDim;
 
-            textureController.DrawBackground(0, 0, Width, Height, power, 255, dim, dim, dim);
+            textureController.DrawBackground(0, 0, Width, Height, GlobalConfig.BackgroundMovement ? power : 0, 255, dim, dim, dim);
 
             particlesController.DrawParticles();
             
