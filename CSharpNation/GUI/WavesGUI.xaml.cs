@@ -43,6 +43,12 @@ namespace CSharpNation.GUI
         {
             double x = 0;
 
+            selectedWave = null;
+            colorViewer = null;
+
+            WavesViewerContent.Children.Clear();
+            viewers.Clear();
+
             for (int i = 0; i < waves.Count; i++)
             {
                 WaveColorViewer wcv = new WaveColorViewer()
@@ -168,6 +174,18 @@ namespace CSharpNation.GUI
         private void SaveConfigBtn_Click(object sender, RoutedEventArgs e)
         {
             GlobalConfig.SaveConfig();
+        }
+
+        private void AddBtn_Click(object sender, RoutedEventArgs e)
+        {
+            waves.Add(new Wave());
+            DrawWaves();
+        }
+
+        private void RemoveBtn_Click(object sender, RoutedEventArgs e)
+        {
+            _ = waves.Remove(selectedWave);
+            DrawWaves();
         }
     }
 }
