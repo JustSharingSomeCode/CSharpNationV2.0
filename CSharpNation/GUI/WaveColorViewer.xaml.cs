@@ -58,5 +58,15 @@ namespace CSharpNation.GUI
         {
             SendRightClick?.Invoke(this, EventArgs.Empty);
         }
+
+        public void Select()
+        {
+            ControlBorder.Background = new SolidColorBrush(Color.FromRgb(70, 70, 70));
+        }
+
+        public void Deselect()
+        {
+            ControlBorder.Background = new SolidColorBrush(Color.FromRgb(60, 60, 60));
+        }
     }
 }

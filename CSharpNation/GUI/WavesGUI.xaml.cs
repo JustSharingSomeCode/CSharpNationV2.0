@@ -61,6 +61,11 @@ namespace CSharpNation.GUI
                 _ = WavesViewerContent.Children.Add(wcv);
                 x += 100 + 10;
             }
+
+            if (waves.Count != 0)
+            {
+                UpdateSelection(viewers[0]);
+            }
         }
 
         private void Wcv_SendRightClick(object sender, EventArgs e)
@@ -103,7 +108,17 @@ namespace CSharpNation.GUI
 
         private void Wcv_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            colorViewer = (WaveColorViewer)sender;
+            UpdateSelection((WaveColorViewer)sender);
+        }
+
+        private void UpdateSelection(WaveColorViewer viewer)
+        {
+            if (colorViewer != null)
+            {
+                colorViewer.Deselect();
+            }
+
+            colorViewer = viewer;
             selectedWave = colorViewer.Wave;
 
             RedAdder.Value = selectedWave.R;
@@ -113,6 +128,8 @@ namespace CSharpNation.GUI
             BarsAdder.Value = selectedWave.AvgBars;
             LoopsAdder.Value = selectedWave.AvgLoops;
             QualityAdder.Value = selectedWave.Quality;
+
+            colorViewer.Select();
         }
 
         private void RedAdder_OnValueChanged(object sender, EventArgs e)
