@@ -77,20 +77,23 @@ namespace CSharpNation.Visualizer
 
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-
+            
+            Stopwatch updateSpectrumStw = new Stopwatch();
+            updateSpectrumStw.Start();
+            
             spectrum = WaveTools.FixDiscontinuities(analyzer.GetSpectrum());
             spectrum = WaveTools.LoopProm(spectrum, 1, 2);
 
             replay.Push(spectrum);
 
-            stopwatch.Stop();
-            Console.WriteLine("UPDATE SPECTRUM MILIS: {0}", stopwatch.ElapsedTicks.ToString());
+            updateSpectrumStw.Stop();
+            Console.WriteLine("UPDATE SPECTRUM MILIS: {0}", updateSpectrumStw.ElapsedTicks.ToString());
+            
 
             CalculateWavePower();
+            
 
-            if(GlobalConfig.EnableShaking)
+            if (GlobalConfig.EnableShaking)
             {
                 switch (ShakeCount)
                 {
@@ -124,7 +127,12 @@ namespace CSharpNation.Visualizer
                 Ry = 0;
             }
 
+            Stopwatch updateWavesStw = Stopwatch.StartNew();
+
             waveController.UpdateWaves(replay, Width / 2 + Rx, Height / 2 + Ry, Height / 4 + power);
+
+            updateWavesStw.Stop();
+            Console.WriteLine("UPDATE WAVES MILIS: {0}", updateWavesStw.ElapsedTicks.ToString());
 
             if (GlobalConfig.AutoBackgroundChange)
             {
@@ -143,7 +151,7 @@ namespace CSharpNation.Visualizer
                 }
             }
 
-            particlesController.UpdateParticles(power);
+            particlesController.UpdateParticles(power);            
 
             base.OnUpdateFrame(e);
         }
@@ -153,21 +161,27 @@ namespace CSharpNation.Visualizer
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
             if (spectrum == null)
-            { return; }
+            {
+                Console.WriteLine("Null spectrum");
+                return; 
+            }
 
             int dim = GlobalConfig.BackgroundDim;
 
             textureController.DrawBackground(0, 0, Width, Height, GlobalConfig.BackgroundMovement ? power : 0, 255, dim, dim, dim);
 
             particlesController.DrawParticles();
-            
+
+            Stopwatch waveDrawingStw = Stopwatch.StartNew();
             waveController.DrawWaves(Width / 2 + Rx, Height / 2 + Ry);
+            waveDrawingStw.Stop();
+            Console.WriteLine("DRAW WAVES MILIS: {0}", waveDrawingStw.ElapsedTicks.ToString());
 
             //DrawCircle(Width / 2, Height / 2, (Height / 4) + power, Color.White);
             //DrawCircle(Width / 2, Height / 2, (Height / 4.2) + power, Color.Black);
 
-            textureController.DrawLogo(Width / 2 - radius + Rx, Height / 2 - radius + Ry, Width / 2 + radius + Rx, Height / 2 + radius + Ry);
-            
+            //textureController.DrawLogo(Width / 2 - radius + Rx, Height / 2 - radius + Ry, Width / 2 + radius + Rx, Height / 2 + radius + Ry);
+
             Context.SwapBuffers();
 
             base.OnRenderFrame(e);

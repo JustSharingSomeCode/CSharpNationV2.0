@@ -49,8 +49,11 @@ namespace CSharpNation.Visualizer
 
                 if (w.Spectrum == null)
                 {
+                    Console.WriteLine("Null wave spectrum");
                     continue;
                 }
+
+                DrawLines(w);
 
                 for (int j = 0; j < w.CatmullRomPoints.Count - 1; j++)
                 {
@@ -90,10 +93,10 @@ namespace CSharpNation.Visualizer
                 GL.Begin(PrimitiveType.Quads);
                 GL.Color3(Color.FromArgb(255, w.R, w.G, w.B));
 
-                GL.Vertex2(j * 10, 0);
-                GL.Vertex2(j * 10, w.Spectrum[j]);
-                GL.Vertex2((j * 10) + 10, w.Spectrum[j]);
-                GL.Vertex2((j * 10) + 10, 0);
+                GL.Vertex2(j * 10, 50);
+                GL.Vertex2(j * 10, w.Spectrum[j] + 50);
+                GL.Vertex2((j * 10) + 10, w.Spectrum[j] + 50);
+                GL.Vertex2((j * 10) + 10, 50);
 
                 GL.End();
             }

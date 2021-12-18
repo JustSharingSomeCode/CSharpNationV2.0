@@ -58,10 +58,11 @@ namespace CSharpNation.Visualizer
             {
                 return;
             }
-
+            
             promSpectrum = WaveTools.LoopProm(Spectrum, AvgBars, AvgLoops);
+            
             Spectrum = WaveTools.CombineWaves(Spectrum, promSpectrum);
-
+            
             UpdatePoints(x, y, radius);
         }
 

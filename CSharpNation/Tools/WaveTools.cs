@@ -89,6 +89,11 @@ namespace CSharpNation.Tools
         {
             float max = spectrum.Max();
 
+            if (max == 0)
+            {
+                max = 1;
+            }
+
             for (int i = 0; i < spectrum.Count; i++)
             {
                 spectrum[i] /= max;
@@ -102,7 +107,12 @@ namespace CSharpNation.Tools
             List<float> norm = Normalize(promSpectrum);
             float max = spectrum.Max();
 
-            for(int i = 0; i < norm.Count; i++)
+            if (max == 0)
+            {
+                max = 1;
+            }
+
+            for (int i = 0; i < norm.Count; i++)
             {
                 norm[i] *= max;
             }
