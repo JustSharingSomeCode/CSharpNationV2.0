@@ -27,6 +27,9 @@ namespace CSharpNation.GUI
             InitializeComponent();
         }
 
+        public event EventHandler SendLeftClick;
+        public event EventHandler SendRightClick;
+
         private Wave wave;
         public Wave Wave
         {
@@ -41,9 +44,29 @@ namespace CSharpNation.GUI
             }
         }
 
-        private void UpdateColorViewer()
+        public void UpdateColorViewer()
         {
             ColorViewer.Fill = new SolidColorBrush(Color.FromRgb((byte)wave.R, (byte)wave.G, (byte)wave.B));
+        }
+
+        private void SendLeftBtn_Click(object sender, RoutedEventArgs e)
+        {
+            SendLeftClick?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void SendRightBtn_Click(object sender, RoutedEventArgs e)
+        {
+            SendRightClick?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void Select()
+        {
+            ControlBorder.Background = new SolidColorBrush(Color.FromRgb(70, 70, 70));
+        }
+
+        public void Deselect()
+        {
+            ControlBorder.Background = new SolidColorBrush(Color.FromRgb(60, 60, 60));
         }
     }
 }

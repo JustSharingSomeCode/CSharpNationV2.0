@@ -10,8 +10,8 @@
     <Border x:Name="ControlBorder"  Background="{StaticResource BackgroundColor}" CornerRadius="5">
         <Grid x:Name="MainGrid">
 
-            <WpfHoverControls:HoverButton x:Name="SendLeftBtn" Content="&#xE00E;" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="25" BorderThickness="0" CornerRadius="5,0,0,0" ShowIcon="False" TextFont="Segoe MDL2 Assets" Background="#00000000" BackgroundHover="#0CFFFFFF" ForegroundHover="White"/>
-            <WpfHoverControls:HoverButton x:Name="SendRightBtn" Content="&#xE00F;" HorizontalAlignment="Right" VerticalAlignment="Top" Width="50" Height="25" BorderThickness="0" CornerRadius="0,5,0,0" ShowIcon="False" TextFont="Segoe MDL2 Assets" Background="#00000000" BackgroundHover="#0CFFFFFF" ForegroundHover="White"/>
+            <WpfHoverControls:HoverButton x:Name="SendLeftBtn" Content="&#xE00E;" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="25" BorderThickness="0" CornerRadius="5,0,0,0" ShowIcon="False" TextFont="Segoe MDL2 Assets" Background="#00000000" BackgroundHover="#0CFFFFFF" ForegroundHover="White" Click="SendLeftBtn_Click"/>
+            <WpfHoverControls:HoverButton x:Name="SendRightBtn" Content="&#xE00F;" HorizontalAlignment="Right" VerticalAlignment="Top" Width="50" Height="25" BorderThickness="0" CornerRadius="0,5,0,0" ShowIcon="False" TextFont="Segoe MDL2 Assets" Background="#00000000" BackgroundHover="#0CFFFFFF" ForegroundHover="White" Click="SendRightBtn_Click"/>
             <Ellipse x:Name="ColorViewer" Fill="#FFF4F4F5" Margin="20,30,20,10" Stroke="Black"/>
 
         </Grid>

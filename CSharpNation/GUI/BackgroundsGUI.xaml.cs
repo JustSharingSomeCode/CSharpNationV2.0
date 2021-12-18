@@ -32,6 +32,7 @@ namespace CSharpNation.GUI
             controller = ctrl;
 
             LoadedFolderbl.Content = GlobalConfig.TexturesPath;
+            BackgroundMovementCb.IsChecked = GlobalConfig.BackgroundMovement;
             //backgrounds = TexturesConfig.Textures;
 
             string[] enumNames = Enum.GetNames(typeof(Texture.Display));
@@ -168,6 +169,11 @@ namespace CSharpNation.GUI
         {
             GlobalConfig.TexturesPath = TexturesPathTxt.Text;
             UpdateBackgroundList();
+        }
+
+        private void BackgroundMovementCb_Click(object sender, RoutedEventArgs e)
+        {
+            GlobalConfig.BackgroundMovement = BackgroundMovementCb.IsChecked.Value;
         }
     }
 }

@@ -25,6 +25,7 @@
         <Border CornerRadius="5" Height="50" Margin="415,105,10,0" VerticalAlignment="Top" Background="#FF505050">
             <Grid>
                 <Label Content="Background Dim: " Foreground="White" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalContentAlignment="Center"/>
+                <CheckBox x:Name="BackgroundMovementCb" Content="Background movement" HorizontalAlignment="Right" Margin="0,18,10,0" VerticalAlignment="Top" Foreground="White" Click="BackgroundMovementCb_Click"/>
             </Grid>
         </Border>
         <Border CornerRadius="5" Height="395" Margin="415,160,10,0" VerticalAlignment="Top" Background="#FF505050">
