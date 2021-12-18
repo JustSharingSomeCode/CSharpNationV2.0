@@ -14,11 +14,11 @@ using CSharpNation.Config;
 
 namespace CSharpNation.Visualizer
 {
-    class Wave
+    public class Wave
     {
         public Wave()
         {
-            replay = new ReplayBuffer(5);
+            replay = new ReplayBuffer(5);            
         }
 
         public Wave(int r, int g, int b, int bars, int loops, float quality) : this()

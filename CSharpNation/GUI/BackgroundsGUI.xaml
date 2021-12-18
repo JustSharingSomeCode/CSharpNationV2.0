@@ -1,0 +1,44 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CSharpNation.GUI"
+             xmlns:WpfHoverControls="clr-namespace:WpfHoverControls;assembly=WpfHoverControls" x:Class="CSharpNation.GUI.BackgroundsGUI"
+             mc:Ignorable="d" 
+             d:DesignHeight="620" d:DesignWidth="1230" Background="{StaticResource BackgroundColor}">
+    <Grid>
+        <Border BorderBrush="Black" CornerRadius="5" Margin="10,10,10,0" Background="#FF505050" Height="90" VerticalAlignment="Top">
+            <Grid>
+                <Label Content="Loaded folder: " Foreground="White" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="LoadedFolderbl" Content="..." Foreground="White" Margin="100,10,10,0" VerticalAlignment="Top"/>
+                <WpfHoverControls:HoverTextBox x:Name="TexturesPathTxt" Height="40" Margin="10,41,90,0" CornerRadius="5,0,0,5" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Background="#FF646464" BorderThickness="0" Foreground="White" Padding="5" BackgroundHover="#FF646464"/>
+                <WpfHoverControls:HoverButton x:Name="LoadFolderBtn" Content="HoverButton" IconText="&#xE001;" CornerRadius="0,5,5,0" BorderThickness="1,0,0,0" HorizontalAlignment="Right" Margin="0,41,10,0" VerticalAlignment="Top" Width="40" Height="40" Background="#FF646464" BorderBrush="#FFB2B2B2" BackgroundHover="#FF6E6E6E" IconForegroundHover="Lime" IconFontSize="15" Click="LoadFolderBtn_Click"/>
+                <WpfHoverControls:HoverButton x:Name="SearchFolderBtn" Content="HoverButton" IconText="&#xE188;" CornerRadius="0" BorderThickness="1,0,0,0" HorizontalAlignment="Right" Margin="0,41,50,0" VerticalAlignment="Top" Width="40" Height="40" Background="#FF646464" BorderBrush="#FFB2B2B2" BackgroundHover="#FF6E6E6E" IconForegroundHover="Yellow" IconFontSize="15"/>
+            </Grid>
+        </Border>
+        <WpfHoverControls:HoverScrollViewer x:Name="BackgroundsScrollViewer" Background="#FF505050" CornerRadius="5" HorizontalAlignment="Left" Margin="10,105,0,65" Width="400">
+            <StackPanel x:Name="BackgroundsStackPnl" Width="Auto" Height="Auto"/>
+        </WpfHoverControls:HoverScrollViewer>
+        <WpfHoverControls:HoverButton x:Name="PrevBgBtn" IconText="&#xE26C;" Content="Previous background" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="195" Height="50" Click="PrevBgBtn_Click" Background="#FF505050" BorderThickness="0" BackgroundHover="#FF5A5A5A" IconForegroundHover="White" ForegroundHover="White"/>
+        <WpfHoverControls:HoverButton x:Name="NextBgBtn" IconText="&#xE26B;" Content="Next background" HorizontalAlignment="Left" Margin="215,0,0,10" VerticalAlignment="Bottom" Width="195" Height="50" Click="NextBgBtn_Click" Background="#FF505050" BorderThickness="0" BackgroundHover="#FF5A5A5A" ForegroundHover="White" IconForegroundHover="White"/>
+        <Border CornerRadius="5" Height="50" Margin="415,105,10,0" VerticalAlignment="Top" Background="#FF505050">
+            <Grid>
+                <Label Content="Background Dim: " Foreground="White" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalContentAlignment="Center"/>
+                <CheckBox x:Name="BackgroundMovementCb" Content="Background movement" HorizontalAlignment="Right" Margin="0,18,10,0" VerticalAlignment="Top" Foreground="White" Click="BackgroundMovementCb_Click"/>
+            </Grid>
+        </Border>
+        <Border CornerRadius="5" Height="395" Margin="415,160,10,0" VerticalAlignment="Top" Background="#FF505050">
+            <Grid>
+                <Label x:Name="TitleLbl" Content="Image title: " Foreground="White" VerticalContentAlignment="Center" Height="50" VerticalAlignment="Top" Margin="10,0" FontWeight="Bold" FontSize="14"/>
+                <Image x:Name="PreviewImg" Height="200" Margin="10,50,10,0" VerticalAlignment="Top" Source="pack://siteoforigin:,,,/Resources/FullscreenPreview.jpg"/>
+                <Label Content="Display mode: " Foreground="White" HorizontalAlignment="Left" Margin="10,255,0,90" VerticalContentAlignment="Center"/>
+                <ComboBox x:Name="DisplayModeCb" HorizontalAlignment="Left" Margin="103,271,0,0" VerticalAlignment="Top" Width="200" IsReadOnly="True" SelectionChanged="DisplayModeCb_SelectionChanged" />
+                <Label Content="Flip mode: " Foreground="White" HorizontalAlignment="Left" Margin="10,291,0,54" VerticalContentAlignment="Center"/>
+                <ComboBox x:Name="FlipModeCb" HorizontalAlignment="Left" Margin="103,306,0,0" VerticalAlignment="Top" Width="200" IsReadOnly="True" />
+                <WpfHoverControls:HoverButton IconText="&#xE7BA;" IconFontSize="20" Content="Changing the display mode or the flip mode requires a visualizer restart to take effect" Margin="10,0,10,10" VerticalAlignment="Bottom" Height="35" IsEnabled="False" Background="{x:Null}" Foreground="Yellow" IconForeground="Yellow" BorderBrush="Yellow"/>
+            </Grid>
+        </Border>
+        <WpfHoverControls:HoverButton x:Name="SaveConfigBtn" IconText="&#xE105;" IconFontSize="20" Content="Save actual config" Margin="415,0,10,10" VerticalAlignment="Bottom" Height="50" Background="#FF505050" BorderThickness="0" BackgroundHover="#FF5A5A5A" ForegroundHover="White" IconForegroundHover="White" Click="SaveConfigBtn_Click"/>
+    </Grid>
+</UserControl>

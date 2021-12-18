@@ -5,7 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using CSharpNation.Tools;
 using CSharpNation.Config;
+
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 
@@ -15,20 +17,16 @@ namespace CSharpNation.Visualizer
     {
         public WaveController()
         {
-            /*
-            waves = new Wave[GlobalConfig.WaveCount];
-
-            waves[0] = new Wave(255, 255, 255, 2, 2);
-            waves[1] = new Wave(255, 255, 0, 2, 3);
-            waves[2] = new Wave(255, 150, 0, 2, 4);
-            waves[3] = new Wave(255, 0, 0, 2, 5);
-            waves[4] = new Wave(255, 100, 255, 2, 6);
-            waves[5] = new Wave(50, 50, 155, 2, 7);
-            waves[6] = new Wave(0, 0, 255, 2, 8);
-            waves[7] = new Wave(50, 200, 255, 2, 9);
-            waves[8] = new Wave(0, 255, 0, 2, 10);
-            */
             waves = WaveConfig.Waves.ToArray();
+
+            for(int i = 0; i < waves.Length; i++)
+            {
+                if (waves[i].Quality == 0)
+                {
+                    waves[i].Quality = 0.2f;
+                    ErrorLog.AddError(new Error(Error.Type.NonCriticalError, "Detected wave with quality set to 0, changed to 0.2 as this can produce an infinite loop"));
+                }
+            }
         }
 
         private Wave[] waves;

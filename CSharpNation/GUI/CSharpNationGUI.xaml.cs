@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
@@ -22,9 +23,23 @@ namespace CSharpNation.GUI
         public CSharpNationGUI()
         {
             InitializeComponent();
+
+            controller = new CSharpNationController();
+
+            waves = new WavesGUI();
+            backgrounds = new BackgroundsGUI(controller);
+            errors = new ErrorsGUI();
+
+            ChangeControl(waves);
         }
 
-        CSharpNationController controller = new CSharpNationController();
+        CSharpNationController controller;
+
+        private WavesGUI waves;
+        private BackgroundsGUI backgrounds;
+        private ErrorsGUI errors;
+
+        private bool IsMenuExpanded = false;
 
         private void StartTemp_Click(object sender, RoutedEventArgs e)
         {
@@ -44,16 +59,63 @@ namespace CSharpNation.GUI
         private void ResumeBtn_Click(object sender, RoutedEventArgs e)
         {
             controller.ResumeCapture();
+        }        
+
+        private void CloseBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
 
-        private void PreviousBtn_Click(object sender, RoutedEventArgs e)
+        private void MinimizeBtn_Click(object sender, RoutedEventArgs e)
         {
-            controller.PreviousBackground();
+            WindowState = WindowState.Minimized;
         }
 
-        private void NextBtn_Click(object sender, RoutedEventArgs e)
+        private void TopMenu_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            controller.NextBackground();
+            DragMove();
+        }
+
+        private void ExpandBtn_Click(object sender, RoutedEventArgs e)
+        {
+            DoubleAnimation anim = new DoubleAnimation()
+            {
+                From = LeftMenu.ActualWidth,
+                To = IsMenuExpanded ? 50 : 150,
+                Duration = new Duration(TimeSpan.FromMilliseconds(200)),
+                EasingFunction = new CubicEase()
+            };
+
+            LeftMenu.BeginAnimation(WidthProperty, anim);
+
+            IsMenuExpanded = !IsMenuExpanded;
+        }
+
+        private void WavesBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeControl(waves);
+        }
+
+        private void BackgroundsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeControl(backgrounds);
+        }
+
+        private void ErrorsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeControl(errors);
+        }
+
+        private void ChangeControl(FrameworkElement ui)
+        {
+            ContentGrid.Children.Clear();
+
+            ContentGrid.Children.Add(ui);
+        }
+
+        private void LeftMenu_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            ContentGrid.Margin = new Thickness(LeftMenu.Width, TopMenu.Height, 0, BottomMenu.Height);
         }
     }
 }
