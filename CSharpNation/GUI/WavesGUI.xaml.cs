@@ -178,7 +178,7 @@ namespace CSharpNation.GUI
 
         private void AddBtn_Click(object sender, RoutedEventArgs e)
         {
-            waves.Add(new Wave());
+            waves.Add(new Wave(0, 0, 0, 1, 1, 0.2f));
             DrawWaves();
         }
 
