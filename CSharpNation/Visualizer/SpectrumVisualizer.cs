@@ -14,6 +14,7 @@ using CSharpNation.Textures;
 using CSharpNation.Config;
 using CSharpNation.Particles;
 using System.Drawing;
+using System.Diagnostics;
 
 namespace CSharpNation.Visualizer
 {
@@ -76,10 +77,16 @@ namespace CSharpNation.Visualizer
 
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
             spectrum = WaveTools.FixDiscontinuities(analyzer.GetSpectrum());
             spectrum = WaveTools.LoopProm(spectrum, 1, 2);
 
             replay.Push(spectrum);
+
+            stopwatch.Stop();
+            Console.WriteLine("UPDATE SPECTRUM MILIS: {0}", stopwatch.ElapsedTicks.ToString());
 
             CalculateWavePower();
 

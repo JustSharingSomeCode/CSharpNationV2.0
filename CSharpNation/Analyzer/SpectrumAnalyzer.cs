@@ -8,6 +8,7 @@ using Un4seen.Bass;
 using Un4seen.BassWasapi;
 
 using CSharpNation.Config;
+using System.Diagnostics;
 
 namespace CSharpNation.Analyzer
 {
@@ -111,7 +112,10 @@ namespace CSharpNation.Analyzer
         #region Spectrum
         public List<float> GetSpectrum()
         {
+            Stopwatch stopwatch = Stopwatch.StartNew();
             int ret = BassWasapi.BASS_WASAPI_GetData(_fft, (int)BASSData.BASS_DATA_FFT8192);
+            stopwatch.Stop();
+            Console.WriteLine("FFT DATA MILIS: {0}", stopwatch.ElapsedTicks.ToString());
             if (ret < -1) { return _spectrumdata; }
             else
             {
