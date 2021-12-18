@@ -98,5 +98,10 @@ namespace CSharpNation
                 visualizer.PreviousBackground();
             }
         }
+
+        public void SearchBackground(string filename)
+        {
+            visualizer?.SearchBackground(filename);
+        }
     }
 }

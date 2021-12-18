@@ -205,5 +205,10 @@ namespace CSharpNation.Visualizer
         {
             textureController.PreviousBackground();
         }
+
+        public void SearchBackground(string filename)
+        {
+            textureController.SearchBackground(filename);
+        }
     }
 }

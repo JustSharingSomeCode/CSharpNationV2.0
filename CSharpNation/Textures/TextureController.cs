@@ -156,5 +156,17 @@ namespace CSharpNation.Textures
                 actualBackground = textures.Count - 1;
             }
         }
+
+        public void SearchBackground(string filename)
+        {
+            for (int i = 0; i < textures.Count; i++)
+            {
+                if (textures[i].FileName == filename)
+                {
+                    actualBackground = i;
+                    break;
+                }
+            }
+        }
     }
 }

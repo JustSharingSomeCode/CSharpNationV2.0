@@ -100,6 +100,8 @@ namespace CSharpNation.GUI
             HandledSelection = true;
             DisplayModeCb.SelectedItem = backgrounds[index].DisplayMode.ToString();
             HandledSelection = false;
+
+            controller.SearchBackground(backgrounds[index].FileName);
         }
 
         private void PrevBgBtn_Click(object sender, RoutedEventArgs e)
