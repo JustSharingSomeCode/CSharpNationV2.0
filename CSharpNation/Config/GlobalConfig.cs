@@ -35,6 +35,9 @@ namespace CSharpNation.Config
         public static bool BackgroundMovement { get; set; }
 
         public static bool EnableShaking { get; set; } = true;
+        public static bool EnableReplayBuffer { get; set; } = true;
+        public static int ReplayBufferCount { get; set; } = 6;
+
 
         public static string ConfigDirectoryPath { get; } = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\CSharpNation";
         private static string ConfigTxtPath = ConfigDirectoryPath + @"\Config.txt";
