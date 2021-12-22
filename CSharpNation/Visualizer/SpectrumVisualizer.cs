@@ -154,7 +154,7 @@ namespace CSharpNation.Visualizer
 
             particlesController.DrawParticles();
             
-            waveController.DrawWaves(Width / 2 + Rx, Height / 2 + Ry);
+            waveController.DrawWaves(Width / 2 + Rx, Height / 2 + Ry, radius);
 
             //DrawCircle(Width / 2, Height / 2, (Height / 4) + power, Color.White);
             //DrawCircle(Width / 2, Height / 2, (Height / 4.2) + power, Color.Black);

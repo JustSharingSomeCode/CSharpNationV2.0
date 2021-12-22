@@ -39,7 +39,7 @@ namespace CSharpNation.Visualizer
             }
         }
 
-        public void DrawWaves(float x, float y)
+        public void DrawWaves(float x, float y, float radius)
         {
             Wave w;
 
@@ -51,6 +51,73 @@ namespace CSharpNation.Visualizer
                 {
                     continue;
                 }
+
+                if (GlobalConfig.EnableGlow)
+                {
+                    for (int j = 0; j < w.GlowCatmullRomPoints.Count - 1; j++)
+                    {
+                        //get opacity based on lenght
+                        int alpha = (int)(WaveTools.Clamp(0.0f, 1.0f, (float)(WaveTools.VectorLenght(new Vector2(x, y), w.GlowCatmullRomPoints[j]) - (radius + GlobalConfig.GlowSize)) / GlobalConfig.GlowMaxAlphaAtSize) * GlobalConfig.GlowMaxAlpha);
+
+                        GL.Enable(EnableCap.Blend);
+                        GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+                        GL.Begin(PrimitiveType.Triangles);
+
+                        GL.Color4(Color.FromArgb(0, w.R, w.G, w.B));
+                        GL.Vertex2(w.GlowCatmullRomPoints[j]);
+                        GL.Vertex2(w.GlowCatmullRomPoints[j + 1]);
+                        GL.Color4(Color.FromArgb(alpha, w.R, w.G, w.B));
+                        GL.Vertex2(w.CatmullRomPoints[j]);
+
+                        GL.End();
+
+                        GL.Begin(PrimitiveType.Triangles);
+
+                        GL.Color4(Color.FromArgb(0, w.R, w.G, w.B));
+                        GL.Vertex2(w.GlowCatmullRomPoints[j + 1]);
+                        GL.Color4(Color.FromArgb(alpha, w.R, w.G, w.B));
+                        GL.Vertex2(w.CatmullRomPoints[j + 1]);
+                        GL.Vertex2(w.CatmullRomPoints[j]);
+
+                        GL.End();
+                        GL.Disable(EnableCap.Blend);
+
+                        //left side
+
+                        GL.Enable(EnableCap.Blend);
+                        GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+                        GL.Begin(PrimitiveType.Triangles);
+
+                        GL.Color4(Color.FromArgb(0, w.R, w.G, w.B));
+                        GL.Vertex2(MirrorPosition(x, w.GlowCatmullRomPoints[j]), w.GlowCatmullRomPoints[j].Y);
+                        GL.Vertex2(MirrorPosition(x, w.GlowCatmullRomPoints[j + 1]), w.GlowCatmullRomPoints[j + 1].Y);
+                        GL.Color4(Color.FromArgb(alpha, w.R, w.G, w.B));
+                        GL.Vertex2(MirrorPosition(x, w.CatmullRomPoints[j]), w.CatmullRomPoints[j].Y);
+
+                        GL.End();
+
+                        GL.Begin(PrimitiveType.Triangles);
+
+                        GL.Color4(Color.FromArgb(0, w.R, w.G, w.B));
+                        GL.Vertex2(MirrorPosition(x, w.GlowCatmullRomPoints[j + 1]), w.GlowCatmullRomPoints[j + 1].Y);
+                        GL.Color4(Color.FromArgb(alpha, w.R, w.G, w.B));
+                        GL.Vertex2(MirrorPosition(x, w.CatmullRomPoints[j + 1]), w.CatmullRomPoints[j + 1].Y);
+                        GL.Vertex2(MirrorPosition(x, w.CatmullRomPoints[j]), w.CatmullRomPoints[j].Y);
+
+                        GL.End();
+                        GL.Disable(EnableCap.Blend);
+                    }
+                }
+            }
+
+            for (int i = waves.Length - 1; i >= 0; i--)
+            {
+                w = waves[i];
+
+                if (w.Spectrum == null)
+                {
+                    continue;
+                }                
 
                 for (int j = 0; j < w.CatmullRomPoints.Count - 1; j++)
                 {
@@ -75,7 +142,7 @@ namespace CSharpNation.Visualizer
 
                     GL.End();
                 }
-            }
+            }            
         }
 
         private float MirrorPosition(float x, Vector2 vector)
