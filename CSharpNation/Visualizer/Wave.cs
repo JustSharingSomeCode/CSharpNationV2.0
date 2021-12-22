@@ -18,7 +18,7 @@ namespace CSharpNation.Visualizer
     {
         public Wave()
         {
-            replay = new ReplayBuffer(5);            
+            replay = new ReplayBuffer(GlobalConfig.ReplayBufferCount);
         }
 
         public Wave(int r, int g, int b, int bars, int loops, float quality) : this()
@@ -51,9 +51,16 @@ namespace CSharpNation.Visualizer
 
         public void Update(List<float> spectrum, float x, float y, float radius)
         {
-            replay.Push(spectrum);
+            if (GlobalConfig.EnableReplayBuffer)
+            {
+                replay.Push(spectrum);
 
-            Spectrum = replay.GetAverage();
+                Spectrum = replay.GetAverage();
+            }
+            else
+            {
+                Spectrum = spectrum;
+            }            
 
             if(Spectrum == null)
             {
