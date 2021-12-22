@@ -64,7 +64,11 @@ namespace CSharpNation.Visualizer
             Spectrum = WaveTools.CombineWaves(Spectrum, promSpectrum);
 
             UpdatePoints(x, y, radius);
-            UpdateGlowPoints(x, y, radius + GlobalConfig.GlowSize);
+
+            if(GlobalConfig.EnableGlow)
+            {
+                UpdateGlowPoints(x, y, radius + GlobalConfig.GlowSize);
+            }            
         }
 
         private void UpdatePoints(float x, float y, float circleRadius)

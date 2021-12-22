@@ -35,6 +35,7 @@ namespace CSharpNation.Config
         public static bool BackgroundMovement { get; set; }
 
         public static bool EnableShaking { get; set; } = true;
+        public static bool EnableGlow { get; set; } = true;
         public static float GlowSize { get; set; } = 20.0f;
         public static float GlowMaxAlphaAtSize { get; set; } = 50.0f;
         public static int GlowMaxAlpha { get; set; } = 80;
