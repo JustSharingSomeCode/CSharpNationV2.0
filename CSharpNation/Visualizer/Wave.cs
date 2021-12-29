@@ -18,7 +18,7 @@ namespace CSharpNation.Visualizer
     {
         public Wave()
         {
-            replay = new ReplayBuffer(GlobalConfig.ReplayBufferCount);
+            replay = new ReplayBuffer(GlobalConfig.ReplayBufferSize);
         }
 
         public Wave(int r, int g, int b, int bars, int loops, float quality) : this()
