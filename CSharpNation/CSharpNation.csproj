@@ -77,6 +77,9 @@
     <Compile Include="GUI\BackgroundsGUI.xaml.cs">
       <DependentUpon>BackgroundsGUI.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\ConfigGUI.xaml.cs">
+      <DependentUpon>ConfigGUI.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\ErrorsGUI.xaml.cs">
       <DependentUpon>ErrorsGUI.xaml</DependentUpon>
     </Compile>
@@ -101,6 +104,10 @@
     <Compile Include="Visualizer\Wave.cs" />
     <Compile Include="Visualizer\WaveController.cs" />
     <Page Include="GUI\BackgroundsGUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\ConfigGUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
