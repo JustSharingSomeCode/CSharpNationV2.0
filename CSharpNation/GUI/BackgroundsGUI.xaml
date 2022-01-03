@@ -22,20 +22,14 @@
         </WpfHoverControls:HoverScrollViewer>
         <WpfHoverControls:HoverButton x:Name="PrevBgBtn" IconText="&#xE26C;" Content="Previous background" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="195" Height="50" Click="PrevBgBtn_Click" Background="#FF505050" BorderThickness="0" BackgroundHover="#FF5A5A5A" IconForegroundHover="White" ForegroundHover="White"/>
         <WpfHoverControls:HoverButton x:Name="NextBgBtn" IconText="&#xE26B;" Content="Next background" HorizontalAlignment="Left" Margin="215,0,0,10" VerticalAlignment="Bottom" Width="195" Height="50" Click="NextBgBtn_Click" Background="#FF505050" BorderThickness="0" BackgroundHover="#FF5A5A5A" ForegroundHover="White" IconForegroundHover="White"/>
-        <Border CornerRadius="5" Height="50" Margin="415,105,10,0" VerticalAlignment="Top" Background="#FF505050">
-            <Grid>
-                <Label Content="Background Dim: " Foreground="White" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalContentAlignment="Center"/>
-                <CheckBox x:Name="BackgroundMovementCb" Content="Background movement" HorizontalAlignment="Right" Margin="0,18,10,0" VerticalAlignment="Top" Foreground="White" Click="BackgroundMovementCb_Click"/>
-            </Grid>
-        </Border>
-        <Border CornerRadius="5" Height="395" Margin="415,160,10,0" VerticalAlignment="Top" Background="#FF505050">
+        <Border CornerRadius="5" Height="450" Margin="415,105,10,0" VerticalAlignment="Top" Background="#FF505050">
             <Grid>
                 <Label x:Name="TitleLbl" Content="Image title: " Foreground="White" VerticalContentAlignment="Center" Height="50" VerticalAlignment="Top" Margin="10,0" FontWeight="Bold" FontSize="14"/>
                 <Image x:Name="PreviewImg" Height="200" Margin="10,50,10,0" VerticalAlignment="Top" Source="pack://siteoforigin:,,,/Resources/FullscreenPreview.jpg"/>
-                <Label Content="Display mode: " Foreground="White" HorizontalAlignment="Left" Margin="10,255,0,90" VerticalContentAlignment="Center"/>
-                <ComboBox x:Name="DisplayModeCb" HorizontalAlignment="Left" Margin="103,271,0,0" VerticalAlignment="Top" Width="200" IsReadOnly="True" SelectionChanged="DisplayModeCb_SelectionChanged" />
-                <Label Content="Flip mode: " Foreground="White" HorizontalAlignment="Left" Margin="10,291,0,54" VerticalContentAlignment="Center"/>
-                <ComboBox x:Name="FlipModeCb" HorizontalAlignment="Left" Margin="103,306,0,0" VerticalAlignment="Top" Width="200" IsReadOnly="True" />
+                <Label Content="Display mode: " Foreground="White" HorizontalAlignment="Left" Margin="10,0,0,90" VerticalContentAlignment="Center" Height="50" VerticalAlignment="Bottom"/>
+                <ComboBox x:Name="DisplayModeCb" HorizontalAlignment="Left" Margin="103,0,0,102" VerticalAlignment="Bottom" Width="200" IsReadOnly="True" SelectionChanged="DisplayModeCb_SelectionChanged" />
+                <Label Content="Flip mode: " Foreground="White" HorizontalAlignment="Left" Margin="10,0,0,54" VerticalContentAlignment="Center" Height="50" VerticalAlignment="Bottom"/>
+                <ComboBox x:Name="FlipModeCb" HorizontalAlignment="Left" Margin="103,0,0,67" VerticalAlignment="Bottom" Width="200" IsReadOnly="True" />
                 <WpfHoverControls:HoverButton IconText="&#xE7BA;" IconFontSize="20" Content="Changing the display mode or the flip mode requires a visualizer restart to take effect" Margin="10,0,10,10" VerticalAlignment="Bottom" Height="35" IsEnabled="False" Background="{x:Null}" Foreground="Yellow" IconForeground="Yellow" BorderBrush="Yellow"/>
             </Grid>
         </Border>
