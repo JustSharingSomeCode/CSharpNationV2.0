@@ -24,14 +24,14 @@ namespace CSharpNation.Config
             TexturesConfig.Initialize();
         }
 
-        public static int Lines { get; private set; }
+        public static int Lines { get; set; }
         public static float DegreesIncrement { get; private set; }
 
         public static float Fps { get; private set; }
 
-        public static bool AutoBackgroundChange { get; private set; }
-        public static int BackgroundTime { get; private set; } //seconds
-        public static int BackgroundDim { get; private set; }
+        public static bool AutoBackgroundChange { get; set; }
+        public static int BackgroundTime { get; set; } //seconds
+        public static int BackgroundDim { get; set; }
         public static bool BackgroundMovement { get; set; }
 
         public static bool EnableShaking { get; set; } = true;
