@@ -12,6 +12,25 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        <Border BorderBrush="Black" CornerRadius="5" Margin="10,10,5,0" Background="#FF505050" Height="155" VerticalAlignment="Top">
+            <Grid>
+                <Label x:Name="TitleLbl2" Content="General" Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="50" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Padding="15"/>
+                <Grid Margin="0,50,0,0" Height="Auto" VerticalAlignment="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Column="0" Content="Analyzer samples:" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Foreground="White"/>
+                    <WpfHoverControls:HoverTextBox x:Name="AnalyzerSamplesTxt" Grid.Column="1" HorizontalAlignment="Center" Height="40" Grid.Row="0" TextWrapping="Wrap" Text="0" VerticalAlignment="Center" Width="200" TextAlignment="Center" Foreground="White" BorderThickness="0" Background="#FF323232" BackgroundHover="#FF3C3C3C"/>
+                    <Label Grid.Column="0" Grid.Row="1" Content="Enable logo shaking:" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Foreground="White"/>
+                    <WpfHoverControls:HoverToggleButton x:Name="EnableLogoShakingTb" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="120" DisabledBrushColor="#FF323232" EnabledBrushColor="#FF00B9FF"/>
+                </Grid>
+            </Grid>
+        </Border>
         <Border BorderBrush="Black" CornerRadius="5" Margin="10,170,5,0" Background="#FF505050" Height="249" VerticalAlignment="Top">
             <Grid>
                 <Label x:Name="TitleLbl1" Content="Backgrounds " Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="50" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Padding="15"/>
@@ -27,32 +46,13 @@
                         <RowDefinition Height="50"/>
                     </Grid.RowDefinitions>
                     <Label Grid.Column="0" Content="Auto background change:" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Foreground="White"/>
-                    <WpfHoverControls:HoverToggleButton Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="120" DisabledBrushColor="#FF323232" EnabledBrushColor="#FF00B9FF"/>
+                    <WpfHoverControls:HoverToggleButton x:Name="AutoBackgroundChangeTb" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="120" DisabledBrushColor="#FF323232" EnabledBrushColor="#FF00B9FF"/>
                     <Label Grid.Column="0" Grid.Row="1" Content="Background duration (seconds):" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Foreground="White"/>
-                    <WpfHoverControls:HoverTextBox Grid.Column="1" HorizontalAlignment="Center" Height="40" Grid.Row="1" TextWrapping="Wrap" Text="0" VerticalAlignment="Center" Width="200" TextAlignment="Center" Foreground="White" BorderThickness="0" Background="#FF323232" BackgroundHover="#FF3C3C3C"/>
+                    <WpfHoverControls:HoverTextBox x:Name="BackgroundDurationTxt" Grid.Column="1" HorizontalAlignment="Center" Height="40" Grid.Row="1" TextWrapping="Wrap" Text="0" VerticalAlignment="Center" Width="200" TextAlignment="Center" Foreground="White" BorderThickness="0" Background="#FF323232" BackgroundHover="#FF3C3C3C"/>
                     <Label Grid.Column="0" Grid.Row="2" Content="Background dim:" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Foreground="White"/>
-                    <WpfHoverControls:HoverFloatAdder Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" Width="200" ButtonBrush="#FF282828" ButtonHoverBrush="#FF3C3C3C" TextBoxBrush="#FF323232" TextBoxHoverBrush="#FF3C3C3C" Height="40" VerticalAlignment="Center" Value="100" MaxValue="100"/>
+                    <WpfHoverControls:HoverFloatAdder x:Name="BackgroundDimFa" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" Width="200" ButtonBrush="#FF282828" ButtonHoverBrush="#FF3C3C3C" TextBoxBrush="#FF323232" TextBoxHoverBrush="#FF3C3C3C" Height="40" VerticalAlignment="Center" Value="100" MaxValue="100"/>
                     <Label Grid.Column="0" Grid.Row="3" Content="Enable background movement:" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Foreground="White"/>
-                    <WpfHoverControls:HoverToggleButton Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="120" DisabledBrushColor="#FF323232" EnabledBrushColor="#FF00B9FF"/>
-                </Grid>
-            </Grid>
-        </Border>
-        <Border BorderBrush="Black" CornerRadius="5" Margin="10,10,5,0" Background="#FF505050" Height="155" VerticalAlignment="Top">
-            <Grid>
-                <Label x:Name="TitleLbl2" Content="General" Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="50" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Padding="15"/>
-                <Grid Margin="0,50,0,0" Height="Auto" VerticalAlignment="Top">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="50"/>
-                    </Grid.RowDefinitions>
-                    <Label Grid.Column="0" Content="Analizer samples:" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Foreground="White"/>
-                    <WpfHoverControls:HoverTextBox Grid.Column="1" HorizontalAlignment="Center" Height="40" Grid.Row="0" TextWrapping="Wrap" Text="0" VerticalAlignment="Center" Width="200" TextAlignment="Center" Foreground="White" BorderThickness="0" Background="#FF323232" BackgroundHover="#FF3C3C3C"/>
-                    <Label Grid.Column="0" Grid.Row="1" Content="Enable logo shaking:" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Foreground="White"/>
-                    <WpfHoverControls:HoverToggleButton Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="120" DisabledBrushColor="#FF323232" EnabledBrushColor="#FF00B9FF"/>
+                    <WpfHoverControls:HoverToggleButton x:Name="BackgroundMovementTb" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="120" DisabledBrushColor="#FF323232" EnabledBrushColor="#FF00B9FF"/>
                 </Grid>
             </Grid>
         </Border>
@@ -73,17 +73,17 @@
                         <RowDefinition Height="50"/>
                     </Grid.RowDefinitions>
                     <Label Grid.Column="0" Content="Enable glow:" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Foreground="White"/>
-                    <WpfHoverControls:HoverToggleButton Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="120" DisabledBrushColor="#FF323232" EnabledBrushColor="#FF00B9FF"/>
+                    <WpfHoverControls:HoverToggleButton x:Name="EnableGlowTb" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="120" DisabledBrushColor="#FF323232" EnabledBrushColor="#FF00B9FF"/>
                     <Label Grid.Column="0" Grid.Row="1" Content="Glow max alpha:" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Foreground="White"/>
-                    <WpfHoverControls:HoverTextBox Grid.Column="1" HorizontalAlignment="Center" Height="40" Grid.Row="1" TextWrapping="Wrap" Text="0" VerticalAlignment="Center" Width="200" TextAlignment="Center" Foreground="White" BorderThickness="0" Background="#FF323232" BackgroundHover="#FF3C3C3C"/>
+                    <WpfHoverControls:HoverTextBox x:Name="GlowMaxAlphaTxt" Grid.Column="1" HorizontalAlignment="Center" Height="40" Grid.Row="1" TextWrapping="Wrap" Text="0" VerticalAlignment="Center" Width="200" TextAlignment="Center" Foreground="White" BorderThickness="0" Background="#FF323232" BackgroundHover="#FF3C3C3C"/>
                     <Label Grid.Column="0" Grid.Row="2" Content="Glow max alpha at wave size:" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Foreground="White"/>
-                    <WpfHoverControls:HoverTextBox Grid.Column="1" HorizontalAlignment="Center" Height="40" Grid.Row="2" TextWrapping="Wrap" Text="0" VerticalAlignment="Center" Width="200" TextAlignment="Center" Foreground="White" BorderThickness="0" Background="#FF323232" BackgroundHover="#FF3C3C3C"/>
+                    <WpfHoverControls:HoverTextBox x:Name="GlowMaxAlphaAtSizeTxt" Grid.Column="1" HorizontalAlignment="Center" Height="40" Grid.Row="2" TextWrapping="Wrap" Text="0" VerticalAlignment="Center" Width="200" TextAlignment="Center" Foreground="White" BorderThickness="0" Background="#FF323232" BackgroundHover="#FF3C3C3C"/>
                     <Label Grid.Column="0" Grid.Row="3" Content="Glow size (distance from wave border):" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Foreground="White"/>
-                    <WpfHoverControls:HoverTextBox Grid.Column="1" HorizontalAlignment="Center" Height="40" Grid.Row="3" TextWrapping="Wrap" Text="0" VerticalAlignment="Center" Width="200" TextAlignment="Center" Foreground="White" BorderThickness="0" Background="#FF323232" BackgroundHover="#FF3C3C3C"/>
+                    <WpfHoverControls:HoverTextBox x:Name="GlowSizeTxt" Grid.Column="1" HorizontalAlignment="Center" Height="40" Grid.Row="3" TextWrapping="Wrap" Text="0" VerticalAlignment="Center" Width="200" TextAlignment="Center" Foreground="White" BorderThickness="0" Background="#FF323232" BackgroundHover="#FF3C3C3C"/>
                     <Label Grid.Column="0" Grid.Row="4" Content="Enable replay buffer:" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Foreground="White"/>
-                    <WpfHoverControls:HoverToggleButton Grid.Column="1" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="120" DisabledBrushColor="#FF323232" EnabledBrushColor="#FF00B9FF"/>
+                    <WpfHoverControls:HoverToggleButton x:Name="EnableReplayBufferTb" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="120" DisabledBrushColor="#FF323232" EnabledBrushColor="#FF00B9FF"/>
                     <Label Grid.Column="0" Grid.Row="5" Content="Replay buffer size:" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Foreground="White"/>
-                    <WpfHoverControls:HoverTextBox Grid.Column="1" HorizontalAlignment="Center" Height="40" Grid.Row="5" TextWrapping="Wrap" Text="0" VerticalAlignment="Center" Width="200" TextAlignment="Center" Foreground="White" BorderThickness="0" Background="#FF323232" BackgroundHover="#FF3C3C3C"/>
+                    <WpfHoverControls:HoverTextBox x:Name="ReplayBufferSize" Grid.Column="1" HorizontalAlignment="Center" Height="40" Grid.Row="5" TextWrapping="Wrap" Text="0" VerticalAlignment="Center" Width="200" TextAlignment="Center" Foreground="White" BorderThickness="0" Background="#FF323232" BackgroundHover="#FF3C3C3C"/>
                 </Grid>
             </Grid>
         </Border>
