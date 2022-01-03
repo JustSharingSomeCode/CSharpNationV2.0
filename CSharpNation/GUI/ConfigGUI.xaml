@@ -87,7 +87,6 @@
                 </Grid>
             </Grid>
         </Border>
-
-
+        <WpfHoverControls:HoverButton x:Name="ResetWavesBtn" Grid.Column="1" IconText="&#xE117;" IconFontSize="20" Content="Reset default waves" Margin="10,0,10,10" VerticalAlignment="Bottom" Height="50" Background="#FF505050" BorderThickness="0" BackgroundHover="#FF5A5A5A" ForegroundHover="White" IconForegroundHover="White" Click="ResetWavesBtn_Click"/>
     </Grid>
 </UserControl>

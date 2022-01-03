@@ -177,5 +177,10 @@ namespace CSharpNation.GUI
         {
             GlobalConfig.BackgroundDim = (int)(BackgroundDimFa.Value / 100 * 255);
         }
+
+        private void ResetWavesBtn_Click(object sender, RoutedEventArgs e)
+        {
+            WaveConfig.LoadDefaultWaves();
+        }
     }
 }
