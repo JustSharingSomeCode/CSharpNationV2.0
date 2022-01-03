@@ -36,7 +36,7 @@ namespace CSharpNation.GUI
 
             AutoBackgroundChangeTb.Value = GlobalConfig.AutoBackgroundChange;
             BackgroundDurationTxt.Text = GlobalConfig.BackgroundTime.ToString();
-            BackgroundDimFa.Value = GlobalConfig.BackgroundDim;
+            BackgroundDimFa.Value = GlobalConfig.BackgroundDim * 100 / 255;
             BackgroundMovementTb.Value = GlobalConfig.BackgroundMovement;
 
             EnableGlowTb.Value = GlobalConfig.EnableGlow;
@@ -171,6 +171,11 @@ namespace CSharpNation.GUI
         private void EnableReplayBufferTb_OnValueChanged(object sender, EventArgs e)
         {
             GlobalConfig.EnableReplayBuffer = EnableReplayBufferTb.Value;
+        }
+
+        private void BackgroundDimFa_OnValueChanged(object sender, EventArgs e)
+        {
+            GlobalConfig.BackgroundDim = (int)(BackgroundDimFa.Value / 100 * 255);
         }
     }
 }
