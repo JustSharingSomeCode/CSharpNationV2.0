@@ -173,7 +173,7 @@ namespace CSharpNation.Visualizer
             particlesController.DrawParticles();
 
             Stopwatch waveDrawingStw = Stopwatch.StartNew();
-            waveController.DrawWaves(Width / 2 + Rx, Height / 2 + Ry);
+            waveController.DrawWaves(Width / 2 + Rx, Height / 2 + Ry, radius);
             waveDrawingStw.Stop();
             Console.WriteLine("DRAW WAVES MILIS: {0}", waveDrawingStw.ElapsedTicks.ToString());
 
