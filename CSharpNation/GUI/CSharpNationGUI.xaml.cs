@@ -29,6 +29,7 @@ namespace CSharpNation.GUI
             waves = new WavesGUI();
             backgrounds = new BackgroundsGUI(controller);
             errors = new ErrorsGUI();
+            config = new ConfigGUI();
 
             ChangeControl(waves);
         }
@@ -38,6 +39,7 @@ namespace CSharpNation.GUI
         private WavesGUI waves;
         private BackgroundsGUI backgrounds;
         private ErrorsGUI errors;
+        private ConfigGUI config;
 
         private bool IsMenuExpanded = false;
 
@@ -59,7 +61,7 @@ namespace CSharpNation.GUI
         private void ResumeBtn_Click(object sender, RoutedEventArgs e)
         {
             controller.ResumeCapture();
-        }        
+        }
 
         private void CloseBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -106,11 +108,16 @@ namespace CSharpNation.GUI
             ChangeControl(errors);
         }
 
+        private void ConfigBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeControl(config);
+        }
+
         private void ChangeControl(FrameworkElement ui)
         {
             ContentGrid.Children.Clear();
 
-            ContentGrid.Children.Add(ui);
+            _ = ContentGrid.Children.Add(ui);
         }
 
         private void LeftMenu_SizeChanged(object sender, SizeChangedEventArgs e)

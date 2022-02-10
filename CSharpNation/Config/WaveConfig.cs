@@ -47,11 +47,16 @@ namespace CSharpNation.Config
             }
         }
 
+        public static void LoadDefaultWaves()
+        {
+            Waves = DefaultWaves();
+        }
+
         public static List<Wave> DefaultWaves()
         {
             Wave[] waves = new Wave[9];
 
-            waves[0] = new Wave(255, 255, 255, 2, 20, 0.1f);
+            waves[0] = new Wave(255, 255, 255, 2, 2, 0.1f);
             waves[1] = new Wave(255, 255, 0, 2, 3, 0.1f);
             waves[2] = new Wave(255, 150, 0, 2, 4, 0.2f);
             waves[3] = new Wave(255, 0, 0, 2, 5, 0.2f);

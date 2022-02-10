@@ -19,22 +19,29 @@ namespace CSharpNation.Config
            
             DegreesIncrement = 180f / (Lines - 1);                      
 
-            CheckConfigFolder();
+            CheckConfigDirectory();
             CheckResourcesDirectory();
             TexturesConfig.Initialize();
         }
 
-        public static int Lines { get; private set; }
+        public static int Lines { get; set; }
         public static float DegreesIncrement { get; private set; }
 
         public static float Fps { get; private set; }
 
-        public static bool AutoBackgroundChange { get; private set; }
-        public static int BackgroundTime { get; private set; } //seconds
-        public static int BackgroundDim { get; private set; }
+        public static bool AutoBackgroundChange { get; set; }
+        public static int BackgroundTime { get; set; } //seconds
+        public static int BackgroundDim { get; set; }
         public static bool BackgroundMovement { get; set; }
 
         public static bool EnableShaking { get; set; } = true;
+        public static bool EnableGlow { get; set; } = true;
+        public static float GlowSize { get; set; } = 20.0f;
+        public static float GlowMaxAlphaAtSize { get; set; } = 50.0f;
+        public static int GlowMaxAlpha { get; set; } = 80;
+        public static bool EnableReplayBuffer { get; set; } = true;
+        public static int ReplayBufferSize { get; set; } = 6;
+
 
         public static string ConfigDirectoryPath { get; } = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\CSharpNation";
         private static string ConfigTxtPath = ConfigDirectoryPath + @"\Config.txt";
@@ -51,7 +58,8 @@ namespace CSharpNation.Config
             }
         }
 
-        private static void CheckConfigFolder()
+        #region CheckConfigDirectory
+        private static void CheckConfigDirectory()
         {
             if (!Directory.Exists(ConfigDirectoryPath))
             {
@@ -59,7 +67,9 @@ namespace CSharpNation.Config
                 WriteConfig(DefaultConfig());
             }
         }
+        #endregion
 
+        #region CheckResourcesDirectory
         private static void CheckResourcesDirectory()
         {
             if (!Directory.Exists(ResourcesDirectoryPath))
@@ -91,6 +101,7 @@ namespace CSharpNation.Config
                 d.Dispose();
             }
         }
+        #endregion
 
         private static void WriteConfig(string[] config)
         {
@@ -105,7 +116,15 @@ namespace CSharpNation.Config
                 "60.0f", //fps
                 "60", //backgrounds seconds
                 "True", //auto background change
-                "150" //background dim
+                "150", //background dim
+                "True", //background movement
+                "True", //enable shaking
+                "True", //enable glow
+                "20.0f", //glow size
+                "50.0f", //glow max alpha at size
+                "80", //glow max alpha
+                "True", //enable replay buffer
+                "6" //replay buffer size
             };
         }
 
@@ -117,7 +136,15 @@ namespace CSharpNation.Config
                 Fps.ToString(), //fps
                 BackgroundTime.ToString(), //backgrounds seconds
                 AutoBackgroundChange.ToString(), //auto background change
-                BackgroundDim.ToString() //background dim
+                BackgroundDim.ToString(), //background dim
+                BackgroundMovement.ToString(),
+                EnableShaking.ToString(),
+                EnableGlow.ToString(),
+                GlowSize.ToString(),
+                GlowMaxAlphaAtSize.ToString(),
+                GlowMaxAlpha.ToString(),
+                EnableReplayBuffer.ToString(),
+                ReplayBufferSize.ToString()
             };
         }
 
@@ -142,17 +169,35 @@ namespace CSharpNation.Config
         {
             if (File.Exists(ConfigTxtPath))
             {
-                string[] config = File.ReadAllLines(ConfigTxtPath);
-                Lines = Convert.ToInt32(config[0]);
-                TexturesPath = config[1];
-                Fps = Convert.ToInt32(config[2]);
-                BackgroundTime = Convert.ToInt32(config[3]);
-                AutoBackgroundChange = config[4] == "True";
-                BackgroundDim = Convert.ToInt32(config[5]);
+                try
+                {
+                    string[] config = File.ReadAllLines(ConfigTxtPath);
+                    Lines = Convert.ToInt32(config[0]);
+                    TexturesPath = config[1];
+                    Fps = Convert.ToInt32(config[2]);
+                    BackgroundTime = Convert.ToInt32(config[3]);
+                    AutoBackgroundChange = config[4] == "True";
+                    BackgroundDim = Convert.ToInt32(config[5]);
+                    BackgroundMovement = config[6] == "True";
+                    EnableShaking = config[7] == "True";
+                    EnableGlow = config[8] == "True";
+                    GlowSize = float.Parse(config[9]);
+                    GlowMaxAlphaAtSize = float.Parse(config[10]);
+                    GlowMaxAlpha = Convert.ToInt32(config[11]);
+                    EnableReplayBuffer = config[12] == "True";
+                    ReplayBufferSize = Convert.ToInt32(config[13]);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    WriteConfig(DefaultConfig());
+                    LoadConfig();
+                }
             }
             else
             {
                 WriteConfig(DefaultConfig());
+                LoadConfig();
             }
         }
     }

@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using OpenTK;
+using OpenTK.Graphics.OpenGL;
+
 namespace CSharpNation.Tools
 {
     class WaveTools
@@ -123,6 +126,16 @@ namespace CSharpNation.Tools
         public static int Clamp(int min, int max, int value)
         {
             return (value < min) ? min : (value > max) ? max : value;
+        }
+
+        public static float Clamp(float min, float max, float value)
+        {
+            return (value < min) ? min : (value > max) ? max : value;
+        }
+
+        public static double VectorLenght(Vector2 a, Vector2 b)
+        {
+            return Math.Sqrt(Math.Pow(b.X - a.X, 2) + Math.Pow(b.Y - a.Y, 2));
         }
     }
 }

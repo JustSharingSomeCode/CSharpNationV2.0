@@ -18,7 +18,7 @@ namespace CSharpNation.Visualizer
     {
         public Wave()
         {
-            replay = new ReplayBuffer(5);            
+            replay = new ReplayBuffer(GlobalConfig.ReplayBufferSize);
         }
 
         public Wave(int r, int g, int b, int bars, int loops, float quality) : this()
@@ -36,6 +36,7 @@ namespace CSharpNation.Visualizer
         private List<float> promSpectrum;
 
         public List<Vector2> CatmullRomPoints { get; private set; } = new List<Vector2>();
+        public List<Vector2> GlowCatmullRomPoints { get; private set; } = new List<Vector2>();
 
         public int R { get; set; }
         public int G { get; set; }
@@ -50,9 +51,16 @@ namespace CSharpNation.Visualizer
 
         public void Update(List<float> spectrum, float x, float y, float radius)
         {
-            replay.Push(spectrum);
+            if (GlobalConfig.EnableReplayBuffer)
+            {
+                replay.Push(spectrum);
 
-            Spectrum = replay.GetAverage();
+                Spectrum = replay.GetAverage();
+            }
+            else
+            {
+                Spectrum = spectrum;
+            }            
 
             if(Spectrum == null)
             {
@@ -64,6 +72,11 @@ namespace CSharpNation.Visualizer
             Spectrum = WaveTools.CombineWaves(Spectrum, promSpectrum);
             
             UpdatePoints(x, y, radius);
+
+            if(GlobalConfig.EnableGlow)
+            {
+                UpdateGlowPoints(x, y, radius + GlobalConfig.GlowSize);
+            }            
         }
 
         private void UpdatePoints(float x, float y, float circleRadius)
@@ -87,6 +100,31 @@ namespace CSharpNation.Visualizer
                 for (float j = 0f; j <= 1; j += Quality)
                 {
                     CatmullRomPoints.Add(CatmullRom(j, p1, p2, p3, p4));
+                }
+            }
+        }
+
+        private void UpdateGlowPoints(float x, float y, float circleRadius)
+        {
+            if (Spectrum == null)
+            {
+                return;
+            }
+
+            GlowCatmullRomPoints.Clear();
+
+            for (int i = 0; i < Spectrum.Count - 1; i++)
+            {
+                p1 = GetPosition(x, y, WaveTools.Clamp(0, Spectrum.Count, i - 1), circleRadius);
+
+                p2 = GetPosition(x, y, i, circleRadius);
+                p3 = GetPosition(x, y, i + 1, circleRadius);
+
+                p4 = GetPosition(x, y, WaveTools.Clamp(0, Spectrum.Count - 1, i + 2), circleRadius);
+
+                for (float j = 0f; j <= 1; j += Quality)
+                {
+                    GlowCatmullRomPoints.Add(CatmullRom(j, p1, p2, p3, p4));
                 }
             }
         }
