@@ -17,14 +17,26 @@ namespace CSharpNation.Config
         {
             LoadConfig();
            
-            DegreesIncrement = 180f / (Lines - 1);                      
+            DegreesIncrement = 180f / (Lines - 1.0f);
 
             CheckConfigDirectory();
             CheckResourcesDirectory();
             TexturesConfig.Initialize();
         }
 
-        public static int Lines { get; set; }
+        private static int lines;
+        public static int Lines
+        {
+            get
+            {
+                return lines;
+            }
+            set
+            {
+                lines = value;
+                DegreesIncrement = 180f / (Lines - 1.0f);
+            }
+        }
         public static float DegreesIncrement { get; private set; }
 
         public static float Fps { get; private set; }
@@ -111,7 +123,7 @@ namespace CSharpNation.Config
         private static string[] DefaultConfig()
         {
             return new string[] {
-                "64", //lines
+                "50", //lines
                 "", //backgrounds
                 "60.0", //fps
                 "60", //backgrounds seconds
