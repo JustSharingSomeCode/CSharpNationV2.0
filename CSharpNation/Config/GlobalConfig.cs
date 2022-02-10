@@ -113,15 +113,15 @@ namespace CSharpNation.Config
             return new string[] {
                 "64", //lines
                 "", //backgrounds
-                "60.0f", //fps
+                "60.0", //fps
                 "60", //backgrounds seconds
                 "True", //auto background change
                 "150", //background dim
                 "True", //background movement
                 "True", //enable shaking
                 "True", //enable glow
-                "20.0f", //glow size
-                "50.0f", //glow max alpha at size
+                "20.0", //glow size
+                "50.0", //glow max alpha at size
                 "80", //glow max alpha
                 "True", //enable replay buffer
                 "6" //replay buffer size
@@ -174,7 +174,7 @@ namespace CSharpNation.Config
                     string[] config = File.ReadAllLines(ConfigTxtPath);
                     Lines = Convert.ToInt32(config[0]);
                     TexturesPath = config[1];
-                    Fps = Convert.ToInt32(config[2]);
+                    Fps = Convert.ToInt32(float.Parse(config[2]));
                     BackgroundTime = Convert.ToInt32(config[3]);
                     AutoBackgroundChange = config[4] == "True";
                     BackgroundDim = Convert.ToInt32(config[5]);
