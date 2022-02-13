@@ -177,6 +177,19 @@ namespace CSharpNation.Config
             }
         }
 
+        public static void ResetConfig()
+        {
+            try
+            {
+                WriteConfig(DefaultConfig());
+                LoadConfig();
+            }
+            catch (Exception ex)
+            {
+                ErrorLog.AddError(new Error(Error.Type.CriticalError, "Error setting default config: " + ex.Message));
+            }
+        }
+
         private static void LoadConfig()
         {
             if (File.Exists(ConfigTxtPath))

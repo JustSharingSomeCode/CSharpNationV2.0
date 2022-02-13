@@ -182,5 +182,11 @@ namespace CSharpNation.GUI
         {
             WaveConfig.LoadDefaultWaves();
         }
+
+        private void ResetConfigBtn_Click(object sender, RoutedEventArgs e)
+        {
+            GlobalConfig.ResetConfig();
+            Initialize();
+        }
     }
 }
