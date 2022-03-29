@@ -78,15 +78,8 @@ namespace CSharpNation.Tools
             return prom.ToList();
         }
 
-        public static List<float> PromSpectrum2(List<float> spectrum, int influence)
-        {
-            /*
-            if(spectrum == null)
-            {
-                return null;
-            }
-            */
-
+        public static List<float> PreviousPromSpectrum(List<float> spectrum, int influence)
+        {            
             if (influence <= 0)
             {
                 return spectrum;
@@ -122,7 +115,17 @@ namespace CSharpNation.Tools
         {
             for(int i = 0; i < loops; i++)
             {
-                spectrum = PromSpectrum2(spectrum, bars);
+                spectrum = PromSpectrum(spectrum, bars);
+            }
+
+            return spectrum;
+        }
+
+        public static List<float> PreviousLoopProm(List<float> spectrum, int bars, int loops)
+        {
+            for (int i = 0; i < loops; i++)
+            {
+                spectrum = PreviousPromSpectrum(spectrum, bars);
             }
 
             return spectrum;
@@ -163,15 +166,8 @@ namespace CSharpNation.Tools
             return norm;
         }
 
-        public static List<float> CombineWaves2(List<float> spectrum, List<float> raw, float increase)
-        {
-            /*
-            if (spectrum == null || spectrum2 == null)
-            {
-                return null;
-            }
-            */
-
+        public static List<float> PreviousCombineWaves(List<float> spectrum, List<float> raw, float increase)
+        {            
             for (int i = 0; i < spectrum.Count; i++)
             {
                 spectrum[i] = spectrum[i] * increase + raw[i] * (1.0f - increase);

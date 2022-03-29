@@ -86,10 +86,23 @@ namespace CSharpNation.Visualizer
                 return;
             }
 
+            if(GlobalConfig.UsePreviousWaveCalculation)
+            {
+                promSpectrum = WaveTools.PreviousLoopProm(Spectrum, AvgBars, AvgLoops);
+                Spectrum = WaveTools.PreviousCombineWaves(promSpectrum, spectrum, 0.5f);
+            }
+            else
+            {
+                promSpectrum = WaveTools.LoopProm(Spectrum, AvgBars, AvgLoops);
+                Spectrum = WaveTools.CombineWaves(Spectrum, promSpectrum);
+            }
+
+            /*
             promSpectrum = WaveTools.LoopProm(Spectrum, AvgBars, AvgLoops);
             //Spectrum = WaveTools.CombineWaves(Spectrum, promSpectrum);
             Spectrum = WaveTools.CombineWaves2(promSpectrum, spectrum, 0.5f);
             //Spectrum = promSpectrum;
+            */
 
             UpdatePoints(x, y, radius);
 
