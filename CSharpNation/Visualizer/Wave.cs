@@ -87,7 +87,9 @@ namespace CSharpNation.Visualizer
             }
 
             promSpectrum = WaveTools.LoopProm(Spectrum, AvgBars, AvgLoops);
-            Spectrum = WaveTools.CombineWaves(Spectrum, promSpectrum);
+            //Spectrum = WaveTools.CombineWaves(Spectrum, promSpectrum);
+            Spectrum = WaveTools.CombineWaves2(promSpectrum, spectrum, 0.5f);
+            //Spectrum = promSpectrum;
 
             UpdatePoints(x, y, radius);
 
