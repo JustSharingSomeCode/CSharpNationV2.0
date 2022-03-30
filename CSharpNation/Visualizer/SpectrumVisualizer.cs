@@ -114,8 +114,10 @@ namespace CSharpNation.Visualizer
                         break;
                 }
 
-                Rx = (float)random.NextDouble() * (power * 0.25f) * Dx;
-                Ry = (float)random.NextDouble() * (power * 0.25f) * Dy;
+                float pw = WaveTools.Clamp(0.0f, float.MaxValue, power - GlobalConfig.ShakeThreshold);
+
+                Rx = (float)random.NextDouble() * (pw * GlobalConfig.ShakeMultiplier) * Dx;
+                Ry = (float)random.NextDouble() * (pw * GlobalConfig.ShakeMultiplier) * Dy;
 
                 ShakeCount++;
             }
