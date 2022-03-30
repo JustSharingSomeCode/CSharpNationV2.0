@@ -11,6 +11,9 @@ using OpenTK;
 
 using CSharpNation.Tools;
 using CSharpNation.Config;
+using CSharpNation.Diagnostics;
+
+using System.Diagnostics;
 
 namespace CSharpNation.Visualizer
 {
@@ -19,6 +22,10 @@ namespace CSharpNation.Visualizer
         public Wave()
         {
             replay = new ReplayBuffer(GlobalConfig.ReplayBufferSize);
+
+            replayLog = GlobalPerformanceLog.AddPerformanceLog("Replay average");
+            waveCalculationLog = GlobalPerformanceLog.AddPerformanceLog("Wave calculation");
+            catmullCalculationLog = GlobalPerformanceLog.AddPerformanceLog("Catmull calculation");
         }
 
         public Wave(int r, int g, int b, int bars, int loops, float quality) : this()
@@ -30,6 +37,10 @@ namespace CSharpNation.Visualizer
             AvgLoops = loops;
             Quality = quality;
         }
+
+        private PerformanceLog replayLog;
+        private PerformanceLog waveCalculationLog;
+        private PerformanceLog catmullCalculationLog;
 
         private ReplayBuffer replay;
         public List<float> Spectrum { get; private set; }
@@ -72,9 +83,13 @@ namespace CSharpNation.Visualizer
         {
             if (GlobalConfig.EnableReplayBuffer)
             {
+                Stopwatch replayBufferSt = Stopwatch.StartNew();
                 replay.Push(spectrum);
 
                 Spectrum = replay.GetAverage();
+
+                replayBufferSt.Stop();
+                replayLog.AddValue(replayBufferSt.ElapsedTicks);
             }
             else
             {
@@ -86,7 +101,9 @@ namespace CSharpNation.Visualizer
                 return;
             }
 
-            if(GlobalConfig.UsePreviousWaveCalculation)
+            Stopwatch waveCalculationSt = Stopwatch.StartNew();
+
+            if (GlobalConfig.UsePreviousWaveCalculation)
             {
                 promSpectrum = WaveTools.PreviousLoopProm(Spectrum, AvgBars, AvgLoops);
                 Spectrum = WaveTools.PreviousCombineWaves(promSpectrum, spectrum, 0.5f);
@@ -97,6 +114,9 @@ namespace CSharpNation.Visualizer
                 Spectrum = WaveTools.CombineWaves(Spectrum, promSpectrum);
             }
 
+            waveCalculationSt.Stop();
+            waveCalculationLog.AddValue(waveCalculationSt.ElapsedTicks);
+
             /*
             promSpectrum = WaveTools.LoopProm(Spectrum, AvgBars, AvgLoops);
             //Spectrum = WaveTools.CombineWaves(Spectrum, promSpectrum);
@@ -104,9 +124,14 @@ namespace CSharpNation.Visualizer
             //Spectrum = promSpectrum;
             */
 
+            Stopwatch catmullCalculationSt = Stopwatch.StartNew();
+
             UpdatePoints(x, y, radius);
 
-            if(GlobalConfig.EnableGlow)
+            catmullCalculationSt.Stop();
+            catmullCalculationLog.AddValue(catmullCalculationSt.ElapsedTicks);
+
+            if (GlobalConfig.EnableGlow)
             {
                 UpdateGlowPoints(x, y, radius + GlobalConfig.GlowSize);
             }

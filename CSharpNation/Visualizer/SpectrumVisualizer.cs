@@ -64,7 +64,7 @@ namespace CSharpNation.Visualizer
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            string[] performanceData = GlobalPerformanceLog.GetLogData(120);
+            string[] performanceData = GlobalPerformanceLog.GetLogData();
 
             for(int i = 0; i < performanceData.Length; i++)
             {
@@ -193,11 +193,13 @@ namespace CSharpNation.Visualizer
         {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
+            
             if (spectrum == null)
             {
-                Console.WriteLine("Null spectrum");
+                //Console.WriteLine("Null spectrum");
                 return; 
             }
+            
 
             int dim = GlobalConfig.BackgroundDim;
 
