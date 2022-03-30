@@ -46,7 +46,10 @@ namespace CSharpNation
 
         private void StartVisualizerThread()
         {
-            vth = new Thread(VisualizerThread);
+            vth = new Thread(VisualizerThread)
+            {
+                Priority = ThreadPriority.Highest
+            };
 
             vth.Start();
         }

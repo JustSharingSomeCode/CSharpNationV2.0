@@ -31,10 +31,15 @@ namespace CSharpNation.Diagnostics
             for (int i = 0; i < Logs.Count; i++)
             {
                 Logs[i].CalculatePerformanceData(120);
-                data[i] = Logs[i].ToString();
+                data[i] = i + ") " + Logs[i].ToString();
             }
 
             return data;
+        }
+
+        public static void RemoveLogs()
+        {
+            Logs.Clear();
         }
     }
 }

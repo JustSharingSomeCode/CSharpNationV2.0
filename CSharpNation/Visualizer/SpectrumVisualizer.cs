@@ -71,6 +71,8 @@ namespace CSharpNation.Visualizer
                 Console.WriteLine(performanceData[i]);
             }
 
+            GlobalPerformanceLog.RemoveLogs();
+
             base.OnClosing(e);
         }
 
