@@ -12,7 +12,7 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Border BorderBrush="Black" CornerRadius="5" Margin="10,10,5,0" Background="#FF505050" Height="155" VerticalAlignment="Top">
+        <Border BorderBrush="Black" CornerRadius="5" Margin="10,10,5,0" Background="#FF505050" Height="AUTO" VerticalAlignment="Top">
             <Grid>
                 <Label x:Name="TitleLbl2" Content="General" Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="50" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Padding="15"/>
                 <Grid Margin="0,50,0,0" Height="Auto" VerticalAlignment="Top">
@@ -31,7 +31,7 @@
                 </Grid>
             </Grid>
         </Border>
-        <Border BorderBrush="Black" CornerRadius="5" Margin="10,170,5,0" Background="#FF505050" Height="249" VerticalAlignment="Top">
+        <Border BorderBrush="Black" CornerRadius="5" Margin="10,165,5,0" Background="#FF505050" Height="Auto" VerticalAlignment="Top">
             <Grid>
                 <Label x:Name="TitleLbl1" Content="Backgrounds " Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="50" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Padding="15"/>
                 <Grid Margin="0,50,0,0" Height="Auto" VerticalAlignment="Top">
@@ -56,7 +56,7 @@
                 </Grid>
             </Grid>
         </Border>
-        <Border BorderBrush="Black" CornerRadius="5" Margin="5,10,10,0" Background="#FF505050" Height="354" VerticalAlignment="Top" Grid.Column="1">
+        <Border BorderBrush="Black" CornerRadius="5" Margin="5,10,10,0" Background="#FF505050" Height="Auto" VerticalAlignment="Top" Grid.Column="1">
             <Grid>
                 <Label x:Name="TitleLbl3" Content="Waves" Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="50" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Padding="15"/>
                 <Grid Margin="0,50,0,0" Height="Auto" VerticalAlignment="Top">
@@ -65,6 +65,7 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="50"/>
@@ -84,9 +85,12 @@
                     <WpfHoverControls:HoverToggleButton x:Name="EnableReplayBufferTb" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="120" DisabledBrushColor="#FF323232" EnabledBrushColor="#FF00B9FF" OnValueChanged="EnableReplayBufferTb_OnValueChanged"/>
                     <Label Grid.Column="0" Grid.Row="5" Content="Replay buffer size:" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Foreground="White"/>
                     <WpfHoverControls:HoverTextBox x:Name="ReplayBufferSizeTxt" Grid.Column="1" HorizontalAlignment="Center" Height="40" Grid.Row="5" TextWrapping="Wrap" Text="0" VerticalAlignment="Center" Width="200" TextAlignment="Center" Foreground="White" BorderThickness="0" Background="#FF323232" BackgroundHover="#FF3C3C3C" KeyDown="ReplayBufferSizeTxt_KeyDown"/>
+                    <Label Grid.Column="0" Grid.Row="6" Content="Enable previous wave calculation:" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Foreground="White"/>
+                    <WpfHoverControls:HoverToggleButton x:Name="EnablePreviousWaveTb" Grid.Column="1" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="120" DisabledBrushColor="#FF323232" EnabledBrushColor="#FF00B9FF" OnValueChanged="EnablePreviousWaveTb_OnValueChanged"/>
                 </Grid>
             </Grid>
         </Border>
-        <WpfHoverControls:HoverButton x:Name="ResetWavesBtn" Grid.Column="1" IconText="&#xE117;" IconFontSize="20" Content="Reset default waves" Margin="10,0,10,10" VerticalAlignment="Bottom" Height="50" Background="#FF505050" BorderThickness="0" BackgroundHover="#FF5A5A5A" ForegroundHover="White" IconForegroundHover="White" Click="ResetWavesBtn_Click"/>
+        <WpfHoverControls:HoverButton x:Name="ResetConfigBtn" Grid.Column="0" IconText="&#xE117;" IconFontSize="20" Content="Reset default config" Margin="10,0,5,10" VerticalAlignment="Bottom" Height="50" Background="#FF505050" BorderThickness="0" BackgroundHover="#FF5A5A5A" ForegroundHover="White" IconForegroundHover="White" Click="ResetConfigBtn_Click"/>
+        <WpfHoverControls:HoverButton x:Name="ResetWavesBtn" Grid.Column="1" IconText="&#xE117;" IconFontSize="20" Content="Reset default waves" Margin="5,0,10,10" VerticalAlignment="Bottom" Height="50" Background="#FF505050" BorderThickness="0" BackgroundHover="#FF5A5A5A" ForegroundHover="White" IconForegroundHover="White" Click="ResetWavesBtn_Click"/>
     </Grid>
 </UserControl>

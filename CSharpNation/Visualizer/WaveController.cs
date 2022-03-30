@@ -53,6 +53,8 @@ namespace CSharpNation.Visualizer
                     continue;
                 }
 
+                //DrawLines(w);
+
                 if (GlobalConfig.EnableGlow)
                 {
                     for (int j = 0; j < w.GlowCatmullRomPoints.Count - 1; j++)
@@ -108,7 +110,7 @@ namespace CSharpNation.Visualizer
                         GL.End();
                         GL.Disable(EnableCap.Blend);
                     }
-                }
+                }                
             }
 
             for (int i = waves.Length - 1; i >= 0; i--)

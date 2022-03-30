@@ -27,7 +27,7 @@
                 <Label Content="Avg Bars:" HorizontalAlignment="Left" Margin="788,55,0,0" VerticalAlignment="Top" Height="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Width="60" Foreground="White"/>
                 <WpfHoverControls:HoverFloatAdder x:Name="LoopsAdder" HorizontalAlignment="Left" Margin="848,100,0,0" VerticalAlignment="Top" Height="40" Width="163" ButtonBrush="#FF282828" ButtonHoverBrush="#FF323232" OnValueChanged="LoopsAdder_OnValueChanged"/>
                 <Label Content="Avg Loops:" HorizontalAlignment="Left" Margin="778,100,0,0" VerticalAlignment="Top" Height="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Width="70" Foreground="White"/>
-                <WpfHoverControls:HoverFloatAdder x:Name="QualityAdder" HorizontalAlignment="Left" Margin="848,145,0,0" VerticalAlignment="Top" Height="40" Width="163" ButtonBrush="#FF282828" ButtonHoverBrush="#FF323232" OnValueChanged="QualityAdder_OnValueChanged" MaxValue="1"/>
+                <WpfHoverControls:HoverFloatAdder x:Name="QualityAdder" HorizontalAlignment="Left" Margin="848,145,0,0" VerticalAlignment="Top" Height="40" Width="163" ButtonBrush="#FF282828" ButtonHoverBrush="#FF323232" OnValueChanged="QualityAdder_OnValueChanged" MaxValue="1" Increase="0.1"/>
                 <Label Content="Quality:" HorizontalAlignment="Left" Margin="798,145,0,0" VerticalAlignment="Top" Height="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Width="50" Foreground="White"/>
             </Grid>
         </Border>

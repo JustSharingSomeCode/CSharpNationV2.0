@@ -44,7 +44,26 @@ namespace CSharpNation.Visualizer
 
         public int AvgBars { get; set; }
         public int AvgLoops { get; set; }
-        public float Quality { get; set; }
+
+        private float quality;
+        public float Quality
+        {
+            get
+            {
+                return quality;
+            }
+            set
+            {
+                if (value <= 0)
+                {
+                    quality = 0.1f;
+                }
+                else
+                {
+                    quality = value;
+                }
+            }
+        }
 
         private double rads, PosX, PosY;
         private Vector2 p1, p2, p3, p4;
@@ -60,23 +79,37 @@ namespace CSharpNation.Visualizer
             else
             {
                 Spectrum = spectrum;
-            }            
+            }
 
             if(Spectrum == null)
             {
                 return;
             }
-            
+
+            if(GlobalConfig.UsePreviousWaveCalculation)
+            {
+                promSpectrum = WaveTools.PreviousLoopProm(Spectrum, AvgBars, AvgLoops);
+                Spectrum = WaveTools.PreviousCombineWaves(promSpectrum, spectrum, 0.5f);
+            }
+            else
+            {
+                promSpectrum = WaveTools.LoopProm(Spectrum, AvgBars, AvgLoops);
+                Spectrum = WaveTools.CombineWaves(Spectrum, promSpectrum);
+            }
+
+            /*
             promSpectrum = WaveTools.LoopProm(Spectrum, AvgBars, AvgLoops);
-            
-            Spectrum = WaveTools.CombineWaves(Spectrum, promSpectrum);
-            
+            //Spectrum = WaveTools.CombineWaves(Spectrum, promSpectrum);
+            Spectrum = WaveTools.CombineWaves2(promSpectrum, spectrum, 0.5f);
+            //Spectrum = promSpectrum;
+            */
+
             UpdatePoints(x, y, radius);
 
             if(GlobalConfig.EnableGlow)
             {
                 UpdateGlowPoints(x, y, radius + GlobalConfig.GlowSize);
-            }            
+            }
         }
 
         private void UpdatePoints(float x, float y, float circleRadius)

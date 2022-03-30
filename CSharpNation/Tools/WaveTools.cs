@@ -78,11 +78,54 @@ namespace CSharpNation.Tools
             return prom.ToList();
         }
 
+        public static List<float> PreviousPromSpectrum(List<float> spectrum, int influence)
+        {            
+            if (influence <= 0)
+            {
+                return spectrum;
+            }
+
+            float[] promediatedSpectrum = new float[spectrum.Count];
+
+            float actualValue = 0;
+
+            for (int i = 0; i < spectrum.Count; i++)
+            {
+                actualValue = spectrum[i];
+
+                for (int j = i - influence; j < i; j++)
+                {
+                    actualValue += spectrum[Clamp(0, spectrum.Count - 1, j)];
+                }
+
+                for (int j = i + 1; j <= i + influence; j++)
+                {
+                    actualValue += spectrum[Clamp(0, spectrum.Count - 1, j)];
+                }
+
+                actualValue /= influence + 1;
+
+                promediatedSpectrum[i] = actualValue;
+            }
+
+            return promediatedSpectrum.ToList();
+        }
+
         public static List<float> LoopProm(List<float> spectrum, int bars, int loops)
         {
             for(int i = 0; i < loops; i++)
             {
                 spectrum = PromSpectrum(spectrum, bars);
+            }
+
+            return spectrum;
+        }
+
+        public static List<float> PreviousLoopProm(List<float> spectrum, int bars, int loops)
+        {
+            for (int i = 0; i < loops; i++)
+            {
+                spectrum = PreviousPromSpectrum(spectrum, bars);
             }
 
             return spectrum;
@@ -121,6 +164,25 @@ namespace CSharpNation.Tools
             }
 
             return norm;
+        }
+
+        public static List<float> PreviousCombineWaves(List<float> spectrum, List<float> raw, float increase)
+        {            
+            for (int i = 0; i < spectrum.Count; i++)
+            {
+                spectrum[i] = spectrum[i] * increase + raw[i] * (1.0f - increase);
+            }
+
+            List<float> normalizedList = Normalize(spectrum);
+
+            float max = raw.Max();
+
+            for (int i = 0; i < spectrum.Count; i++)
+            {
+                normalizedList[i] = normalizedList[i] * max;
+            }
+
+            return normalizedList;
         }
 
         public static int Clamp(int min, int max, int value)

@@ -17,14 +17,26 @@ namespace CSharpNation.Config
         {
             LoadConfig();
            
-            DegreesIncrement = 180f / (Lines - 1);                      
+            DegreesIncrement = 180f / (Lines - 1.0f);
 
             CheckConfigDirectory();
             CheckResourcesDirectory();
             TexturesConfig.Initialize();
         }
 
-        public static int Lines { get; set; }
+        private static int lines;
+        public static int Lines
+        {
+            get
+            {
+                return lines;
+            }
+            set
+            {
+                lines = value;
+                DegreesIncrement = 180f / (Lines - 1.0f);
+            }
+        }
         public static float DegreesIncrement { get; private set; }
 
         public static float Fps { get; private set; }
@@ -41,6 +53,8 @@ namespace CSharpNation.Config
         public static int GlowMaxAlpha { get; set; } = 80;
         public static bool EnableReplayBuffer { get; set; } = true;
         public static int ReplayBufferSize { get; set; } = 6;
+
+        public static bool UsePreviousWaveCalculation { get; set; } = false;
 
 
         public static string ConfigDirectoryPath { get; } = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\CSharpNation";
@@ -111,17 +125,17 @@ namespace CSharpNation.Config
         private static string[] DefaultConfig()
         {
             return new string[] {
-                "64", //lines
+                "50", //lines
                 "", //backgrounds
-                "60.0f", //fps
+                "60.0", //fps
                 "60", //backgrounds seconds
                 "True", //auto background change
                 "150", //background dim
                 "True", //background movement
                 "True", //enable shaking
                 "True", //enable glow
-                "20.0f", //glow size
-                "50.0f", //glow max alpha at size
+                "20.0", //glow size
+                "50.0", //glow max alpha at size
                 "80", //glow max alpha
                 "True", //enable replay buffer
                 "6" //replay buffer size
@@ -165,6 +179,19 @@ namespace CSharpNation.Config
             }
         }
 
+        public static void ResetConfig()
+        {
+            try
+            {
+                WriteConfig(DefaultConfig());
+                LoadConfig();
+            }
+            catch (Exception ex)
+            {
+                ErrorLog.AddError(new Error(Error.Type.CriticalError, "Error setting default config: " + ex.Message));
+            }
+        }
+
         private static void LoadConfig()
         {
             if (File.Exists(ConfigTxtPath))
@@ -174,7 +201,7 @@ namespace CSharpNation.Config
                     string[] config = File.ReadAllLines(ConfigTxtPath);
                     Lines = Convert.ToInt32(config[0]);
                     TexturesPath = config[1];
-                    Fps = Convert.ToInt32(config[2]);
+                    Fps = Convert.ToInt32(float.Parse(config[2]));
                     BackgroundTime = Convert.ToInt32(config[3]);
                     AutoBackgroundChange = config[4] == "True";
                     BackgroundDim = Convert.ToInt32(config[5]);
