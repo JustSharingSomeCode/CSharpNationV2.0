@@ -54,6 +54,8 @@ namespace CSharpNation.Config
         public static bool EnableReplayBuffer { get; set; } = true;
         public static int ReplayBufferSize { get; set; } = 6;
 
+        public static bool UsePreviousWaveCalculation { get; set; } = false;
+
 
         public static string ConfigDirectoryPath { get; } = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\CSharpNation";
         private static string ConfigTxtPath = ConfigDirectoryPath + @"\Config.txt";

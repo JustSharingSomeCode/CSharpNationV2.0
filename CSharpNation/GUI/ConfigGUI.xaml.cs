@@ -45,6 +45,8 @@ namespace CSharpNation.GUI
             GlowSizeTxt.Text = GlobalConfig.GlowSize.ToString();
             EnableReplayBufferTb.Value = GlobalConfig.EnableReplayBuffer;
             ReplayBufferSizeTxt.Text = GlobalConfig.ReplayBufferSize.ToString();
+
+            EnablePreviousWaveTb.Value = GlobalConfig.UsePreviousWaveCalculation;
         }
 
         private bool EnterKeyPressed(Key keyPressed)
@@ -187,6 +189,11 @@ namespace CSharpNation.GUI
         {
             GlobalConfig.ResetConfig();
             Initialize();
+        }
+
+        private void EnablePreviousWaveTb_OnValueChanged(object sender, EventArgs e)
+        {
+            GlobalConfig.UsePreviousWaveCalculation = EnablePreviousWaveTb.Value;
         }
     }
 }
