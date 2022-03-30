@@ -13,8 +13,11 @@ using CSharpNation.Tools;
 using CSharpNation.Textures;
 using CSharpNation.Config;
 using CSharpNation.Particles;
+using CSharpNation.Diagnostics;
+
 using System.Drawing;
 using System.Diagnostics;
+using System.ComponentModel;
 
 namespace CSharpNation.Visualizer
 {
@@ -31,14 +34,22 @@ namespace CSharpNation.Visualizer
             textureController = new TextureController();
             particlesController = new ParticleController(width, height);
             random = new Random();
+
+            UpdateSpectrumLog = GlobalPerformanceLog.AddPerformanceLog("Update spectrum");
+            UpdateWaveLog = GlobalPerformanceLog.AddPerformanceLog("Update waves");
+            DrawLog = GlobalPerformanceLog.AddPerformanceLog("Draw frame");
         }
+
+        private PerformanceLog UpdateSpectrumLog;
+        private PerformanceLog UpdateWaveLog;
+        private PerformanceLog DrawLog;
 
         private List<float> spectrum;
         private SpectrumAnalyzer analyzer;
         private ReplayBuffer replay;
         private WaveController waveController;
         private TextureController textureController;
-        private ParticleController particlesController;        
+        private ParticleController particlesController;
 
         private Random random;
 
@@ -50,6 +61,18 @@ namespace CSharpNation.Visualizer
         private float Rx, Ry;
         private int Dx = -1, Dy = 1;
         private int ShakeCount = 0;
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            string[] performanceData = GlobalPerformanceLog.GetLogData(120);
+
+            for(int i = 0; i < performanceData.Length; i++)
+            {
+                Console.WriteLine(performanceData[i]);
+            }
+
+            base.OnClosing(e);
+        }
 
         protected override void OnLoad(EventArgs e)
         {
@@ -95,7 +118,8 @@ namespace CSharpNation.Visualizer
             replay.Push(spectrum);
 
             updateSpectrumStw.Stop();
-            Console.WriteLine("UPDATE SPECTRUM MILIS: {0}", updateSpectrumStw.ElapsedTicks.ToString());
+            //Console.WriteLine("UPDATE SPECTRUM MILIS: {0}", updateSpectrumStw.ElapsedTicks.ToString());
+            UpdateSpectrumLog.AddValue(updateSpectrumStw.ElapsedTicks);
             
 
             CalculateWavePower();
@@ -140,7 +164,8 @@ namespace CSharpNation.Visualizer
             waveController.UpdateWaves(replay, Width / 2 + Rx, Height / 2 + Ry, Height / 4 + power);
 
             updateWavesStw.Stop();
-            Console.WriteLine("UPDATE WAVES MILIS: {0}", updateWavesStw.ElapsedTicks.ToString());
+            //Console.WriteLine("UPDATE WAVES MILIS: {0}", updateWavesStw.ElapsedTicks.ToString());
+            UpdateWaveLog.AddValue(updateWavesStw.ElapsedTicks);
 
             if (GlobalConfig.AutoBackgroundChange)
             {
@@ -183,7 +208,8 @@ namespace CSharpNation.Visualizer
             Stopwatch waveDrawingStw = Stopwatch.StartNew();
             waveController.DrawWaves(Width / 2 + Rx, Height / 2 + Ry, radius);
             waveDrawingStw.Stop();
-            Console.WriteLine("DRAW WAVES MILIS: {0}", waveDrawingStw.ElapsedTicks.ToString());
+            //Console.WriteLine("DRAW WAVES MILIS: {0}", waveDrawingStw.ElapsedTicks.ToString());
+            DrawLog.AddValue(waveDrawingStw.ElapsedTicks);
 
             //DrawCircle(Width / 2, Height / 2, (Height / 4) + power, Color.White);
             //DrawCircle(Width / 2, Height / 2, (Height / 4.2) + power, Color.Black);

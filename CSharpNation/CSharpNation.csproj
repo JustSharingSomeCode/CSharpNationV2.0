@@ -74,6 +74,8 @@
     <Compile Include="Config\TexturesConfig.cs" />
     <Compile Include="Config\WaveConfig.cs" />
     <Compile Include="CSharpNationController.cs" />
+    <Compile Include="Diagnostics\GlobalPerformanceLog.cs" />
+    <Compile Include="Diagnostics\PerformanceLog.cs" />
     <Compile Include="GUI\BackgroundsGUI.xaml.cs">
       <DependentUpon>BackgroundsGUI.xaml</DependentUpon>
     </Compile>

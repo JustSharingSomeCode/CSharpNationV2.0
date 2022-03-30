@@ -21,7 +21,7 @@ namespace CSharpNation.Analyzer
         private int previousDevice = -1;
 
         public float multiplier = 1;
-        public static int _lines = GlobalConfig.Lines;
+        public static int _lines = GlobalConfig.Lines;        
 
         #region Constructor
         public SpectrumAnalyzer()
@@ -112,10 +112,11 @@ namespace CSharpNation.Analyzer
         #region Spectrum
         public List<float> GetSpectrum()
         {
-            Stopwatch stopwatch = Stopwatch.StartNew();
+            //Stopwatch stopwatch = Stopwatch.StartNew();
             int ret = BassWasapi.BASS_WASAPI_GetData(_fft, (int)BASSData.BASS_DATA_FFT8192);
-            stopwatch.Stop();
-            Console.WriteLine("FFT DATA MILIS: {0}", stopwatch.ElapsedTicks.ToString());
+            //stopwatch.Stop();
+            //Console.WriteLine("FFT DATA MILIS: {0}", stopwatch.ElapsedTicks.ToString());
+
             if (ret < -1) { return _spectrumdata; }
             else
             {
