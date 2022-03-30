@@ -80,6 +80,8 @@ namespace CSharpNation.Visualizer
         {
             GL.ClearColor(new Color4(50, 50, 50, 255));
 
+            WindowState = WindowState.Fullscreen;
+
             base.OnLoad(e);
         }
 
