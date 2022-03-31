@@ -23,7 +23,7 @@ namespace CSharpNation.Visualizer
         {
             analyzer = _analyzer;
 
-            //VSync = VSyncMode.On;
+            VSync = VSyncMode.On;
 
             replay = new ReplayBuffer();
             waveController = new WaveController();

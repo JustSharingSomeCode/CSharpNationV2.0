@@ -55,7 +55,7 @@ namespace CSharpNation
         {
             using (visualizer = new SpectrumVisualizer(1280, 720, "CSharpNation", analyzer))
             {
-                visualizer.Run(GlobalConfig.Fps);
+                visualizer.Run(GlobalConfig.Fps, GlobalConfig.Fps);
             }
 
             //GlobalConfig.SaveConfig();
