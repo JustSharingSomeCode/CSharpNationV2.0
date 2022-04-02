@@ -23,15 +23,21 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
                     </Grid.RowDefinitions>
                     <Label Grid.Column="0" Content="Analyzer samples:" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Foreground="White"/>
                     <WpfHoverControls:HoverTextBox x:Name="AnalyzerSamplesTxt" Grid.Column="1" HorizontalAlignment="Center" Height="40" Grid.Row="0" TextWrapping="Wrap" Text="0" VerticalAlignment="Center" Width="200" TextAlignment="Center" Foreground="White" BorderThickness="0" Background="#FF323232" BackgroundHover="#FF3C3C3C" KeyDown="AnalyzerSamplesTxt_KeyDown"/>
                     <Label Grid.Column="0" Grid.Row="1" Content="Enable logo shaking:" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Foreground="White"/>
                     <WpfHoverControls:HoverToggleButton x:Name="EnableLogoShakingTb" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="120" DisabledBrushColor="#FF323232" EnabledBrushColor="#FF00B9FF" OnValueChanged="EnableLogoShakingTb_OnValueChanged"/>
+                    <Label Grid.Column="0" Grid.Row="2" Content="Shake threshold:" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Foreground="White"/>
+                    <WpfHoverControls:HoverTextBox x:Name="ShakeThresholdTxt" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" Height="40" TextWrapping="Wrap" Text="0" VerticalAlignment="Center" Width="200" TextAlignment="Center" Foreground="White" BorderThickness="0" Background="#FF323232" BackgroundHover="#FF3C3C3C" KeyDown="ShakeThresholdTxt_KeyDown"/>
+                    <Label Grid.Column="0" Grid.Row="3" Content="Shake multiplier:" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Foreground="White"/>
+                    <WpfHoverControls:HoverTextBox x:Name="ShakeMultiplierTxt" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" Height="40" TextWrapping="Wrap" Text="0" VerticalAlignment="Center" Width="200" TextAlignment="Center" Foreground="White" BorderThickness="0" Background="#FF323232" BackgroundHover="#FF3C3C3C" KeyDown="ShakeMultiplierTxt_KeyDown"/>
                 </Grid>
             </Grid>
         </Border>
-        <Border BorderBrush="Black" CornerRadius="5" Margin="10,165,5,0" Background="#FF505050" Height="Auto" VerticalAlignment="Top">
+        <Border BorderBrush="Black" CornerRadius="5" Margin="10,265,5,0" Background="#FF505050" Height="Auto" VerticalAlignment="Top">
             <Grid>
                 <Label x:Name="TitleLbl1" Content="Backgrounds " Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="50" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Padding="15"/>
                 <Grid Margin="0,50,0,0" Height="Auto" VerticalAlignment="Top">

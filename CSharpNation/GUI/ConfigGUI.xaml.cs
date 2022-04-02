@@ -47,6 +47,8 @@ namespace CSharpNation.GUI
             ReplayBufferSizeTxt.Text = GlobalConfig.ReplayBufferSize.ToString();
 
             EnablePreviousWaveTb.Value = GlobalConfig.UsePreviousWaveCalculation;
+            ShakeThresholdTxt.Text = GlobalConfig.ShakeThreshold.ToString();
+            ShakeMultiplierTxt.Text = GlobalConfig.ShakeMultiplier.ToString();
         }
 
         private bool EnterKeyPressed(Key keyPressed)
@@ -194,6 +196,38 @@ namespace CSharpNation.GUI
         private void EnablePreviousWaveTb_OnValueChanged(object sender, EventArgs e)
         {
             GlobalConfig.UsePreviousWaveCalculation = EnablePreviousWaveTb.Value;
+        }
+
+        private void ShakeThresholdTxt_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (EnterKeyPressed(e.Key))
+            {
+                try
+                {
+                    GlobalConfig.ShakeThreshold = float.Parse(ShakeThresholdTxt.Text);
+                }
+                catch (Exception ex)
+                {
+                    ErrorLog.AddError(new Error(Error.Type.CriticalError, ex.Message));
+                    ShakeThresholdTxt.Text = GlobalConfig.ShakeThreshold.ToString();
+                }
+            }
+        }
+
+        private void ShakeMultiplierTxt_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (EnterKeyPressed(e.Key))
+            {
+                try
+                {
+                    GlobalConfig.ShakeMultiplier = float.Parse(ShakeMultiplierTxt.Text);
+                }
+                catch (Exception ex)
+                {
+                    ErrorLog.AddError(new Error(Error.Type.CriticalError, ex.Message));
+                    ShakeMultiplierTxt.Text = GlobalConfig.ShakeMultiplier.ToString();
+                }
+            }
         }
     }
 }
