@@ -68,6 +68,11 @@ namespace CSharpNation.Visualizer
         private double rads, PosX, PosY;
         private Vector2 p1, p2, p3, p4;
 
+        public void UpdateReplayBuffer()
+        {
+            replay = new ReplayBuffer(GlobalConfig.ReplayBufferSize);
+        }
+
         public void Update(List<float> spectrum, float x, float y, float radius)
         {
             if (GlobalConfig.EnableReplayBuffer)

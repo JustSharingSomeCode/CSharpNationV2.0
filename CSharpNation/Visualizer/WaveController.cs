@@ -17,6 +17,7 @@ namespace CSharpNation.Visualizer
     {
         public WaveController()
         {
+            WaveConfig.UpdateReplayBuffer();
             waves = WaveConfig.Waves.ToArray();
 
             for(int i = 0; i < waves.Length; i++)

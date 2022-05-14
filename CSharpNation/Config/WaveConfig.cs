@@ -80,5 +80,13 @@ namespace CSharpNation.Config
 
             File.WriteAllLines(path, config);
         }
+
+        public static void UpdateReplayBuffer()
+        {
+            for(int i = 0; i < Waves.Count; i++)
+            {
+                Waves[i].UpdateReplayBuffer();
+            }
+        }
     }
 }
