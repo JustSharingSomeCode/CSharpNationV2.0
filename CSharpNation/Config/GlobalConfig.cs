@@ -15,12 +15,13 @@ namespace CSharpNation.Config
     {
         static GlobalConfig()
         {
+            CheckConfigDirectory();
+            CheckResourcesDirectory();
+
             LoadConfig();
            
             DegreesIncrement = 180f / (Lines - 1.0f);
-
-            CheckConfigDirectory();
-            CheckResourcesDirectory();
+            
             TexturesConfig.Initialize();
         }
 
